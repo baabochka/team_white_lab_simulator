@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Stratego</title>
+    <link rel="icon" th:href="@{/static/resources/images/icon.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../static/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/static/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" href="../static/resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" th:href="@{/static/resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css}">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/loginSign.css" th:href="@{/resources/css/loginSign.css}">
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/index.css" th:href="@{/resources/css/index.css}">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="mb-1 navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+
+    <img id="logo" src="../static/resources/images/icon.png" th:src="@{/resources/images/icon.png}"/>
+    <a class="navbar-brand txt" href="/">Stratego</a>
+    <ul class="navbar-nav ml-auto">
+    </ul>
+
+</nav>
+
+<div class="container">
+        <div class="row title mb-4">
+                <div class="col">
+                    <span class="login-title txt1 row mb-3">
+                            Login
+                        </span>
+
+                    <div class="change-sign-in txt2">
+                        <span class="">New to Stratego?</span>
+
+                        <a href="/signup" th:href="@{/signup}">Sign up</a>
+                    </div>
+                </div>
+
+        </div>
+        <div class="col">
+            <div class="col">
+                <div class="login-social">
+                    <div>
+                        <a th:href="@{/oauth2/authorization/google}" class="btn-login-with row">
+                            <img class="social-img" src="../static/resources/images/icon-google.png" th:src="@{/resources/images/icon-google.png}"/>
+                            Login with Google
+                        </a>
+
+<!--                        <a th:href="@{/oauth2/authorization/fackbook}" class="btn-login-with row m-b-12 bg1">-->
+<!--                            <img id="fb" src="../static/resources/images/icon-fb5.png" th:src="@{/resources/images/icon-fb5.png}"/>-->
+<!--                            Login with Facebook-->
+<!--                        </a>-->
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="divider divider mx-auto">&#8226</div>
+            <div class="error-prompt" th:if="${param.error}">
+                Invalid username and password.
+            </div>
+            <div class="error-prompt" th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <form th:action="@{/login}" method="post" class="login-email col">
+                <div class="input-info" >
+                    <input type="text" placeholder="Username" name="username">
+                </div>
+                <div class="input-info mb-3" >
+                    <input type="password" placeholder="Password" name="password">
+                </div>
+                <div class="login-btn-wrap">
+                    <button class="btn-primary btn">
+                        login
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>

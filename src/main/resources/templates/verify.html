@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Stratego</title>
+    <link rel="icon" href="../static/resources/images/icon.png" th:href="@{/static/resources/images/icon.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../static/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/static/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" href="../static/resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" th:href="@{/static/resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css}">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/util.css" th:href="@{/static/resources/css/util.css}">
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/static/resources/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/loginSign.css" th:href="@{/static/resources/css/loginSign.css}">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+    <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+</head>
+
+<body class="send-email-wrapper">
+
+<nav class="mb-1 navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <img id="logo" src="../static/resources/images/icon-sm.png" th:src="@{/static/resources/images/icon.png}"/>
+    <a class="navbar-brand txt" href="/">Stratego</a>
+    <ul class="navbar-nav ml-auto">
+    </ul>
+</nav>
+
+<div class="container h-100 d-flex align-items-center">
+        <div class="row w-100">
+            <div class="col">
+                <div class="row text-uppercase">
+                    <h1 class="mx-auto">activation required</h1>
+                </div>
+                <div class="row mb-4"><h6 class="mx-auto">Please check your email to activate your account.</h6></div>
+                <div id="resend-prompt"></div>
+                <div class="row input-info">
+                    <input id="email" type="text" class=" mx-auto" placeholder="email address"/>
+                </div>
+                <div class="text-center">
+                    <button id="resend" class="btn-primary btn mx-auto col w-25">Resend Email</button>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script src="../static/resources/js/resend.js" th:src="@{/static/resources/js/resend.js}" ></script>
+
+</body>
+</html>
