@@ -1,15 +1,14 @@
 package com.white.lab_sim.market.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
+@Document
 public abstract class MarketUnit {
 
-    @Id
-    private Long id;
+    @MongoId
+    private String id;
 
     private User createdBy;
 
@@ -17,11 +16,6 @@ public abstract class MarketUnit {
 
     private boolean if_public;
 
-    @Transient
-    private AtomicInteger incrementor = new AtomicInteger(0);
-    public MarketUnit() {
-        id = (long)(incrementor.incrementAndGet());
-    }
     public User getCreatedBy() {
         return createdBy;
     }
@@ -38,11 +32,11 @@ public abstract class MarketUnit {
         this.savedBy = savedBy;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,8 +1,10 @@
 package com.white.lab_sim.market.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -12,16 +14,14 @@ public class VerificationToken {
     public static final String STATUS_PENDING = "PENDING";
     public static final String STATUS_VERIFIED = "VERIFIED";
 
-    @Id
-    private Long id;
+    @MongoId
+    private ObjectId id;
 
     private String token;
     private String status;
     private LocalDateTime expiredDateTime;
     private LocalDateTime issuedDateTime;
     private LocalDateTime confirmedDateTime;
-    @Transient
-    private AtomicInteger incrementor = new AtomicInteger(0);
     @JsonBackReference
     private User user;
 
@@ -31,14 +31,13 @@ public class VerificationToken {
         this.issuedDateTime = LocalDateTime.now();
         this.expiredDateTime = this.issuedDateTime.plusDays(1);
         this.status = STATUS_PENDING;
-        id = (long)(incrementor.incrementAndGet());
     }
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
