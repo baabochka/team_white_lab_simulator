@@ -128,20 +128,6 @@ public class UserController {
         return map;
     }
 
-    @RequestMapping({"/dashboard"})
-    public String dashboard(HttpServletRequest request, Authentication authentication, Model model) {
 
-        User user = userService.findByAuthentication(authentication);
-        if(!user.getIsActive()) {
-            try {
-                authentication.setAuthenticated(false);
-                request.logout();
-                return "redirect:/verify";
-            } catch (ServletException e) {
-                e.printStackTrace();
-            }
-        }
-        model.addAttribute("user", user);
-        return "dashboard";
-    }
+
 }

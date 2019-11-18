@@ -1,16 +1,15 @@
 package com.white.lab_sim.market.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
+@Document
 public class User {
     @MongoId
     private ObjectId id;
@@ -27,19 +26,16 @@ public class User {
 
     private Boolean isActive;
 
+    @Transient
     private String passwordConfirm;
 
     private Set<Role> roles;
 
     private Set<Role> saved_units;
 
-    @Transient
-    private AtomicInteger incrementor = new AtomicInteger(0);
-
     public User() {
         super();
         this.isActive = false;
-        //id = (long)(incrementor.incrementAndGet());
     }
 
     public ObjectId getId() {
