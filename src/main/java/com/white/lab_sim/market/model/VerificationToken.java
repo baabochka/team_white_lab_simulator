@@ -1,14 +1,10 @@
 package com.white.lab_sim.market.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class VerificationToken {
     public static final String STATUS_PENDING = "PENDING";
@@ -22,7 +18,6 @@ public class VerificationToken {
     private LocalDateTime expiredDateTime;
     private LocalDateTime issuedDateTime;
     private LocalDateTime confirmedDateTime;
-    @JsonBackReference
     private User user;
 
 
