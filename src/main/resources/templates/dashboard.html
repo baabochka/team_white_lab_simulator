@@ -58,25 +58,21 @@
                     All Courses
                 </div>
                 <div class="card-container">
-                    <div class="row">
+                    <div id="add-course-dashboard" class="row">
 
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
                             <div class="box-part text-center">
-
-                                <!--<i class="fa fa-instagram fa-3x" aria-hidden="true"></i>-->
                                 <i class="mdi mdi-add" aria-hidden="true"></i>
                                 <div class="title">
                                     <h4>Add A New Course</h4>
                                 </div>
-
                                 <div class="text">
                                     <span>add more course</span>
                                 </div>
-
                                 <a href="/addCourse" th:href="@{/addCourse}" class="stretched-link">Click me</a>
-
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -91,7 +87,7 @@
         </div>
     </div>
 
-
+    <script th:src="@{/resources/js/addCourse.js}"></script>
 </body>
 
 </html>

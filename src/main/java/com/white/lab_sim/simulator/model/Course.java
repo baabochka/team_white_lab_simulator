@@ -1,9 +1,9 @@
 package com.white.lab_sim.simulator.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.white.lab_sim.market.model.MarketUnit;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-public class Course {
+public class Course extends MarketUnit {
     @MongoId
     String id;
 
@@ -50,4 +50,5 @@ public class Course {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }
