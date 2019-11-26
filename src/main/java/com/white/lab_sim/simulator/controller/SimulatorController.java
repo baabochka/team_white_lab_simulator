@@ -55,4 +55,11 @@ public class SimulatorController {
         labService.load_pre_equip();
         return "redirect:dashboard";
     }
+
+    @RequestMapping({"/addCourse"})
+    public String coursePage(HttpServletRequest request, Authentication authentication, Model model) {
+        User user = userService.findByAuthentication(authentication);
+        model.addAttribute("user", user);
+        return "addCourse";
+    }
 }
