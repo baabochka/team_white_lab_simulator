@@ -67,7 +67,7 @@
 
         <form th:action="@{/signup}" method="post" class="login-email col">
             <div class="input-info" >
-                <input type="text" placeholder="Email" name="email">
+                <input type="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Email" name="email">
             </div>
             <div id="sign-error" class="error-message"></div>
             <div class="input-info" >
