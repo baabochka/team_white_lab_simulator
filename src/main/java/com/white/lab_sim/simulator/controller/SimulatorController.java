@@ -2,7 +2,7 @@ package com.white.lab_sim.simulator.controller;
 
 import com.white.lab_sim.market.model.User;
 import com.white.lab_sim.market.service.UserServiceImpl;
-import com.white.lab_sim.simulator.service.LabCreateService;
+import com.white.lab_sim.simulator.service.LabService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ public class SimulatorController {
     @Autowired
     UserServiceImpl userService;
     @Autowired
-    LabCreateService labCreateService;
+    LabService labService;
     @GetMapping({"/"})
     public String index(Authentication authentication) {
         if(authentication != null && authentication.isAuthenticated())
@@ -47,12 +47,12 @@ public class SimulatorController {
     public String edit_lab(Authentication authentication, Model model) {
         User user = userService.findByAuthentication(authentication);
         model.addAttribute("user", user);
-        return "lab_edit";
+        return "edit";
     }
 
     @RequestMapping({"/load_equip"})
     public String load_equip() {
-        labCreateService.load_pre_equip();
+        labService.load_pre_equip();
         return "redirect:dashboard";
     }
 }

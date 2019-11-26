@@ -11,8 +11,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Document
 public class User {
-    @MongoId
-    private ObjectId id;
+
+    private String id;
 
     private String username;
 
@@ -38,11 +38,11 @@ public class User {
         this.isActive = false;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 

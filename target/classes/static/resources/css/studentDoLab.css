@@ -1,0 +1,35 @@
+.mycontent-left {
+  border-right: 1px dashed #333;
+}
+
+.sub-content{
+    padding: 2rem;
+    border:1px solid rgba(146, 188, 232, 0.25);
+    /* border-top: 10px solid rgba(146, 188, 232, 0.25); */
+    border-radius: 15px;
+    width: 100%;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.sub-content-multi-wrapper{
+  padding: 2rem;
+  border:1px solid rgba(146, 188, 232, 0.25);
+  /* border-top: 10px solid rgba(146, 188, 232, 0.25); */
+  border-radius: 15px;
+  width: 100%;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  height: 540px;
+}
+
+.sub-content-multi{
+  padding: 2rem;
+  border:1px solid rgba(146, 188, 232, 0.25);
+  /* border-top: 10px solid rgba(146, 188, 232, 0.25); */
+  border-radius: 15px;
+  width: 100%;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  height: 390px;
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Lab</title>
+  <link rel="icon" href="images/logo.jpg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/instructorPage.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="js/insMakeLab.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar row navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="Lab-logo col-md-2">
+        <img src="images/logo.jpg" alt="logo">
+      </div>
+      <div class="lab-nav-search col-md-8" id="navbarSupportedContent">
+        <form class="form-inline mr-auto">
+          <div class="md-form my-0">
+            <input  type="text" placeholder="Lab1" aria-label="Search">
+            <!-- <i class="fas fa-search text-white ml-3" aria-hidden="true"></i> -->
+          </div>
+        </form>
+      </div>
+      <!-- <div class="lab-personal-info"></div> -->
+      <div class="lab-personal-info collapse navbar-collapse col-md-2" id="navbarSupportedContent-555">
+             <ul class="navbar-nav ml-auto nav-flex-icons">
+                 <li class="nav-item avatar dropdown">
+                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                         <img class="rounded-circle z-depth-0"
+                              src="images/default.png">
+                         <span class="user-name">Xiao Liu</span>
+                     </a>
+                     <div class="dropdown-menu dropdown-menu-right dropdown-secondary"
+                          aria-labelledby="navbarDropdownMenuLink-55">
+                         <a class="dropdown-item" id="Change-State-link" >Change State</a>
+                     </div>
+                 </li>
+             </ul>
+      </div>
+    </nav>
+    <div class="container mt-10">
+      <div class="recent-lab-container-wrapper">
+        <div class="recent-lab-tool-bar row">
+
+					<div class="dropdown col-md-10 mt-3 mb-3">
+						<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Labs
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="#">Courses</a>
+
+						</div>
+					</div>
+
+					<div class="dropdown mt-3 mb-3">
+					  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    Own by me
+					  </button>
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					    <a class="dropdown-item" href="#">Favorite</a>
+
+					  </div>
+					</div>
+
+
+        </div>
+        <div class="recent-lab-container-card-wrapper">
+          <div class="recent-lab-container-cards row">
+            <div class="recent-card-wrapper col-md-4">
+              <div class="view-recent-cards">
+                <div class="view-recent-card-wrapper">
+                  <img class="review-lab" src="images/temp.png">
+                </div>
+                <div class="view-recent-card-subtitle">
+                  <div class="view-recent-card-subtitle-wrapper">
+                    <div class="view-recent-lab-title ml-2">
+                      Lab1
+                    </div>
+                    <div class="view-recent-more-info row">
+                      <div class="view-recent-logo col ml-2 mt-2">
+                        Logo
+                      </div>
+
+											<div class="dropdown col ">
+												<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													more info
+												</button>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="#">Save</a>
+													<a class="dropdown-item" href="#">Edit</a>
+													<a class="dropdown-item" href="#">Copy</a>
+													<a class="dropdown-item" href="#">Delete</a>
+
+												</div>
+											</div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+						<div class="recent-card-wrapper col-md-4">
+              <div class="view-recent-cards">
+                <div class="view-recent-card-wrapper">
+                  <img class="review-lab" src="images/temp.png">
+                </div>
+                <div class="view-recent-card-subtitle">
+                  <div class="view-recent-card-subtitle-wrapper">
+                    <div class="view-recent-lab-title ml-2">
+                      Lab1
+                    </div>
+                    <div class="view-recent-more-info row">
+                      <div class="view-recent-logo col ml-2 mt-2">
+                        Logo
+                      </div>
+
+											<div class="dropdown col ">
+												<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													more info
+												</button>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="#">Save</a>
+													<a class="dropdown-item" href="#">Edit</a>
+													<a class="dropdown-item" href="#">Copy</a>
+													<a class="dropdown-item" href="#">Delete</a>
+
+												</div>
+											</div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+						<div class="recent-card-wrapper col-md-4">
+              <div class="view-recent-cards">
+                <div class="view-recent-card-wrapper">
+                  <img class="review-lab" src="images/temp.png">
+                </div>
+                <div class="view-recent-card-subtitle">
+                  <div class="view-recent-card-subtitle-wrapper">
+                    <div class="view-recent-lab-title ml-2">
+                      Lab1
+                    </div>
+                    <div class="view-recent-more-info row">
+                      <div class="view-recent-logo col ml-2 mt-2">
+                        Logo
+                      </div>
+
+											<div class="dropdown col ">
+												<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													more info
+												</button>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="#">Save</a>
+													<a class="dropdown-item" href="#">Edit</a>
+													<a class="dropdown-item" href="#">Copy</a>
+													<a class="dropdown-item" href="#">Delete</a>
+
+												</div>
+											</div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+</body>
+</html>
