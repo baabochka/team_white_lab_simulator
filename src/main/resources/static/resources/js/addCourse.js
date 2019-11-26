@@ -4,15 +4,19 @@ function addCourseInDashboard(){
         type:"POST",
         url:"/addCourse",
         data:{
+            "courseName":courseName.val(),
+            "courseSection":courseSec.val(),
+            "courseDescription":courseDescription.val()
         },
         success : function(data){
             $(courseTemplate).appendTo(whereShowCourseDashboard);
-            alert(courseName.val());
+            alert(courseSec.val());
         }
     });
 }
 
 let courseName = $("#Form-Course-Name");
+let courseSec = $("#Form-Course-Section");
 let courseDescription = $("#Form-Course-Descrip");
 let courseAddBtn = $("#add-course-btn");
 
@@ -27,7 +31,7 @@ let courseTemplate = "<div class=\"box-part text-center\">\n" +
     "                                    <span>" + courseDescription.val() + "</span>\n" +
     "                                </div>\n" +
     "                                <a href=\"/addCourse\" th:href=\"@{/addCourse}\" class=\"stretched-link\">Read More</a>\n" +
-    "                            </div>"
+    "                            </div>";
 
 courseAddBtn.click(function () {
     addCourseInDashboard();

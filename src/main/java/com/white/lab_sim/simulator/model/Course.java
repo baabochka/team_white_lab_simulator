@@ -19,7 +19,7 @@ public class Course extends MarketUnit {
         this.section = section;
         this.description = description;
     }
-    
+
     public String getName() {
         return name;
     }

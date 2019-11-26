@@ -2,13 +2,15 @@ package com.white.lab_sim.simulator.controller;
 
 import com.white.lab_sim.market.model.User;
 import com.white.lab_sim.market.service.UserServiceImpl;
+import com.white.lab_sim.simulator.model.Course;
+import com.white.lab_sim.simulator.service.CourseService;
 import com.white.lab_sim.simulator.service.LabService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,8 +19,13 @@ public class SimulatorController {
 
     @Autowired
     UserServiceImpl userService;
+
     @Autowired
     LabService labService;
+
+    @Autowired
+    CourseService courseService;
+
     @GetMapping({"/"})
     public String index(Authentication authentication) {
         if(authentication != null && authentication.isAuthenticated())
@@ -56,11 +63,19 @@ public class SimulatorController {
         return "redirect:dashboard";
     }
 
-    @RequestMapping({"/addCourse"})
+    @GetMapping({"/addCourse"})
     public String addCoursePage(HttpServletRequest request, Authentication authentication, Model model) {
         User user = userService.findByAuthentication(authentication);
         model.addAttribute("user", user);
         return "addCourse";
+    }
+
+    @PostMapping({"/addCourse"})
+    @ResponseBody
+    public String createCourse(@RequestParam String courseName, @RequestParam String courseSection, @RequestParam String courseDescription,
+                               Authentication authentication){
+        Course course = courseService.newCourse(userService.findByAuthentication(authentication), courseName, courseSection, courseDescription);
+        return null;
     }
 
     @RequestMapping({"/addLab"})
