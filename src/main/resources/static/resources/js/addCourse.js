@@ -2,12 +2,12 @@
 function addCourseInDashboard(){
     $.ajax({
         type:"POST",
-        url:"/addCourse/",
+        url:"/addCourse",
         data:{
         },
         success : function(data){
             $(courseTemplate).appendTo(whereShowCourseDashboard);
-            alert(courseTemplate);
+            alert(courseName.val());
         }
     });
 }
@@ -30,7 +30,5 @@ let courseTemplate = "<div class=\"box-part text-center\">\n" +
     "                            </div>"
 
 courseAddBtn.click(function () {
-
     addCourseInDashboard();
-
 });

@@ -57,9 +57,16 @@ public class SimulatorController {
     }
 
     @RequestMapping({"/addCourse"})
-    public String coursePage(HttpServletRequest request, Authentication authentication, Model model) {
+    public String addCoursePage(HttpServletRequest request, Authentication authentication, Model model) {
         User user = userService.findByAuthentication(authentication);
         model.addAttribute("user", user);
         return "addCourse";
+    }
+
+    @RequestMapping({"/addLab"})
+    public String addLabPage(HttpServletRequest request, Authentication authentication, Model model) {
+        User user = userService.findByAuthentication(authentication);
+        model.addAttribute("user", user);
+        return "addLab";
     }
 }
