@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
-<!--    <script type="text/javascript" src="../static/resources/js/dashboard.js" th:src="@{/resources/js/dashboard.js}"></script>-->
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/addCourse.css" th:href="@{/resources/css/addCourse.css}">
+    <!--    <script type="text/javascript" src="../static/resources/js/dashboard.js" th:src="@{/resources/js/dashboard.js}"></script>-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
@@ -35,7 +36,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-secondary"
                          aria-labelledby="navbarDropdownMenuLink-55">
-<!--                        <a class="dropdown-item" href="#">game history</a>-->
+                        <!--                        <a class="dropdown-item" href="#">game history</a>-->
                         <a class="dropdown-item" id="logout-link" href="/logout" th:href="@{/logout}">logout</a>
 
                     </div>
@@ -44,51 +45,41 @@
         </div>
     </nav>
     <div class="lab-container">
-        <div class="toolbar">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search..." style="width: 300px">
-                <button type="button" aria-label="Search">
-                <i class="mdi mdi-magnify" aria-hidden="true"></i>
-            </button>
-            </div>
-        </div>
-        <div class="lab-col mt-4">
-            <div class="card ">
-                <div class="card-header">
-                    All Courses
-                </div>
-                <div class="card-container">
-                    <div class="row">
+        <section class="form-elegant">
+            <div class="row">
+                <div class="col-md-9 col-lg-7 col-xl-5">
+                    <div class="card">
+                        <div class="card-body mx-4">
+                            <div class="text-center">
+                                <h3 class="dark-grey-text mb-5"><strong>Add New Course</strong></h3>
+                            </div>
+                            <div class="md-form">
+                                <input type="text" id="Form-Course-Name" class="form-control" placeholder="Course Name">
+                                <!--<label class="bmd-label-floating" for="Form-Course-Name">Course Name</label>-->
+                            </div>
 
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="md-form">
+                                <input type="text" id="Form-Course-Section" class="form-control" placeholder="Course Section">
+                                <!--<label class="bmd-label-floating" for="Form-Course-Section">Course Section</label>-->
+                            </div>
 
-                            <div class="box-part text-center">
+                            <div class="md-form">
+                                <input type="text" id="Form-Course-Descrip" class="form-control" placeholder="Course Description">
+                                <!--<label class="bmd-label-floating" for="Form-Course-Descrip">Course Description</label>-->
+                            </div>
 
-                                <!--<i class="fa fa-instagram fa-3x" aria-hidden="true"></i>-->
-                                <i class="mdi mdi-add" aria-hidden="true"></i>
-                                <div class="title">
-                                    <h4>Add A New Course</h4>
-                                </div>
-
-                                <div class="text">
-                                    <span>add more course</span>
-                                </div>
-
-                                <a href="/addCourse" th:href="@{/addCourse}" class="stretched-link">Click me</a>
-
+                            <div class="text-center mb-3">
+                                <button type="button" class="btn btn-block btn-rounded z-depth-1a">Add Course</button>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
-        </div>
-        <div class="lab-col mt-4">
-            <div class="card card-own">
-                <div class="card-header">
-                    All Labs
-                </div>
-            </div>
-        </div>
+
+
+        </section>
     </div>
 
 
