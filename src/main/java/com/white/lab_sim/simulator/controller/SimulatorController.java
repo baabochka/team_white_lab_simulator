@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class SimulatorController {
@@ -47,6 +48,8 @@ public class SimulatorController {
             }
         }
         model.addAttribute("user", user);
+        List<Course> courses = courseService.findByCreatedBy(user);
+        model.addAttribute("courses", courses);
         return "dashboard";
     }
 
@@ -73,7 +76,7 @@ public class SimulatorController {
     @PostMapping({"/addCourse"})
     @ResponseBody
     public String createCourse(@RequestParam String courseName, @RequestParam String courseSection, @RequestParam String courseDescription,
-                               Authentication authentication){
+                               Authentication authentication, Model model){
         Course course = courseService.newCourse(userService.findByAuthentication(authentication), courseName, courseSection, courseDescription);
         return null;
     }

@@ -7,6 +7,7 @@ import com.white.lab_sim.simulator.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 @Service
 public class CourseService {
@@ -42,5 +43,9 @@ public class CourseService {
     public Course findById(String id) {
         Optional<Course> o = courseRepository.findById(id);
         return o.orElse(null);
+    }
+
+    public List<Course> findByCreatedBy(User user) {
+        return courseRepository.getByCreatedBy(user);
     }
 }
