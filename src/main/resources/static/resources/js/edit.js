@@ -25,7 +25,7 @@ function loadEquipmentFromMarket() {
 }
 
 function constructRadio(id, name) {
-    let link = "/resources/images/equipments/" + id + ".png";
+    let link = "/resources/images/equipments/" + name + ".png";
     return "<div class='col col-sm-3 equip-unit'>" +
         "<label class=\"layersMenu\">\n" +
         "    <input type=\"checkbox\" id=" + id + " name=" + name + ">\n" +
@@ -41,7 +41,7 @@ function loadSelectionToCart() {
     let selection = $('#equip-market-modal input:checked');
     let s;
     for(s of selection) {
-        let link = "/resources/images/equipments/" + $(s).attr('id') + ".png";
+        let link = "/resources/images/equipments/" + $(s).attr('name') + ".png";
         cart_body.append($("<li class='cart-item list-group-item'><img src=" + link + "><span>" + $(s).attr('name') + "</span>"
             +"<div class=\"form-group row\">\n" +
             "  <div class=\"col-10\">\n" +
