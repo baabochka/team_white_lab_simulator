@@ -61,7 +61,71 @@
                 <textarea rows='1' id="lab_name_input" placeholder="Lab Title" th:text="${lab.getTitle()}">{{ set.set_name }}</textarea><br>
                 <textarea id="lab_description_input" placeholder="Lab Description" th:text="${lab.getDescription()}"></textarea><br>
             </div>
+            <div class="title">
+                <div>Lab Area</div>
+            </div>
+            <div></div>
         </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="step: ${steps}">
+            <div class="box-part text-center">
+                <i class="mdi mdi-add" aria-hidden="true"></i>
+                <div class="title" th:text="${step.getName()}"></div>
+                <div class="text" th:text="${step.getDescription()}"></div>
+                <a href="/addStep" th:href="@{/}" class="stretched-link">Get More</a>
+            </div>
+        </div>
+        <!--<div id="add-step-dashboard" class="row">-->
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="box-part text-center">
+                    <i class="mdi mdi-add" aria-hidden="true"></i>
+                    <div class="title">
+                        <div>Add A New Step</div>
+                    </div>
+                    <!--<div class="text">-->
+                        <!--<div>add more steps</div>-->
+                    <!--</div>-->
+                    <!-- List of steps-->
+                    <ul class="list-group list-group-horizontal" id="step-group">
+
+                    </ul>
+                    <!--                                <a href="/addCourse" th:href="@{/addCourse}" class="stretched-link">Click me</a>-->
+
+                    <!-- Trigger the modal with a button -->
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add step</button>
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add a new step</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="md-form">
+                                        <input type="text" id="Form-Step-Name" class="form-control" placeholder="Step Name">
+                                    </div>
+
+                                    <div class="md-form">
+                                        <input type="text" id="Form-Step-Descrip" class="form-control" placeholder="Step Description">
+                                    </div>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <!--                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                    <div class="text-center mb-3">
+                                        <button id="add-step-btn" type="button" data-dismiss="modal" class="btn btn-block btn-rounded z-depth-1a">Add this step</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!--</div>-->
     </div>
     <div class="modal fade" id="equip-market-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -104,6 +168,6 @@
         </div>
     </div>
     <script th:src="@{/resources/js/edit.js}"></script>
-
+    <script th:src="@{/resources/js/addStep.js}"></script>
 </body>
 </html>
