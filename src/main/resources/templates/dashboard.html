@@ -57,18 +57,28 @@
                 <div class="card-header">
                     All Courses
                 </div>
-                <div class="card-container">
+
+                <div class="card-container" >
+
                     <div id="add-course-dashboard" class="row">
 
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="course: ${courses}">
+                            <div class="box-part text-center">
+                                <i class="mdi mdi-add" aria-hidden="true"></i>
+                                <div class="title" th:text="${course.getName()}"></div>
+                                <div class="text" th:text="${course.getDescription()}"></div>
+                                <a href="/addCourse" th:href="@{/}" class="stretched-link">Get More</a>
+                            </div>
+                        </div>
 
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="box-part text-center">
                                 <i class="mdi mdi-add" aria-hidden="true"></i>
                                 <div class="title">
-                                    <h4>Add A New Course</h4>
+                                    <div>Add A New Course</div>
                                 </div>
                                 <div class="text">
-                                    <span>add more course</span>
+                                    <div>add more course</div>
                                 </div>
                                 <!-- List of courses-->
                                 <ul class="list-group list-group-horizontal" id="course-group">
@@ -113,10 +123,18 @@
                                         </div>
                                     </div>
                             </div>
-
                         </div>
+
                     </div>
+
+                    <!--<div id="add-course-dashboard" class="row">-->
+
+
+                    <!--</div>-->
+
+
                 </div>
+
             </div>
         </div>
         <div class="lab-col mt-4">
@@ -125,10 +143,9 @@
                     All Labs
                 </div>
                 <div class="card-container">
+
                     <div id="add-lab-dashboard" class="row">
-
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
                             <div class="box-part text-center">
                                 <i class="mdi mdi-add" aria-hidden="true"></i>
                                 <div class="title">
@@ -139,9 +156,9 @@
                                 </div>
                                 <a href="/addCourse" th:href="@{/addLab}" class="stretched-link">Click me</a>
                             </div>
-
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
