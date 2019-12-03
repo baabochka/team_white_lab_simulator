@@ -1,14 +1,24 @@
 package com.white.lab_sim.simulator.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
-
-@Document
 public class State {
-    @MongoId
-    String id;
 
-    Equipment equipment;
-    String label;
+    private String info;
+    private int level;
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
 }

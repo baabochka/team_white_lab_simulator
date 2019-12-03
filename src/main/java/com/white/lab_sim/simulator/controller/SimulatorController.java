@@ -2,23 +2,31 @@ package com.white.lab_sim.simulator.controller;
 
 import com.white.lab_sim.market.model.User;
 import com.white.lab_sim.market.service.UserServiceImpl;
-import com.white.lab_sim.simulator.service.LabCreateService;
+import com.white.lab_sim.simulator.model.Course;
+import com.white.lab_sim.simulator.service.CourseService;
+import com.white.lab_sim.simulator.service.LabService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class SimulatorController {
 
     @Autowired
     UserServiceImpl userService;
+
     @Autowired
-    LabCreateService labCreateService;
+    LabService labService;
+
+    @Autowired
+    CourseService courseService;
+
     @GetMapping({"/"})
     public String index(Authentication authentication) {
         if(authentication != null && authentication.isAuthenticated())
@@ -40,6 +48,8 @@ public class SimulatorController {
             }
         }
         model.addAttribute("user", user);
+        List<Course> courses = courseService.findByCreatedBy(user);
+        model.addAttribute("courses", courses);
         return "dashboard";
     }
 
@@ -47,12 +57,34 @@ public class SimulatorController {
     public String edit_lab(Authentication authentication, Model model) {
         User user = userService.findByAuthentication(authentication);
         model.addAttribute("user", user);
-        return "lab_edit";
+        return "edit";
     }
 
     @RequestMapping({"/load_equip"})
     public String load_equip() {
-        labCreateService.load_pre_equip();
+        labService.load_pre_equip();
         return "redirect:dashboard";
+    }
+
+    @GetMapping({"/addCourse"})
+    public String addCoursePage(HttpServletRequest request, Authentication authentication, Model model) {
+        User user = userService.findByAuthentication(authentication);
+        model.addAttribute("user", user);
+        return "addCourse";
+    }
+
+    @PostMapping({"/addCourse"})
+    @ResponseBody
+    public String createCourse(@RequestParam String courseName, @RequestParam String courseSection, @RequestParam String courseDescription,
+                               Authentication authentication, Model model){
+        Course course = courseService.newCourse(userService.findByAuthentication(authentication), courseName, courseSection, courseDescription);
+        return null;
+    }
+
+    @RequestMapping({"/addLab"})
+    public String addLabPage(HttpServletRequest request, Authentication authentication, Model model) {
+        User user = userService.findByAuthentication(authentication);
+        model.addAttribute("user", user);
+        return "addLab";
     }
 }

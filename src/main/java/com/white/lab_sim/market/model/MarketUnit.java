@@ -1,15 +1,11 @@
 package com.white.lab_sim.market.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 import java.util.Set;
 
-@Document
 public abstract class MarketUnit {
 
-    @MongoId
-    private String id;
 
+    private String id;
     private User createdBy;
 
     private Set<User> savedBy;

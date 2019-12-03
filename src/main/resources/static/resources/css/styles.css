@@ -3,7 +3,7 @@ body {
 }
 
 .navbar {
-    height: 48px;
+    height: 65px;
     -webkit-box-shadow: 0 3px 5px rgba(100, 100, 100, 0.2);
     -moz-box-shadow:    0 3px 5px rgba(100, 100, 100, 0.2);
     box-shadow:         0 3px 5px rgba(100, 100, 100, 0.2);
@@ -16,15 +16,12 @@ body {
     margin-right: 10px;
 }
 
-.stratego-container {
+.lab-container {
     width: 100%;
     background-color: #f0f4f7;
     position: absolute;
-    top: 48px;
+    top: 65px;
     bottom: 0;
-    padding: 40px 60px;
-    display: flex;
-    justify-content: space-between;
 }
 
 .stratego-col {
@@ -242,3 +239,32 @@ a.link-disabled {
 /*#history {*/
 /*    overflow: scroll;*/
 /*}*/
+
+/*body{*/
+    /*background: #f0f4f7;*/
+/*}*/
+span{
+    font-size:15px;
+}
+a{
+    text-decoration:none;
+    /*color: #0062cc;*/
+    /*border-bottom:2px solid #0062cc;*/
+}
+.box{
+    padding:60px 0px;
+}
+
+.box-part{
+    background:#FFF;
+    border-radius:0;
+    padding:60px 10px;
+    margin:30px 0px;
+}
+.text{
+    margin:20px 0px;
+}
+
+.fa{
+    color:#4183D7;
+}

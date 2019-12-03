@@ -12,6 +12,8 @@
     <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
 <!--    <script type="text/javascript" src="../static/resources/js/dashboard.js" th:src="@{/resources/js/dashboard.js}"></script>-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 </head>
 <body>
     <nav class="mb-1 navbar navbar-expand-sm navbar-light">
@@ -41,7 +43,87 @@
             </ul>
         </div>
     </nav>
+    <div class="lab-container">
+        <div class="toolbar">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search..." style="width: 300px">
+                <button type="button" aria-label="Search">
+                <i class="mdi mdi-magnify" aria-hidden="true"></i>
+            </button>
+            </div>
+        </div>
+        <div class="lab-col mt-4">
+            <div class="card ">
+                <div class="card-header">
+                    All Courses
+                </div>
 
+                <div class="card-container" >
+
+                    <div id="add-course-dashboard" class="row">
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="course: ${courses}">
+                            <div class="box-part text-center">
+                                <i class="mdi mdi-add" aria-hidden="true"></i>
+                                <div class="title" th:text="${course.getName()}"></div>
+                                <div class="text" th:text="${course.getDescription()}"></div>
+                                <a href="/addCourse" th:href="@{/}" class="stretched-link">Get More</a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="box-part text-center">
+                                <i class="mdi mdi-add" aria-hidden="true"></i>
+                                <div class="title">
+                                    <div>Add A New Course</div>
+                                </div>
+                                <div class="text">
+                                    <div>add more course</div>
+                                </div>
+                                <a href="/addCourse" th:href="@{/addCourse}" class="stretched-link">Click me</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--<div id="add-course-dashboard" class="row">-->
+
+
+                    <!--</div>-->
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="lab-col mt-4">
+            <div class="card card-own">
+                <div class="card-header">
+                    All Labs
+                </div>
+                <div class="card-container">
+
+                    <div id="add-lab-dashboard" class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="box-part text-center">
+                                <i class="mdi mdi-add" aria-hidden="true"></i>
+                                <div class="title">
+                                    <h4>Add A New Lab</h4>
+                                </div>
+                                <div class="text">
+                                    <span>add more labs</span>
+                                </div>
+                                <a href="/addCourse" th:href="@{/addLab}" class="stretched-link">Click me</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/resources/js/addCourse.js}"></script>
 </body>
 
 </html>

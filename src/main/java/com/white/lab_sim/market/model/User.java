@@ -1,18 +1,14 @@
 package com.white.lab_sim.market.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Document
 public class User {
-    @MongoId
-    private ObjectId id;
+
+    private String id;
 
     private String username;
 
@@ -31,18 +27,16 @@ public class User {
 
     private Set<Role> roles;
 
-    private Set<Role> saved_units;
-
     public User() {
         super();
         this.isActive = false;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -94,23 +88,12 @@ public class User {
         this.roles = roles;
     }
 
-    @JsonManagedReference
-    private VerificationToken verificationToken;
-
     public String getAvatar_url() {
         return avatar_url;
     }
 
     public void setAvatar_url(String avatar_url) {
         this.avatar_url = avatar_url;
-    }
-
-    public Set<Role> getSaved_units() {
-        return saved_units;
-    }
-
-    public void setSaved_units(Set<Role> saved_units) {
-        this.saved_units = saved_units;
     }
 
     public String getNickname() {
@@ -128,14 +111,6 @@ public class User {
 
     public void setIsActive(Boolean active) {
         isActive = active;
-    }
-
-    public VerificationToken getVerificationToken() {
-        return verificationToken;
-    }
-
-    public void setVerificationToken(VerificationToken verificationToken) {
-        this.verificationToken = verificationToken;
     }
 
 }

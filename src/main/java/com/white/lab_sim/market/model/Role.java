@@ -1,10 +1,6 @@
 package com.white.lab_sim.market.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Role {
 
@@ -12,11 +8,6 @@ public class Role {
     private Long id;
 
     private String name;
-
-    private Set<User> users;
-
-    @Transient
-    private AtomicInteger incrementor = new AtomicInteger(0);
 
     public Long getId() {
         return id;
@@ -34,11 +25,4 @@ public class Role {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 }
