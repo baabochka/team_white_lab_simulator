@@ -4,6 +4,4 @@ import java.util.HashMap;
 
 public class Step {
     private HashMap<String, State> map;
-
-
 }
