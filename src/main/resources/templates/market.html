@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--    Bootstrap CSS-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!--    Custom CSS-->
+    <link rel="stylesheet" href="css/marketPage.css">
+
+    <!--    fontawesome Icon CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--    Bootstrap Javascript-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <title>Title</title>
+
+</head>
+<body>
+<div class="vertical-center">
+    <div class="container">
+        <form class="form-inline well">
+            <!--                <div class="input-group-prepend">-->
+            <!--                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>-->
+            <!--                    <div class="dropdown-menu">-->
+            <!--                        <a class="dropdown-item" href="#">Action</a>-->
+            <!--                        <a class="dropdown-item" href="#">Another action</a>-->
+            <!--                        <a class="dropdown-item" href="#">Something else here</a>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <div class="input-group-prepend">
+                <select class="form-control select2" >
+                    <option>Course</option>
+                    <option>Equipment</option>
+                    <option>Lab</option>
+                </select>
+            </div>
+            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                   aria-label="Search">
+            <div class="input-group-prepend">
+                <button class="btn btn-secondary" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>
+</body>
+
+</html>

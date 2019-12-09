@@ -1,0 +1,14 @@
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 50vh; /* These two lines are counted as one :-)       */
+
+    display: flex;
+    align-items: center;
+}
+/*.form-control.select2 {*/
+/*    width: auto;*/
+/*}*/
+
+.input-group {
+    width:auto;
+}
