@@ -55,15 +55,22 @@
                     alert("Congratulations! You did the step #" + stepN + " correctly!");
                     stepN +=1;
                     li.remove();
-                    alert(document.getElementsByClassName("lab-table")[0].innerHTML)
-                    <!--.getElementsByTagName("span").remove();-->
+                    cleanLabArea();
 
                 } else {
                     alert("Sorry, you did something wrong, try again!");
-                    document.getElementsByClassName("lab-table")[0].getElementsByTagName("span").remove();
-
+                    cleanLabArea();
                 }
-            }
+        }
+        function cleanLabArea() {
+            var labArea = document.getElementsByClassName("lab-area")[0];
+            var spans = labArea.getElementsByTagName("span");
+            <!--alert(spans[0].innerHTML);-->
+            <!--alert(spans[1].innerHTML);-->
+            spans[1].remove();
+            spans[0].remove();
+            selectorForEquipment = 1;
+        }
     </script>
 
 
