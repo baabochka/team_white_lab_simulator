@@ -6,8 +6,10 @@
 
     <!--    Bootstrap CSS-->
     <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
+
     <!--    Custom CSS-->
     <link rel="stylesheet" href="../static/resources/css/market.css" th:href="@{/resources/css/market.css}">
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
 
     <!--    fontawesome Icon CSS-->
     <link rel="stylesheet" href="../static/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
@@ -16,40 +18,38 @@
     <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
-    <!--    Custom Javascript-->
-
-    <title>Title</title>
+    <title>Market</title>
 
 </head>
 <body>
     <div id="top-half">
-    <!--        <nav class="mb-1 navbar navbar-expand-sm navbar-light">-->
-    <!--            <img id="logo" src="../static/resources/images/icon.png" th:src="@{/resources/images/icon.png}"/>-->
-    <!--            <a class="navbar-brand" href="#">Lab Sim</a>-->
-    <!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"-->
-    <!--                    aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">-->
-    <!--                <span class="navbar-toggler-icon"></span>-->
-    <!--            </button>-->
-    <!--            <div class="collapse navbar-collapse" id="navbarSupportedContent-555">-->
-    <!--                <ul class="navbar-nav ml-auto nav-flex-icons">-->
-    <!--                    <li class="nav-item avatar dropdown">-->
-    <!--                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"-->
-    <!--                           aria-haspopup="true" aria-expanded="false">-->
-    <!--                            <img class="rounded-circle z-depth-0"-->
-    <!--                                 th:src="${user.avatar_url == null || user.avatar_url.isEmpty()} ? '/resources/images/default.png':${user.avatar_url}">-->
-    <!--                            &lt;!&ndash;/*@thymesVar id="user" type=""*/&ndash;&gt;-->
-    <!--                            <span th:text="${user.getNickname()}"></span>-->
-    <!--                        </a>-->
-    <!--                        <div class="dropdown-menu dropdown-menu-right dropdown-secondary"-->
-    <!--                             aria-labelledby="navbarDropdownMenuLink-55">-->
-    <!--                            &lt;!&ndash;                        <a class="dropdown-item" href="#">game history</a>&ndash;&gt;-->
-    <!--                            <a class="dropdown-item" id="logout-link" href="/logout" th:href="@{/logout}">logout</a>-->
+            <nav class="mb-1 navbar navbar-expand-sm navbar-light">
+                <img id="logo" src="../static/resources/images/icon.png" th:src="@{/resources/images/icon.png}"/>
+                <a class="navbar-brand" href="#">Lab Sim</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+                        aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+                    <ul class="navbar-nav ml-auto nav-flex-icons">
+                        <li class="nav-item avatar dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded-circle z-depth-0"
+                                     th:src="${user.avatar_url == null || user.avatar_url.isEmpty()} ? '/resources/images/default.png':${user.avatar_url}">
+                                <!--/*@thymesVar id="user" type=""*/-->
+                                <span th:text="${user.getNickname()}"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-secondary"
+                                 aria-labelledby="navbarDropdownMenuLink-55">
+                                <!--                        <a class="dropdown-item" href="#">game history</a>-->
+                                <a class="dropdown-item" id="logout-link" href="/logout" th:href="@{/logout}">logout</a>
 
-    <!--                        </div>-->
-    <!--                    </li>-->
-    <!--                </ul>-->
-    <!--            </div>-->
-    <!--        </nav>-->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
         <div class="vertical-center">
             <div class="container">
@@ -65,7 +65,9 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div id="course" class="container tab-pane active">
+                        <br>
                         <h3>Course</h3>
+                        <br>
                         <form class="form-inline well">
 
 
@@ -83,6 +85,7 @@
                             <!--                    </button>-->
                             <!--                </div>-->
                         </form>
+                        <br>
                         <!--                        Course cards-->
                         <div class="container">
                             <div class="row">
@@ -103,11 +106,14 @@
                         </div>
                     </div>
                     <div id="lab" class="container tab-pane fade">
+                        <br>
                         <h3>Lab</h3>
+                        <br>
                         <form class="form-inline well">
                             <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
                                    aria-label="Search" id="labFilterBar">
                         </form>
+                        <br>
                         <div class="container">
                             <div class="row">
 
