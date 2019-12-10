@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!--    Bootstrap CSS-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}">
-
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
     <!--    Custom CSS-->
     <link rel="stylesheet" href="../static/resources/css/market.css" th:href="@{/resources/css/market.css}">
 
@@ -16,11 +15,14 @@
     <!--    Bootstrap Javascript-->
     <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <!--    Custom Javascript-->
+
     <title>Title</title>
 
 </head>
 <body>
-<div id="top-half">
+    <div id="top-half">
     <!--        <nav class="mb-1 navbar navbar-expand-sm navbar-light">-->
     <!--            <img id="logo" src="../static/resources/images/icon.png" th:src="@{/resources/images/icon.png}"/>-->
     <!--            <a class="navbar-brand" href="#">Lab Sim</a>-->
@@ -49,56 +51,86 @@
     <!--            </div>-->
     <!--        </nav>-->
 
-    <div class="vertical-center">
-        <div class="container">
-            <form class="form-inline well">
+        <div class="vertical-center">
+            <div class="container">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#course">Course</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#lab">Lab</a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div id="course" class="container tab-pane active">
+                        <h3>Course</h3>
+                        <form class="form-inline well">
 
 
-                <!--                    <div class="input-group-prepend">-->
-                <!--                        <select class="form-control select2" >-->
-                <!--                            <option>Course</option>-->
-                <!--                            <option>Lab</option>-->
-                <!--                        </select>-->
-                <!--                    </div>-->
-                <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-                       aria-label="Search">
-                <div class="input-group-prepend">
-                    <button class="btn btn-secondary" type="submit">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-4 col-md-6 mb-4" th:each="course: ${courses}">
-            <div class="flip-card">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <h3 th:text="${course.getName()}"></h3>
+                            <!--                    <div class="input-group-prepend">-->
+                            <!--                        <select class="form-control select2" >-->
+                            <!--                            <option>Course</option>-->
+                            <!--                            <option>Lab</option>-->
+                            <!--                        </select>-->
+                            <!--                    </div>-->
+                            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                                   aria-label="Search" id="courseFilterBar">
+                            <!--                <div class="input-group-prepend">-->
+                            <!--                    <button class="btn btn-secondary" type="submit">-->
+                            <!--                        <i class="fa fa-search"></i>-->
+                            <!--                    </button>-->
+                            <!--                </div>-->
+                        </form>
+                        <!--                        Course cards-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4" th:each="course: ${courses}">
+                                    <div class="flip-card">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-card-front">
+                                                <h3 th:text="${course.getName()}"></h3>
+                                            </div>
+                                            <div class="flip-card-back">
+                                                <h4 th:text="${course.getSection()}"></h4>
+                                                <p th:text="${course.getDescription()}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flip-card-back">
-                        <h4 th:text="${course.getSection()}"></h4>
-                        <p th:text="${course.getDescription()}"></p>
+                    <div id="lab" class="container tab-pane fade">
+                        <h3>Lab</h3>
+                        <form class="form-inline well">
+                            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                                   aria-label="Search" id="labFilterBar">
+                        </form>
+                        <div class="container">
+                            <div class="row">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
-</div>
+
 
 </body>
 
 </html>
 
-<!--        <div id="add-course-dashboard" class="row">-->
+<!--        <div id="market" class="row">-->
 <!--            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="course: ${courses}">-->
 <!--                <div class="box-part text-center">-->
 <!--                    <i class="mdi mdi-add" aria-hidden="true"></i>-->
 <!--                    <div class="title" th:text="${course.getName()}"></div>-->
-<!--                    <div class="text" th:text="${course.getDescription()}"></div>-->
 <!--                    <a href="/addCourse" th:href="@{/}" class="stretched-link">Get More</a>-->
 <!--                </div>-->
 <!--            </div>-->
