@@ -1,16 +1,15 @@
-function filterFunction() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById("coursefilterBar");
+function courseFilterFunction() {
+    var input, filter, cards, cardContainer, h5, title, i;
+    input = document.getElementById("courseFilterInput");
     filter = input.value.toUpperCase();
-    content = document.getElementById("tab-content");
-    li = content.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
+    cardContainer = document.getElementById("courseGroup");
+    cards = cardContainer.getElementsByClassName("courseCard");
+    for (i = 0; i < cards.length; i++) {
+        title = cards[i].querySelector(".flip-card .flip-card-inner .flip-card-front h3.card-title");
+        if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+            cards[i].style.display = "";
         } else {
-            li[i].style.display = "none";
+            cards[i].style.display = "none";
         }
     }
 }

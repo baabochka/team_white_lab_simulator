@@ -18,6 +18,8 @@
     <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
+    <!--    Custom Javascript-->
+    <script src="../static/resources/js/market.js" th:src="@{/resources/js/market.js}"></script>
     <title>Market</title>
 
 </head>
@@ -78,7 +80,7 @@
                             <!--                        </select>-->
                             <!--                    </div>-->
                             <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-                                   aria-label="Search" id="courseFilterBar">
+                                   aria-label="Search" id="courseFilterInput" onkeyup="courseFilterFunction()">
                             <!--                <div class="input-group-prepend">-->
                             <!--                    <button class="btn btn-secondary" type="submit">-->
                             <!--                        <i class="fa fa-search"></i>-->
@@ -88,12 +90,14 @@
                         <br>
                         <!--                        Course cards-->
                         <div class="container">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 mb-4" th:each="course: ${courses}">
+                            <div class="row" id="courseGroup">
+                                <div class="courseCard col-lg-4 col-md-6 mb-4"  th:each="course: ${courses}" th:name="${course.getName()}">
                                     <div class="flip-card">
                                         <div class="flip-card-inner">
                                             <div class="flip-card-front">
-                                                <h3 th:text="${course.getName()}"></h3>
+                                                <br>
+                                                <br>
+                                                <h3 class="card-title"th:text="${course.getName()}"></h3>
                                             </div>
                                             <div class="flip-card-back">
                                                 <h4 th:text="${course.getSection()}"></h4>
