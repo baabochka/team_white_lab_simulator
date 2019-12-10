@@ -29,6 +29,11 @@
                     selectorForEquipment += 1;
                 }
             });
+            $("div[class*=lab-area] div").click(function () {
+               $( "div[class*=lab-area] div span" ).remove();
+               selectorForEquipment = 1
+            });
+
         });
     </script>
 
