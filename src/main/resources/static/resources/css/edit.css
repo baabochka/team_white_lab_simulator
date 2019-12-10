@@ -19,6 +19,15 @@
     padding: 20px 25px;
     height: calc(100% - 84px);
 }
+
+#lab-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    padding: 20px 25px;
+    float: center;
+    color: #353985;
+}
+
 .text-btn {
     float: right;
     font-size: 1.5rem;

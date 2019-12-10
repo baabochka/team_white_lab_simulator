@@ -10,6 +10,21 @@
     <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("ul[id*=equip-item-list] li").click(function () {
+                alert($(this).text()); // gets text contents of clicked li
+                var node = document.createElement("SPAN");                 // Create a <span> node
+                var textnode = document.createTextNode($(this).text());         // Create a text node
+                node.appendChild(textnode);                              // Append the text to <span>
+                document.getElementById("first-equip").appendChild(node);     // Append <span> to <div> with id="first-equip"
+            });
+        });
+    </script>
+
+
+
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
@@ -48,21 +63,23 @@
         <div class="d-inline" id="equip-list">
             <div id="equip-list-header">
                 <span class="font-weight-bold">Equipment List</span>
-                <button class="text-btn no-border-btn" data-toggle="modal" data-target="#equip-market-modal"><span aria-hidden="true">+</span></button>
             </div>
             <ul class="list-group" id="equip-item-list">
-
+                <li class='list-group-item' onclick="doSomething()"><span>Flask1</span></li>
+                <li class='list-group-item' onclick="doSomething()"><span>Flask2</span></li>
+                <li class='list-group-item' onclick="doSomething()"><span>Beaker</span></li>
             </ul>
             <div></div>
         </div>
         <div class="d-inline">
             <div class="set-form">
-                <div></div>
-                <textarea rows='1' id="lab_name_input" placeholder="Lab Title" th:text="${lab.getTitle()}">{{ set.set_name }}</textarea><br>
-                <textarea id="lab_description_input" placeholder="Lab Description" th:text="${lab.getDescription()}"></textarea><br>
+                <div id="lab-title" class="text-center mb-3"><span> My hardcoded lab</span></div>
+                <div class="text-center mb-3"><span>Here is some dscription of this extremely interesting lab</span></div>
             </div>
             <div class="title">
                 <div>Lab Area</div>
+                <div id="first-equip"></div>
+                <div id="second-equip"></div>
             </div>
             <div></div>
         </div>
@@ -80,49 +97,19 @@
                 <div class="box-part text-center">
                     <i class="mdi mdi-add" aria-hidden="true"></i>
                     <div class="title">
-                        <div>Add A New Step</div>
+                        <div>Do the following steps:</div>
                     </div>
                     <!--<div class="text">-->
                         <!--<div>add more steps</div>-->
                     <!--</div>-->
                     <!-- List of steps-->
-                    <ul class="list-group list-group-horizontal" id="step-group">
-
+                    <ul class="list-group list-group-horizonta" id="step-group">
+                        <li class='list-group-item'><span>Step1</span></li>
+                        <li class='list-group-item'><span>Step2</span></li>
+                        <li class='list-group-item'><span>Step3</span></li>
                     </ul>
                     <!--                                <a href="/addCourse" th:href="@{/addCourse}" class="stretched-link">Click me</a>-->
 
-                    <!-- Trigger the modal with a button -->
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add step</button>
-                    <div class="modal fade" id="myModal" role="dialog">
-                        <div class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Add a new step</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="md-form">
-                                        <input type="text" id="Form-Step-Name" class="form-control" placeholder="Step Name">
-                                    </div>
-
-                                    <div class="md-form">
-                                        <input type="text" id="Form-Step-Descrip" class="form-control" placeholder="Step Description">
-                                    </div>
-
-
-                                </div>
-                                <div class="modal-footer">
-                                    <!--                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                                    <div class="text-center mb-3">
-                                        <button id="add-step-btn" type="button" data-dismiss="modal" class="btn btn-block btn-rounded z-depth-1a">Add this step</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
                 <div>
                     <button id="save-lab" type="button" data-dismiss="modal" class="btn btn-block btn-rounded z-depth-1a">Save lab</button>
