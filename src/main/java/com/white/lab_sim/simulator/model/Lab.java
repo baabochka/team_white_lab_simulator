@@ -2,11 +2,19 @@ package com.white.lab_sim.simulator.model;
 
 import com.white.lab_sim.market.model.MarketUnit;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import com.white.lab_sim.market.model.User;
 
 import java.util.List;
 
 @Document
 public class Lab extends MarketUnit {
+    @Id
+    public ObjectId _id;
+
+//    public User createdBy;
+
     private String Title;
     private String Description;
     private List<Equipment> equipmentList;

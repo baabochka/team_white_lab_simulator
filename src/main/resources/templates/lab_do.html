@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:divth="http://www.w3.org/1999/html">
+<head>
+    <title>Lab Sim</title>
+    <link rel="icon" href="../static/resources/images/icon.png" th:href="@{/resources/images/icon.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">-->
+    <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/edit.css" th:href="@{/resources/css/edit.css}">
+</head>
+<body>
+    <nav class="mb-1 navbar navbar-expand-sm navbar-light">
+        <img id="logo" src="../static/resources/images/icon.png" th:src="@{/resources/images/icon.png}"/>
+        <a class="navbar-brand" href="#">Lab Sim</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+                aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item avatar dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded-circle z-depth-0"
+                             th:src="${user.avatar_url == null || user.avatar_url.isEmpty()} ? '/resources/images/default.png':${user.avatar_url}">
+                        <!--/*@thymesVar id="user" type=""*/-->
+                        <span th:text="${user.getNickname()}"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-secondary"
+                         aria-labelledby="navbarDropdownMenuLink-55">
+                        <!--                        <a class="dropdown-item" href="#">game history</a>-->
+                        <a class="dropdown-item" id="logout-link" href="/logout" th:href="@{/logout}">logout</a>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="lab-container d-flex">
+        <div class="d-inline" id="equip-list">
+            <div id="equip-list-header">
+                <span class="font-weight-bold">Equipment List</span>
+                <button class="text-btn no-border-btn" data-toggle="modal" data-target="#equip-market-modal"><span aria-hidden="true">+</span></button>
+            </div>
+            <ul class="list-group" id="equip-item-list">
+
+            </ul>
+            <div></div>
+        </div>
+        <div class="d-inline">
+            <div class="set-form">
+                <div></div>
+                <textarea rows='1' id="lab_name_input" placeholder="Lab Title" th:text="${lab.getTitle()}">{{ set.set_name }}</textarea><br>
+                <textarea id="lab_description_input" placeholder="Lab Description" th:text="${lab.getDescription()}"></textarea><br>
+            </div>
+            <div class="title">
+                <div>Lab Area</div>
+            </div>
+            <div></div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="step: ${steps}">
+            <div class="box-part text-center">
+                <i class="mdi mdi-add" aria-hidden="true"></i>
+                <div class="title" th:text="${step.getName()}"></div>
+                <div class="text" th:text="${step.getDescription()}"></div>
+                <a href="/addStep" th:href="@{/}" class="stretched-link">Get More</a>
+            </div>
+        </div>
+        <!--<div id="add-step-dashboard" class="row">-->
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="box-part text-center">
+                    <i class="mdi mdi-add" aria-hidden="true"></i>
+                    <div class="title">
+                        <div>Add A New Step</div>
+                    </div>
+                    <!--<div class="text">-->
+                        <!--<div>add more steps</div>-->
+                    <!--</div>-->
+                    <!-- List of steps-->
+                    <ul class="list-group list-group-horizontal" id="step-group">
+
+                    </ul>
+                    <!--                                <a href="/addCourse" th:href="@{/addCourse}" class="stretched-link">Click me</a>-->
+
+                    <!-- Trigger the modal with a button -->
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add step</button>
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add a new step</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="md-form">
+                                        <input type="text" id="Form-Step-Name" class="form-control" placeholder="Step Name">
+                                    </div>
+
+                                    <div class="md-form">
+                                        <input type="text" id="Form-Step-Descrip" class="form-control" placeholder="Step Description">
+                                    </div>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <!--                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                    <div class="text-center mb-3">
+                                        <button id="add-step-btn" type="button" data-dismiss="modal" class="btn btn-block btn-rounded z-depth-1a">Add this step</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button id="save-lab" type="button" data-dismiss="modal" class="btn btn-block btn-rounded z-depth-1a">Save lab</button>
+                </div>
+            </div>
+        <!--</div>-->
+    </div>
+    <div class="modal fade" id="equip-market-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Equipment Market</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#equip-cart-modal" id="view-cart-button">View Shopping Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="equip-cart-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Shopping Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="add-to-lab-btn">Add to Lab</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/resources/js/edit.js}"></script>
+    <script th:src="@{/resources/js/addStep.js}"></script>
+</body>
+</html>
