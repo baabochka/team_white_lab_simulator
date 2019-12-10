@@ -29,14 +29,28 @@
                     selectorForEquipment += 1;
                 }
             });
-            $("div[class*=lab-area] div").click(function () {
+            $("div[class*=lab-table] div").click(function () {
                $( "div[class*=lab-area] div span" ).remove();
                selectorForEquipment = 1
             });
 
         });
-    </script>
 
+    </script>
+    <script>
+        var stepN = 1;
+        function myFunction() {
+                var div1 = document.getElementById("first-equip");
+                var span1 = div1.getElementsByTagName("span");
+                var div2 = document.getElementById("second-equip");
+                var span2 = div2.getElementsByTagName("span");
+                var labAction = span1[0].innerHTML+span2[0].innerHTML;
+                var li = document.getElementById("step"+stepN);
+                <!--var liText = li.innerHTML;-->
+                var stepCheck = li.getElementsByClassName("step-action")[0].innerHTML;
+                alert(stepCheck);
+            }
+    </script>
 
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -79,9 +93,9 @@
                 <span class="font-weight-bold">Equipment List</span>
             </div>
             <ul class="list-group" id="equip-item-list">
-                <li class='list-group-item' onclick="doSomething()"><span>Flask1</span></li>
-                <li class='list-group-item' onclick="doSomething()"><span>Flask2</span></li>
-                <li class='list-group-item' onclick="doSomething()"><span>Beaker</span></li>
+                <li class='list-group-item'><span>Flask1</span></li>
+                <li class='list-group-item'><span>Flask2</span></li>
+                <li class='list-group-item'><span>Beaker</span></li>
             </ul>
             <div></div>
         </div>
@@ -91,21 +105,18 @@
                 <div class="text-center mb-3"><span>Here is some dscription of this extremely interesting lab</span></div>
             </div>
             <div class="lab-area">
-                <div>Lab Area</div>
-                <div id="first-equip"></div>
-                <div id="second-equip"></div>
+                <div class="lab-table">Lab Area
+                    <div id="first-equip"></div>
+                    <div id="second-equip"></div>
+                </div>
+                <div><button id="do-lab" type="button" class="btn btn-block btn-rounded z-depth-1a" onclick="myFunction()">Do some magic</button>
+                </div>
             </div>
+
             <div></div>
         </div>
 
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="step: ${steps}">
-            <div class="box-part text-center">
-                <i class="mdi mdi-add" aria-hidden="true"></i>
-                <div class="title" th:text="${step.getName()}"></div>
-                <div class="text" th:text="${step.getDescription()}"></div>
-                <a href="/addStep" th:href="@{/}" class="stretched-link">Get More</a>
-            </div>
-        </div>
+
         <!--<div id="add-step-dashboard" class="row">-->
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="box-part text-center">
@@ -118,9 +129,9 @@
                     <!--</div>-->
                     <!-- List of steps-->
                     <ul class="list-group list-group-horizonta" id="step-group">
-                        <li class='list-group-item'><span>Step1</span></li>
-                        <li class='list-group-item'><span>Step2</span></li>
-                        <li class='list-group-item'><span>Step3</span></li>
+                        <li id="step1" class='list-group-item'>Combine <span class="step-action">Flask1 and Flask2</span> together</li>
+                        <li id="step2" class='list-group-item'><span>Step2</span></li>
+                        <li  id="step3" class='list-group-item'><span>Step3</span></li>
                     </ul>
                     <!--                                <a href="/addCourse" th:href="@{/addCourse}" class="stretched-link">Click me</a>-->
 
@@ -131,46 +142,7 @@
             </div>
         <!--</div>-->
     </div>
-    <div class="modal fade" id="equip-market-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">Equipment Market</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#equip-cart-modal" id="view-cart-button">View Shopping Cart</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="equip-cart-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Shopping Cart</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <ul class="list-group">
 
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="add-to-lab-btn">Add to Lab</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <script th:src="@{/resources/js/edit.js}"></script>
     <script th:src="@{/resources/js/addStep.js}"></script>
 </body>
