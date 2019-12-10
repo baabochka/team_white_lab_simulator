@@ -5,50 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!--    Bootstrap CSS-->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
     <!--    Custom CSS-->
-    <link rel="stylesheet" href="css/marketPage.css">
+    <link rel="stylesheet" href="../static/resources/css/market.css">
 
     <!--    fontawesome Icon CSS-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 
     <!--    Bootstrap Javascript-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <title>Title</title>
 
 </head>
 <body>
-<div class="vertical-center">
-    <div class="container">
-        <form class="form-inline well">
-            <!--                <div class="input-group-prepend">-->
-            <!--                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>-->
-            <!--                    <div class="dropdown-menu">-->
-            <!--                        <a class="dropdown-item" href="#">Action</a>-->
-            <!--                        <a class="dropdown-item" href="#">Another action</a>-->
-            <!--                        <a class="dropdown-item" href="#">Something else here</a>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <div class="input-group-prepend">
-                <select class="form-control select2" >
-                    <option>Course</option>
-                    <option>Equipment</option>
-                    <option>Lab</option>
-                </select>
-            </div>
-            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-                   aria-label="Search">
-            <div class="input-group-prepend">
-                <button class="btn btn-secondary" type="submit">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
-        </form>
-    </div>
+    <div id="top-half">
+    <!--    <nav class="mb-1 navbar navbar-expand-sm navbar-light">-->
+    <!--        <img id="logo" src="../static/resources/images/icon.png" th:src="@{/resources/images/icon.png}"/>-->
+    <!--        <a class="navbar-brand" href="#">Lab Sim</a>-->
+    <!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"-->
+    <!--                aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">-->
+    <!--            <span class="navbar-toggler-icon"></span>-->
+    <!--        </button>-->
+    <!--        <div class="collapse navbar-collapse" id="navbarSupportedContent-555">-->
+    <!--            <ul class="navbar-nav ml-auto nav-flex-icons">-->
+    <!--                <li class="nav-item avatar dropdown">-->
+    <!--                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"-->
+    <!--                       aria-haspopup="true" aria-expanded="false">-->
+    <!--                        <img class="rounded-circle z-depth-0"-->
+    <!--                             th:src="${user.avatar_url == null || user.avatar_url.isEmpty()} ? '/resources/images/default.png':${user.avatar_url}">-->
+    <!--                        &lt;!&ndash;/*@thymesVar id="user" type=""*/&ndash;&gt;-->
+    <!--                        <span th:text="${user.getNickname()}"></span>-->
+    <!--                    </a>-->
+    <!--                    <div class="dropdown-menu dropdown-menu-right dropdown-secondary"-->
+    <!--                         aria-labelledby="navbarDropdownMenuLink-55">-->
+    <!--                        &lt;!&ndash;                        <a class="dropdown-item" href="#">game history</a>&ndash;&gt;-->
+    <!--                        <a class="dropdown-item" id="logout-link" href="/logout" th:href="@{/logout}">logout</a>-->
 
-</div>
+    <!--                    </div>-->
+    <!--                </li>-->
+    <!--            </ul>-->
+    <!--        </div>-->
+    <!--    </nav>-->
+
+        <div class="vertical-center">
+            <div class="container">
+                <form class="form-inline well">
+                    <!--                <div class="input-group-prepend">-->
+                    <!--                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>-->
+                    <!--                    <div class="dropdown-menu">-->
+                    <!--                        <a class="dropdown-item" href="#">Action</a>-->
+                    <!--                        <a class="dropdown-item" href="#">Another action</a>-->
+                    <!--                        <a class="dropdown-item" href="#">Something else here</a>-->
+                    <!--                    </div>-->
+                    <!--                </div>-->
+                    <div class="input-group-prepend">
+                        <select class="form-control select2" >
+                            <option>Course</option>
+                            <option>Lab</option>
+                        </select>
+                    </div>
+                    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                           aria-label="Search">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-secondary" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -87,4 +87,22 @@ public class SimulatorController {
         model.addAttribute("user", user);
         return "addLab";
     }
+
+    @RequestMapping({"/market"})
+    public String market(HttpServletRequest request, Authentication authentication, Model model) {
+        User user = userService.findByAuthentication(authentication);
+        if(!user.getIsActive()) {
+            try {
+                authentication.setAuthenticated(false);
+                request.logout();
+                return "redirect:/verify";
+            } catch (ServletException e) {
+                e.printStackTrace();
+            }
+        }
+        model.addAttribute("user", user);
+        List<Course> courses = courseService.findByCreatedBy(user);
+        model.addAttribute("courses", courses);
+        return "market";
+    }
 }
