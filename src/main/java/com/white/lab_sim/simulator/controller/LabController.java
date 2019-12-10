@@ -20,6 +20,8 @@ public class LabController {
     private LabService labService;
     @Autowired
     private UserServiceImpl userService;
+    private Lab lab;
+    private Model model;
 
     @RequestMapping("/create_lab")
     public String newLab(Authentication authentication) {
@@ -50,4 +52,19 @@ public class LabController {
         return "lab_edit";
     }
 
+    @RequestMapping("/lab/{id}/do")
+    public String doLab(@PathVariable String id, Model model, Authentication authentication) {
+        Lab lab = labService.findById(id);
+        User user = userService.findByAuthentication(authentication);
+//        if(!user.getId().equals(lab.getCreatedBy().getId())) {
+//            return "redirect:/dashboard";
+//        }
+        // TODO check if user allowed to take lab?
+
+        model.addAttribute("user", user);
+        model.addAttribute("lab", lab);
+
+//        System.out.println(model.getAttribute("user"));
+        return "lab_do";
+    }
 }
