@@ -27,7 +27,17 @@
     float: center;
     color: #353985;
 }
-
+.lab-area div{
+    padding: 40px;
+}
+#first-equip{
+    color: #00cc99;
+    border: solid 1px grey;
+}
+#second-equip{
+    color: #009999;
+    border: solid 1px grey;
+}
 .text-btn {
     float: right;
     font-size: 1.5rem;

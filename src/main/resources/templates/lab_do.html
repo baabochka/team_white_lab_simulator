@@ -12,13 +12,22 @@
     <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
+        var selectorForEquipment = 1;
         $(document).ready(function () {
             $("ul[id*=equip-item-list] li").click(function () {
-                alert($(this).text()); // gets text contents of clicked li
-                var node = document.createElement("SPAN");                 // Create a <span> node
-                var textnode = document.createTextNode($(this).text());         // Create a text node
-                node.appendChild(textnode);                              // Append the text to <span>
-                document.getElementById("first-equip").appendChild(node);     // Append <span> to <div> with id="first-equip"
+                if (selectorForEquipment === 1 || selectorForEquipment === 2) {
+                    alert("You added "+ $(this).text() + " to your lab table"); // gets text contents of clicked li
+                    var node = document.createElement("SPAN");                 // Create a <span> node
+                    var textnode = document.createTextNode($(this).text());         // Create a text node
+                    node.appendChild(textnode);                           // Append the text to <span>
+                }
+                if (selectorForEquipment === 1) {
+                    document.getElementById("first-equip").appendChild(node);     // Append <span> to <div> with id="first-equip"
+                    selectorForEquipment += 1;
+                } else if (selectorForEquipment === 2) {
+                    document.getElementById("second-equip").appendChild(node);     // Append <span> to <div> with id="first-equip"
+                    selectorForEquipment += 1;
+                }
             });
         });
     </script>
@@ -76,7 +85,7 @@
                 <div id="lab-title" class="text-center mb-3"><span> My hardcoded lab</span></div>
                 <div class="text-center mb-3"><span>Here is some dscription of this extremely interesting lab</span></div>
             </div>
-            <div class="title">
+            <div class="lab-area">
                 <div>Lab Area</div>
                 <div id="first-equip"></div>
                 <div id="second-equip"></div>
