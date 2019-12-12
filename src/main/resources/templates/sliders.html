@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Different sliders</title>
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/sliders.css">
+
+</head>
+
+<body>
+
+
+<input type="range" min="1" max="100" value="50" id="simple">
+<p>Value: <span id="demo1"></span></p>
+
+<script>
+<!--Simple slider-->
+var sliderSimple = document.getElementById("simple");
+var output1 = document.getElementById("demo1");
+
+output1.innerHTML = sliderSimple.value;
+
+sliderSimple.oninput = function() {
+  output1.innerHTML = this.value;
+}
+</script>
+
+
+<div class="slidecontainer">
+
+    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+    <p>Value: <span id="demo2"></span></p>
+</div>
+
+
+<script>
+<!--Slider with square-->
+var slider = document.getElementById("myRange");
+var output2 = document.getElementById("demo2");
+output2.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output2.innerHTML = this.value;
+}
+</script>
+
+
+<div class="slidecontainer">
+
+    <input type="range" min="1" max="100" value="50" class="slider round" id="roundSlider">
+    <p>Value: <span id="demo3"></span></p>
+</div>
+
+
+<script>
+<!--Slider with circle-->
+var sliderRound = document.getElementById("roundSlider");
+var output3 = document.getElementById("demo3");
+output3.innerHTML = sliderRound.value;
+
+sliderRound.oninput = function() {
+  output3.innerHTML = this.value;
+}
+</script>
+
+<div class="slidecontainer">
+
+    <input type="range" min="1" max="100" value="50" class="slider pict" id="pictSlider">
+    <p>Value: <span id="demo4"></span></p>
+</div>
+
+<script>
+<!--Slider with circle-->
+var sliderPict = document.getElementById("pictSlider");
+var output4 = document.getElementById("demo4");
+output4.innerHTML = sliderPict.value;
+
+sliderPict.oninput = function() {
+  output4.innerHTML = this.value;
+}
+</script>
+
+</body>
+
+</html>
