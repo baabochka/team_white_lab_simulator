@@ -70,7 +70,7 @@ sliderRound.oninput = function() {
 </div>
 
 <script>
-<!--Slider with circle-->
+<!--Slider with picture-->
 var sliderPict = document.getElementById("pictSlider");
 var output4 = document.getElementById("demo4");
 output4.innerHTML = sliderPict.value;
@@ -80,6 +80,89 @@ sliderPict.oninput = function() {
 }
 </script>
 
+
+<div id="Progress_Status">
+<div id="myprogressBar">1%</div>
+</div>
+
+<br>
+<button onclick="update()">Start Download</button>
+
+<script>
+
+function update() {
+  var element = document.getElementById("myprogressBar");
+  var width = 1;
+  var identity = setInterval(scene, 10);
+  function scene() {
+    if (width >= 100) {
+      clearInterval(identity);
+    } else {
+      width++;
+      element.style.width = width + '%';
+      element.innerHTML = width * 1  + '%';
+    }
+  }
+}
+
+</script>
+
+
+<form id="form">
+    <h2>Is this awesome?</h2>
+    <div class="switch-field">
+        <input type="radio" id="radio-one" name="switch-one" value="Yes" checked/>
+        <label for="radio-one">Yes</label>
+        <input type="radio" id="radio-two" name="switch-one" value="No" />
+        <label for="radio-two">No</label>
+    </div>
+
+    <h2>Three fields? Sure.</h2>
+    <div class="switch-field">
+        <input type="radio" id="radio-three" name="switch-two" value="One" checked/>
+        <label for="radio-three">One</label>
+        <input type="radio" id="radio-four" name="switch-two" value="Two" />
+        <label for="radio-four">Two</label>
+        <input type="radio" id="radio-five" name="switch-two" value="Three" />
+        <label for="radio-five">Three</label>
+    </div>
+
+    <h2>I'm ugly.</h2>
+    <div class="regular-field">
+        <input type="radio" id="radio-six" name="notaswitch-one" value="Boring" checked/>
+        <label for="radio-six">Boring</label>
+        <input type="radio" id="radio-seven" name="notaswitch-one" value="Generic" />
+        <label for="radio-seven">Generic</label>
+        <input type="radio" id="radio-eight" name="notaswitch-one" value="Confusing" />
+        <label for="radio-eight">Confusing</label>
+    </div>
+
+    <h2>So am I.</h2>
+    <div class="regular-field">
+        <input type="radio" id="radio-nine" name="notaswitch-two" value="This works" checked/>
+        <label for="radio-nine">This works</label><br />
+        <input type="radio" id="radio-ten" name="notaswitch-two" value="I'm used to it" />
+        <label for="radio-ten">I'm used to it</label><br />
+        <input type="radio" id="radio-eleven" name="notaswitch-two" value="I have no flavor" />
+        <label for="radio-eleven">I have no flavor</label><br />
+    </div>
+</form>
+<button onclick="getInfo()">Get info</button>
+<p>Value: <span id="demo5"></span></p>
 </body>
 
+<script>
+function getInfo() {
+  var x = document.getElementById("form");
+  var text = "";
+  var i;
+
+  for (i = 0; i < x.length ;i++) {
+    if (x.elements[i].checked==true) {
+        text += x.elements[i].value + "<br>";
+    }
+  }
+  document.getElementById("demo5").innerHTML = text;
+}
+</script>
 </html>
