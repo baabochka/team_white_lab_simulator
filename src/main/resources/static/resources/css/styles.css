@@ -240,12 +240,6 @@ a.link-disabled {
 /*    overflow: scroll;*/
 /*}*/
 
-body{
-    background: #f0f4f7;
-}
-span{
-    font-size:15px;
-}
 a{
     text-decoration:none;
     /*color: #0062cc;*/

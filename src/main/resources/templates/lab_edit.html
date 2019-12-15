@@ -14,6 +14,11 @@
 
     <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
     <link rel="stylesheet" type="text/css" href="../static/resources/css/edit.css" th:href="@{/resources/css/edit.css}">
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        let lab = [[${lab}]];
+        /*]]>*/
+    </script>
 </head>
 <body>
     <nav class="mb-1 navbar navbar-expand-sm navbar-light">
@@ -45,22 +50,68 @@
     </nav>
 
     <div class="lab-container d-flex">
-        <div class="d-inline" id="equip-list">
-            <div id="equip-list-header">
+        <div class="d-inline side-list top-border-card" id="equip-list">
+            <div class="equip-list-header">
                 <span class="font-weight-bold">Equipment List</span>
                 <button class="text-btn no-border-btn" data-toggle="modal" data-target="#equip-market-modal"><span aria-hidden="true">+</span></button>
             </div>
-            <ul class="list-group" id="equip-item-list">
+            <div id="equip-item-list">
+
+            </div>
+            <div></div>
+        </div>
+        <div class="d-inline" id="main-canvas">
+            <div class="lab-edit-canvas">
+                <div id="step-basic-edit" class="top-border-card">
+                    <div class="h3" id="step-edit-header">
+                        <span>Step </span><span id="step-edit-counter">0</span>
+                    </div>
+                    <div id="step-brief-edit">
+                        <textarea rows='1' id="step-instruction-input" placeholder="Instruction"></textarea><br>
+                    </div>
+                </div>
+                <div id="initial-edit" style="display: none">
+                    <div class="edit-section">
+                        <div class="edit-section-header">
+                            <h4>Initial Setup</h4>
+                        </div>
+                    </div>
+                </div>
+                <div id="not-initial-edit" style="display: none">
+                    <div class="edit-section">
+                        <div class="edit-section-header">
+                            <h4>Before</h4><h6>Add equipments(1 or 2) for this step.</h6>
+                        </div>
+                    </div>
+                    <div class="edit-section">
+                        <div class="edit-section-header">
+                            <h4>Action</h4><h6>Add actions!</h6>
+                        </div>
+                    </div>
+                    <div class="edit-section">
+                        <div class="edit-section-header">
+                            <h4>After</h4><h6>Set new states.</h6>
+                        </div>
+                    </div>
+                    <div id="edit-button-panel">
+                        <button type="button" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="d-inline side-list top-border-card" id="step-list">
+            <div class="equip-list-header">
+                <span class="font-weight-bold">Step List</span>
+                <button class="text-btn no-border-btn" id="add-step-btn"><span aria-hidden="true">+</span></button>
+            </div>
+            <ul class="list-group" id="step-item-list">
 
             </ul>
             <div></div>
-        </div>
-        <div class="d-inline">
-            <div class="set-form">
-                <div></div>
-                <textarea rows='1' id="lab_name_input" placeholder="Lab Title" th:text="${lab.getTitle()}">{{ set.set_name }}</textarea><br>
-                <textarea id="lab_description_input" placeholder="Lab Description" th:text="${lab.getDescription()}"></textarea><br>
-            </div>
+
         </div>
     </div>
     <div class="modal fade" id="equip-market-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -103,7 +154,7 @@
             </div>
         </div>
     </div>
-    <script th:src="@{/resources/js/edit.js}"></script>
-
+    <script th:src="@{/resources/js/lab_edit.js}"></script>
+    <script th:src="@{/resources/js/lab_edit_equip_market.js}"></script>
 </body>
 </html>
