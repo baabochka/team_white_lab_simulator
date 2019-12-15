@@ -54,6 +54,46 @@
     <input type="button" id="right" value=">" />
 
 
+
+    <!--    Add course-->
+    <div id="dialog-form" title="Add new course">
+        <form>
+            <fieldset>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name"  class="text ui-widget-content ui-corner-all">
+                <label for="section">Section</label>
+                <input type="text" name="section" id="section"  class="text ui-widget-content ui-corner-all">
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description"  class="text ui-widget-content ui-corner-all">
+
+                <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+            </fieldset>
+        </form>
+    </div>
+
+
+    <div id="users-contain" class="ui-widget">
+        <h1>Existing Courses:</h1>
+        <table id="users" class="ui-widget ui-widget-content">
+            <thead>
+            <tr class="ui-widget-header ">
+                <th>Name</th>
+                <th>Section</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>CSE373</td>
+                <td>CSE373-A02</td>
+                <td>This is course CSE373</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <button id="create-course">Create new course</button>
+
 </body>
 
 </html>
