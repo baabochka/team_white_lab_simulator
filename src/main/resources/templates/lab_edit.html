@@ -14,6 +14,11 @@
 
     <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
     <link rel="stylesheet" type="text/css" href="../static/resources/css/edit.css" th:href="@{/resources/css/edit.css}">
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        let lab = [[${lab}]];
+        /*]]>*/
+    </script>
 </head>
 <body>
     <nav class="mb-1 navbar navbar-expand-sm navbar-light">
@@ -45,90 +50,67 @@
     </nav>
 
     <div class="lab-container d-flex">
-        <div class="d-inline" id="equip-list">
-            <div id="equip-list-header">
+        <div class="d-inline side-list top-border-card" id="equip-list">
+            <div class="equip-list-header">
                 <span class="font-weight-bold">Equipment List</span>
                 <button class="text-btn no-border-btn" data-toggle="modal" data-target="#equip-market-modal"><span aria-hidden="true">+</span></button>
             </div>
-            <ul class="list-group" id="equip-item-list">
+            <div id="equip-item-list">
 
-            </ul>
-            <div></div>
-        </div>
-        <div class="d-inline">
-            <div class="set-form">
-                <div></div>
-                <textarea rows='1' id="lab_name_input" placeholder="Lab Title" th:text="${lab.getTitle()}">{{ set.set_name }}</textarea><br>
-                <textarea id="lab_description_input" placeholder="Lab Description" th:text="${lab.getDescription()}"></textarea><br>
-            </div>
-            <div class="title">
-                <div>Lab Area</div>
             </div>
             <div></div>
         </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="step: ${steps}">
-            <div class="box-part text-center">
-                <i class="mdi mdi-add" aria-hidden="true"></i>
-                <div class="title" th:text="${step.getName()}"></div>
-                <div class="text" th:text="${step.getDescription()}"></div>
-                <a href="/addStep" th:href="@{/}" class="stretched-link">Get More</a>
-            </div>
-        </div>
-        <!--<div id="add-step-dashboard" class="row">-->
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <div class="box-part text-center">
-                    <i class="mdi mdi-add" aria-hidden="true"></i>
-                    <div class="title">
-                        <div>Add A New Step</div>
+        <div class="d-inline" id="main-canvas">
+            <div class="lab-edit-canvas">
+                <div id="step-basic-edit" class="top-border-card">
+                    <div class="h3" id="step-edit-header">
+                        <span>Step </span><span id="step-edit-counter">0</span>
                     </div>
-                    <!--<div class="text">-->
-                        <!--<div>add more steps</div>-->
-                    <!--</div>-->
-                    <!-- List of steps-->
-                    <ul class="list-group list-group-horizontal" id="step-group">
-
-                    </ul>
-                    <!--                                <a href="/addCourse" th:href="@{/addCourse}" class="stretched-link">Click me</a>-->
-
-                    <!-- Trigger the modal with a button -->
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add step</button>
-                    <div class="modal fade" id="myModal" role="dialog">
-                        <div class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Add a new step</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="md-form">
-                                        <input type="text" id="Form-Step-Name" class="form-control" placeholder="Step Name">
-                                    </div>
-
-                                    <div class="md-form">
-                                        <input type="text" id="Form-Step-Descrip" class="form-control" placeholder="Step Description">
-                                    </div>
-
-
-                                </div>
-                                <div class="modal-footer">
-                                    <!--                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                                    <div class="text-center mb-3">
-                                        <button id="add-step-btn" type="button" data-dismiss="modal" class="btn btn-block btn-rounded z-depth-1a">Add this step</button>
-                                    </div>
-                                </div>
-                            </div>
-
+                    <div id="step-brief-edit">
+                        <textarea rows='1' id="step-instruction-input" placeholder="Instruction"></textarea><br>
+                    </div>
+                </div>
+                <div id="initial-edit" style="display: none">
+                    <div class="edit-section">
+                        <div class="edit-section-header">
+                            <h4>Initial Setup</h4>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <button id="save-lab" type="button" data-dismiss="modal" class="btn btn-block btn-rounded z-depth-1a">Save lab</button>
+                <div id="not-initial-edit" style="display: none">
+                    <div class="edit-section">
+                        <div class="edit-section-header">
+                            <h4>Before</h4><h6>Add equipments(1 or 2) for this step.</h6>
+                        </div>
+                    </div>
+                    <div class="edit-section">
+                        <div class="edit-section-header">
+                            <h4>Action</h4><h6>Add actions!</h6>
+                        </div>
+                    </div>
+                    <div class="edit-section">
+                        <div class="edit-section-header">
+                            <h4>After</h4><h6>Set new states.</h6>
+                        </div>
+                    </div>
                 </div>
+                <div id="edit-button-panel">
+                    <button type="button" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </div>
+
             </div>
-        <!--</div>-->
+
+        </div>
+        <div class="d-inline side-list top-border-card" id="step-list">
+            <div class="equip-list-header">
+                <span class="font-weight-bold">Step List</span>
+                <button class="text-btn no-border-btn" id="add-step-btn"><span aria-hidden="true">+</span></button>
+            </div>
+            <ul class="list-group" id="step-item-list">
+
+            </ul>
+        </div>
     </div>
     <div class="modal fade" id="equip-market-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -170,7 +152,8 @@
             </div>
         </div>
     </div>
-    <script th:src="@{/resources/js/edit.js}"></script>
-    <script th:src="@{/resources/js/addStep.js}"></script>
+    <script th:src="@{/resources/js/lab_edit.js}"></script>
+    <script th:src="@{/resources/js/lab_edit_equip_market.js}"></script>
+
 </body>
 </html>

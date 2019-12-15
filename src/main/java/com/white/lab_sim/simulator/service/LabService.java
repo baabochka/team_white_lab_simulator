@@ -4,19 +4,24 @@ import com.white.lab_sim.market.model.MarketUnit;
 import com.white.lab_sim.market.model.User;
 import com.white.lab_sim.market.repository.MarketUnitRepository;
 import com.white.lab_sim.market.repository.UserRepository;
-import com.white.lab_sim.simulator.model.Equipment;
-import com.white.lab_sim.simulator.model.Lab;
+import com.white.lab_sim.simulator.model.*;
 import com.white.lab_sim.simulator.repository.EquipmentRepository;
 import com.white.lab_sim.simulator.repository.LabRepository;
+import com.white.lab_sim.simulator.repository.StateRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class LabService {
 
+    @Autowired
+    private StateRepository stateRepository;
     @Autowired
     private EquipmentRepository equipmentRepository;
     @Autowired
@@ -48,5 +53,101 @@ public class LabService {
     public Lab findById(String id) {
         Optional<Lab> o = labRepository.findById(id);
         return o.orElse(null);
+    }
+
+    public void addStateList(String id, HashMap<String, String> counter) {
+        Optional<Lab> o = labRepository.findById(id);
+        if(o.isPresent()) {
+            StateMap stateMap = o.get().getStateMap();
+            for (Map.Entry mapElement : counter.entrySet()) {
+                String key = (String)mapElement.getKey();
+                int value = Integer.parseInt((String)mapElement.getValue());
+                for(int i = 0; i < value; i++) {
+                    State state = new State(key);
+                    stateRepository.save(state);
+                    state.setName(state.getId().substring(state.getId().length() - 5));
+                    stateRepository.save(state);
+                    stateMap.put(state.getId(), state);
+                }
+            }
+            labRepository.save(o.get());
+        }
+
+    }
+
+    public void removeStateList(String id, String key) {
+        Optional<Lab> o = labRepository.findById(id);
+        if(o.isPresent()) {
+            StateMap stateMap = o.get().getStateMap();
+            stateMap.remove(key);
+            stateRepository.deleteById(key);
+            labRepository.save(o.get());
+        }
+    }
+
+    public HashMap<String, State> performStep(String id, int count) {
+        Optional<Lab> o = labRepository.findById(id);
+        HashMap<String, State> map = new HashMap<>();
+        if(o.isPresent()) {
+            StateMap stateMap = o.get().getStateMap();
+            stateMap.forEach(map::put);
+            ArrayList<Step> steps = o.get().getSteps();
+            for(int i = 0; i < count; i++) {
+                Step s = steps.get(i);
+                s.getMap().forEach((k, v)-> {
+                    map.get(k).setInfo(v);
+                });
+            }
+        }
+        return map;
+    }
+
+    public void changeBaseInfo(String id, String name, String description) {
+        Optional<Lab> o = labRepository.findById(id);
+        if(o.isPresent()) {
+            Lab lab = o.get();
+            lab.setTitle(name);
+            lab.setDescription(description);
+            labRepository.save(lab);
+        }
+    }
+
+    public void addStep(String id) {
+        Optional<Lab> o = labRepository.findById(id);
+        if(o.isPresent()) {
+            Lab lab = o.get();
+            lab.getSteps().add(new Step());
+            labRepository.save(lab);
+        }
+    }
+
+    public void changeStepBrief(String id, int i, String brief) {
+        System.err.println("change");
+        Optional<Lab> o = labRepository.findById(id);
+        if(o.isPresent()) {
+            Lab lab = o.get();
+            lab.getSteps().get(i).setBrief(brief);
+            labRepository.save(lab);
+        }
+    }
+
+
+    public Object perform(String id, int count) {
+        Optional<Lab> o = labRepository.findById(id);
+        if(o.isPresent()) {
+            Lab lab = o.get();
+            lab.performSteps(count);
+            return lab;
+        }
+        return null;
+    }
+
+    public void changeStateName(String id, String stateId, String name) {
+        Optional<Lab> l = labRepository.findById(id);
+        if(l.isPresent()) {
+            Lab lab = l.get();
+            lab.getStateMap().get(stateId).setName(name);
+            labRepository.save(lab);
+        }
     }
 }
