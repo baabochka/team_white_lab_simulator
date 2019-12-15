@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Lab Sim</title>
+	<link rel="icon" th:href="@{/resources/images/icon.png}">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../static/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+	<link rel="stylesheet" type="text/css" href="../static/resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" th:href="@{/resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css}">
+	<link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/resources/css/loginSign.css" th:href="@{/resources/css/loginSign.css}">
+	<link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}"/>
+	<link rel="stylesheet" type="text/css" href="../static/resources/css/index.css" th:href="@{/resources/css/index.css}">
+	<link rel="stylesheet" type="text/css" href="css/insMakeLab.css">
+	<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="js/insMakeLab.js"></script>
+</head>
+
+<body>
+
+<nav class="mb-1 navbar navbar-expand-sm navbar-light">
+	<img id="logo" src="../static/resources/images/icon.png" th:src="@{/resources/images/icon.png}"/>
+	<a class="navbar-brand" href="#">Lab Sim</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+			aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+		<!--<ul class="navbar-nav ml-auto nav-flex-icons">-->
+			<!--<li class="nav-item avatar dropdown">-->
+				<!--<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"-->
+				   <!--aria-haspopup="true" aria-expanded="false">-->
+					<!--<img class="rounded-circle z-depth-0"-->
+						 <!--th:src="${user.avatar_url == null || user.avatar_url.isEmpty()} ? '/resources/images/default.png':${user.avatar_url}">-->
+					<!--&lt;!&ndash;/*@thymesVar id="user" type=""*/&ndash;&gt;-->
+					<!--<span th:text="${user.getNickname()}"></span>-->
+				<!--</a>-->
+				<!--<div class="dropdown-menu dropdown-menu-right dropdown-secondary"-->
+					 <!--aria-labelledby="navbarDropdownMenuLink-55">-->
+					<!--&lt;!&ndash;                        <a class="dropdown-item" href="#">game history</a>&ndash;&gt;-->
+					<!--<a class="dropdown-item" id="logout-link" href="/logout" th:href="@{/logout}">logout</a>-->
+
+				<!--</div>-->
+			<!--</li>-->
+		<!--</ul>-->
+	</div>
+</nav>
+
+<div class="container">
+	<div class="col">
+		<span class="login-title txt1 row mb-3">Upload Equipment</span>
+		<form th:action="@{/dashboard}" method="post" class="login-email col">
+			<div class="input-info" >
+				<input type="text" pattern="([a-zA-Z0-9.-]+)" placeholder="Name" name="equipName">
+			</div>
+			<div class="input-info" >
+				<input type="file" name="equipImage" accept="image/*" placeholder="*Please upload the image with white backgroud">
+			</div>
+			<div class="input-info" >
+				<input type="text" pattern="([sS][oO][lL][iI][dD]|[lL][iI][qQ][uU][iI][dD]|[gG][aA][sS])" placeholder="Input (Solid/Liquid/Gas)" name="input">
+			</div>
+			<div class="input-info" >
+				<input type="text" pattern="([sS][oO][lL][iI][dD]|[lL][iI][qQ][uU][iI][dD]|[gG][aA][sS])" placeholder="Output (Solid/Liquid/Gas)" name="output">
+			</div>
+			<div class="login-btn-wrap">
+				<button class="btn-primary btn">
+					Submit New Equipment
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<!--</head>-->
+
+<!--<body>-->
+	<!--<nav class="navbar row navbar-expand-lg navbar-light fixed-top" id="mainNav">-->
+		<!--<div class="Lab-logo col">-->
+			<!--<img src="images/logo.jpg" alt="logo">-->
+		<!--</div>-->
+
+		<!--&lt;!&ndash; <div class="lab-personal-info"></div> &ndash;&gt;-->
+		<!--<div class="lab-personal-info collapse navbar-collapse col" id="navbarSupportedContent-555">-->
+			 <!--<ul class="navbar-nav ml-auto nav-flex-icons">-->
+					 <!--<li class="nav-item avatar dropdown">-->
+							 <!--<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"-->
+									<!--aria-haspopup="true" aria-expanded="false">-->
+									<!--<i class="mdi mdi-dots-vertical" aria-hidden="true"></i>-->
+									 <!--<img class="rounded-circle z-depth-0"-->
+												<!--src="images/default.png">-->
+									 <!--<span class="user-name">Xiao Liu</span>-->
+							 <!--</a>-->
+							 <!--<div class="dropdown-menu dropdown-menu-right dropdown-secondary"-->
+										<!--aria-labelledby="navbarDropdownMenuLink-55">-->
+									 <!--<a class="dropdown-item" id="Change-State-link" >Change State</a>-->
+							 <!--</div>-->
+					 <!--</li>-->
+			 <!--</ul>-->
+		<!--</div>-->
+	<!--</nav>-->
+  <!--<div class="container container-custom">-->
+    <!--<div class="content">-->
+      <!--<div class="row">-->
+        <!--<div class="col">-->
+          <!--<label>Name</label>-->
+        <!--</div>-->
+        <!--<button class="btn btn-light">Upload Equipment Image</button>-->
+      <!--</div>-->
+      <!--<div class="row">-->
+				<!--<label class="col">Input </label>-->
+				<!--<div class="col-3">-->
+					<!--<select name="Output State" class="custom-select" >-->
+							<!--<option class="option" value="Solid">Solid</option>-->
+							<!--<option class="option" value="Liquid" selected>Liquid</option>-->
+							<!--<option class="option" value="Gas">Gas</option>-->
+					<!--</select>-->
+					<!--<span class="select-btn">-->
+							<!--<i class="zmdi zmdi-chevron-down"></i>-->
+					<!--</span>-->
+				<!--</div>-->
+			<!--</div>-->
+      <!--<div class="row">-->
+				<!--<label class="col">Output </label>-->
+				<!--<div class="col-3">-->
+					<!--<select name="Output State" class="custom-select">-->
+							<!--<option class="option" value="Solid">Solid</option>-->
+							<!--<option class="option" value="Liquid" selected>Liquid</option>-->
+							<!--<option class="option" value="Gas">Gas</option>-->
+					<!--</select>-->
+					<!--<span class="select-btn">-->
+							<!--<i class="zmdi zmdi-chevron-down"></i>-->
+					<!--</span>-->
+				<!--</div>-->
+			<!--</div>-->
+      <!--<div class="row">-->
+        <!--<div class="col-15">-->
+          <!--<button class="btn btn-light">Submit New Equipment</button>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="row">-->
+        <!--<div class="text">-->
+          <!--<span>*Please upload the image with white backgroud</span>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->

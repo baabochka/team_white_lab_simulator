@@ -67,7 +67,7 @@
 
         <form th:action="@{/signup}" method="post" class="login-email col">
             <div class="input-info" >
-                <input type="text" placeholder="Email" name="email">
+                <input type="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Email" name="email">
             </div>
             <div id="sign-error" class="error-message"></div>
             <div class="input-info" >
@@ -75,6 +75,9 @@
             </div>
             <div class="input-info mb-3" >
                 <input type="password" placeholder="Please Input Password Again" name="passwordConfirm">
+            </div>
+            <div class="input-info" >
+            <input type="text" pattern="(student|Student|STUDENT|stud|Stud|STUD|S|s|professor|Professor|PROFESSOR|prof|Prof|PROF|P|p)" placeholder="student/professor" name="role">
             </div>
             <div class="login-btn-wrap">
                 <button id="signin-btn" class="btn-primary btn">

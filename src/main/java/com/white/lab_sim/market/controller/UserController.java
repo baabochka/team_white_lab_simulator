@@ -37,6 +37,11 @@ public class UserController {
         return "signup";
     }
 
+    @GetMapping("/uploadEq1")
+    public String uploadEq(Model model) {
+        return "uploadEq1";
+    }
+
     @PostMapping("/signup")
     public String signup(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
 

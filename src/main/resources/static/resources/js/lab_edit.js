@@ -57,7 +57,7 @@ function initialStates() {
 function loadStepEdit() {
     $('#step-edit-counter').text(current_step);
     instruction_input.val(steps[current_step]['brief']);
-    if(current_step === '0'){
+    if(current_step == 0){
         instruction_input.prop('disabled', true);
         initial_edit.css('display', 'block');
         not_initial_edit.css('display', 'none');

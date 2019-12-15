@@ -1,11 +1,9 @@
 package com.white.lab_sim.simulator.controller;
 
-import com.white.lab_sim.market.model.MarketUnit;
 import com.white.lab_sim.market.model.User;
 import com.white.lab_sim.market.service.UserServiceImpl;
 import com.white.lab_sim.simulator.model.Lab;
 import com.white.lab_sim.simulator.service.LabService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -52,8 +50,6 @@ public class LabController {
         model.addAttribute("lab", lab);
         return "lab_edit";
     }
-
-
 
     @PostMapping("/lab/{id}/add_from_cart")
     @ResponseBody
@@ -105,5 +101,19 @@ public class LabController {
 
 
 
+    @RequestMapping("/lab/{id}/do")
+    public String doLab(@PathVariable String id, Model model, Authentication authentication) {
+        Lab lab = labService.findById(id);
+        User user = userService.findByAuthentication(authentication);
+//        if(!user.getId().equals(lab.getCreatedBy().getId())) {
+//            return "redirect:/dashboard";
+//        }
+        // TODO check if user allowed to take lab?
 
+        model.addAttribute("user", user);
+        model.addAttribute("lab", lab);
+
+//        System.out.println(model.getAttribute("user"));
+        return "lab_do";
+    }
 }
