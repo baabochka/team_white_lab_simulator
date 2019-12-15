@@ -76,7 +76,7 @@ public class SimulatorController {
     @PostMapping({"/addCourse"})
     @ResponseBody
     public String createCourse(@RequestParam String courseName, @RequestParam String courseSection, @RequestParam String courseDescription,
-                               Authentication authentication, Model model){
+                               Authentication authentication){
         Course course = courseService.newCourse(userService.findByAuthentication(authentication), courseName, courseSection, courseDescription);
         return null;
     }

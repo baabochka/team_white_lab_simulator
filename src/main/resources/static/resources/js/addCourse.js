@@ -9,9 +9,7 @@ function addCourseInDashboard(){
             "courseDescription":courseDescription.val()
         },
         success : function(data){
-            // $(courseTemplate).appendTo(whereShowCourseDashboard);
-            whereShowCourseDashboard.appendChild($(courseTemplate));
-            alert(courseSec.val());
+
         }
     });
 }
