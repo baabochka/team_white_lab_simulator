@@ -24,112 +24,112 @@
 
 </head>
 <body>
-    <div id="top-half">
-            <nav class="mb-1 navbar navbar-expand-sm navbar-light">
-                <img id="logo" src="../static/resources/images/icon.png" th:src="@{/resources/images/icon.png}"/>
-                <a class="navbar-brand" href="#">Lab Sim</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
-                        aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
-                    <ul class="navbar-nav ml-auto nav-flex-icons">
-                        <li class="nav-item avatar dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle z-depth-0"
-                                     th:src="${user.avatar_url == null || user.avatar_url.isEmpty()} ? '/resources/images/default.png':${user.avatar_url}">
-                                <!--/*@thymesVar id="user" type=""*/-->
-                                <span th:text="${user.getNickname()}"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-secondary"
-                                 aria-labelledby="navbarDropdownMenuLink-55">
-                                <!--                        <a class="dropdown-item" href="#">game history</a>-->
-                                <a class="dropdown-item" id="logout-link" href="/logout" th:href="@{/logout}">logout</a>
+<div id="top-half">
+    <nav class="mb-1 navbar navbar-expand-sm navbar-light">
+        <img id="logo" src="../static/resources/images/icon.png" th:src="@{/resources/images/icon.png}"/>
+        <a class="navbar-brand" href="#">Lab Sim</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+                aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item avatar dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded-circle z-depth-0"
+                             th:src="${user.avatar_url == null || user.avatar_url.isEmpty()} ? '/resources/images/default.png':${user.avatar_url}">
+                        <!--/*@thymesVar id="user" type=""*/-->
+                        <span th:text="${user.getNickname()}"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-secondary"
+                         aria-labelledby="navbarDropdownMenuLink-55">
+                        <!--                        <a class="dropdown-item" href="#">game history</a>-->
+                        <a class="dropdown-item" id="logout-link" href="/logout" th:href="@{/logout}">logout</a>
 
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-        <div class="vertical-center">
-            <div class="container">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#course">Course</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#lab">Lab</a>
-                    </li>
-                </ul>
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div id="course" class="container tab-pane active">
-                        <br>
-                        <h3>Course</h3>
-                        <br>
-                        <form class="form-inline well">
+    <div class="vertical-center">
+        <div class="container">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#course">Course</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#lab">Lab</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div id="course" class="container tab-pane active">
+                    <br>
+                    <h3>Course</h3>
+                    <br>
+                    <form class="form-inline well">
 
 
-                            <!--                    <div class="input-group-prepend">-->
-                            <!--                        <select class="form-control select2" >-->
-                            <!--                            <option>Course</option>-->
-                            <!--                            <option>Lab</option>-->
-                            <!--                        </select>-->
-                            <!--                    </div>-->
-                            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-                                   aria-label="Search" id="courseFilterInput" onkeyup="courseFilterFunction()">
-                            <!--                <div class="input-group-prepend">-->
-                            <!--                    <button class="btn btn-secondary" type="submit">-->
-                            <!--                        <i class="fa fa-search"></i>-->
-                            <!--                    </button>-->
-                            <!--                </div>-->
-                        </form>
-                        <br>
-                        <!--                        Course cards-->
-                        <div class="container">
-                            <div class="row" id="courseGroup">
-                                <div class="courseCard col-lg-4 col-md-6 mb-4"  th:each="course: ${courses}" th:name="${course.getName()}">
-                                    <div class="flip-card">
-                                        <div class="flip-card-inner">
-                                            <div class="flip-card-front">
-                                                <br>
-                                                <br>
-                                                <h3 class="card-title"th:text="${course.getName()}"></h3>
-                                            </div>
-                                            <div class="flip-card-back">
-                                                <h4 th:text="${course.getSection()}"></h4>
-                                                <p th:text="${course.getDescription()}"></p>
-                                            </div>
+                        <!--                    <div class="input-group-prepend">-->
+                        <!--                        <select class="form-control select2" >-->
+                        <!--                            <option>Course</option>-->
+                        <!--                            <option>Lab</option>-->
+                        <!--                        </select>-->
+                        <!--                    </div>-->
+                        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                               aria-label="Search" id="courseFilterInput" onkeyup="courseFilterFunction()">
+                        <!--                <div class="input-group-prepend">-->
+                        <!--                    <button class="btn btn-secondary" type="submit">-->
+                        <!--                        <i class="fa fa-search"></i>-->
+                        <!--                    </button>-->
+                        <!--                </div>-->
+                    </form>
+                    <br>
+                    <!--                        Course cards-->
+                    <div class="container">
+                        <div class="row" id="courseGroup">
+                            <div class="courseCard col-lg-4 col-md-6 mb-4"  th:each="course: ${courses}" th:name="${course.getName()}">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <br>
+                                            <br>
+                                            <h3 class="card-title"th:text="${course.getName()}"></h3>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h4 th:text="${course.getSection()}"></h4>
+                                            <p th:text="${course.getDescription()}"></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="lab" class="container tab-pane fade">
-                        <br>
-                        <h3>Lab</h3>
-                        <br>
-                        <form class="form-inline well">
-                            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-                                   aria-label="Search" id="labFilterBar">
-                        </form>
-                        <br>
-                        <div class="container">
-                            <div class="row">
+                </div>
+                <div id="lab" class="container tab-pane fade">
+                    <br>
+                    <h3>Lab</h3>
+                    <br>
+                    <form class="form-inline well">
+                        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                               aria-label="Search" id="labFilterBar">
+                    </form>
+                    <br>
+                    <div class="container">
+                        <div class="row">
 
-                            </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
+
+
         </div>
     </div>
+</div>
 
 
 </body>
