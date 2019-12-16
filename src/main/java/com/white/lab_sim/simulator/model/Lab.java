@@ -58,12 +58,4 @@ public class Lab extends MarketUnit {
         steps.add(step);
     }
 
-    public void performSteps(int count) {
-        for(int i = 0; i < count; i++) {
-            Step step = steps.get(i);
-            step.getMap().forEach((k, v) -> {
-                stateMap.get(k).setInfo(v);
-            });
-        }
-    }
 }

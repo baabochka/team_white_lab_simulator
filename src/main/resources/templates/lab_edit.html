@@ -6,11 +6,12 @@
     <link rel="icon" href="../static/resources/images/icon.png" th:href="@{/resources/images/icon.png}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f49d6c9a46.js" crossorigin="anonymous"></script>
     <!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">-->
     <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<!--    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">-->
 
     <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
     <link rel="stylesheet" type="text/css" href="../static/resources/css/edit.css" th:href="@{/resources/css/edit.css}">
@@ -81,12 +82,12 @@
                     </div>
                 </div>
                 <div id="not-initial-edit" style="display: none">
-                    <div class="edit-section">
+                    <div id="before-section" class="edit-section">
                         <div class="edit-section-header">
                             <h4>Before</h4><h6>Add equipments(1 or 2) for this step.</h6>
                         </div>
                         <ul class="list-group states-container">
-                            <li class="list-group-item optionOne">
+                            <li class="list-group-item optionOne option">
                                     <div class="form-row">
                                         <div class="form-group col-md-3">
                                             <label>Equipment</label>
@@ -103,7 +104,7 @@
                                         </div>
                                     </div>
                             </li>
-                            <li class="list-group-item optionTwo">
+                            <li class="list-group-item optionTwo option">
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <label>Equipment</label>
@@ -127,11 +128,11 @@
                             <h4>After</h4><h6>Set new states.</h6>
                         </div>
                         <ul class="list-group states-container">
-                            <li class="list-group-item optionOne">
+                            <li class="list-group-item optionOne option">
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <label>Equipment</label>
-                                        <select class="form-control" disabled>
+                                        <select class="form-control inputEquip" disabled>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
@@ -145,11 +146,11 @@
                                     <button class="text-btn no-border-btn add-property-btn"><span aria-hidden="true">+</span></button>
                                 </div>
                             </li>
-                            <li class="list-group-item optionTwo">
+                            <li class="list-group-item optionTwo option">
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <label>Equipment</label>
-                                        <select class="form-control" disabled>
+                                        <select class="form-control inputEquip" disabled>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
@@ -165,14 +166,15 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div class="edit-section">
-                    <div class="edit-section-header">
-                        <h4>Action</h4><h6>Add actions!</h6>
+                    <div class="edit-section">
+                        <div class="edit-section-header">
+                            <h4>Action</h4><h6>Add actions!</h6>
+                        </div>
                     </div>
                 </div>
+
                 <div id="edit-button-panel">
-                    <button id="delete-step-btn" type="button" class="btn btn-danger">Delete</button>
+                    <button id="delete-step-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-step-confirm">Delete</button>
                 </div>
 
             </div>
@@ -224,6 +226,25 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="add-to-lab-btn">Add to Lab</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="delete-step-confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Step</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Do you want to delete step 5?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+                    <button type="button" class="btn btn-danger" id="remove-step-confirm-btn">Delete</button>
                 </div>
             </div>
         </div>

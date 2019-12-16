@@ -24,13 +24,14 @@ function loadEquipmentFromMarket() {
 
 function constructRadio(id, name) {
     let link = "/resources/images/equipments/" + id + ".png";
-    return "<div class='col col-sm-3 equip-unit'>" +
+    return "<div class='col col-sm-2'>" +
+        "<div class='equip-unit'>" +
         "<label class=\"layersMenu\">\n" +
         "    <input type=\"checkbox\" id=" + id + " name=" + name + ">\n" +
         "    <img src=" + link + ">\n" +
-        "    <div>" + name + "</div>\n" +
+        "    <span>" + name + "</span>\n" +
         "</label>" +
-        "</div>"
+        "</div>" + "</div>"
 }
 
 function loadSelectionToCart() {
