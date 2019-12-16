@@ -12,10 +12,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class LabService {
@@ -147,6 +144,24 @@ public class LabService {
         if(l.isPresent()) {
             Lab lab = l.get();
             lab.getStateMap().get(stateId).setName(name);
+            labRepository.save(lab);
+        }
+    }
+
+
+    public void changeStepState(String id, int stepId, String stateId, String[] props, String[] values) {
+        Optional<Lab> l = labRepository.findById(id);
+        if(l.isPresent()) {
+            Lab lab = l.get();
+            HashMap<String, HashMap<String, String>> map = lab.getSteps().get(stepId).getMap();
+            HashMap<String, String> fields = new HashMap<>();
+            for(int i = 0; i < props.length; i++) {
+                if(props[i].length() == 0 && values[i].length() == 0) {
+                    continue;
+                }
+                fields.put(props[i], values[i]);
+            }
+            map.put(stateId, fields);
             labRepository.save(lab);
         }
     }

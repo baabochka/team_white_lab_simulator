@@ -16,6 +16,10 @@
     width: calc(100% - 700px);
     background-color: transparent;
     height: 100%;
+    padding: 0 0 50px 0;
+    overflow: auto;
+
+
 }
 .side-list {
     border-radius: 10px;
@@ -37,7 +41,7 @@
 }
 
 #equip-item-list {
-    overflow: scroll;
+    overflow: auto;
     padding: 10px 25px;
     height: calc(100% - 84px);
 }
@@ -237,7 +241,7 @@ textarea:focus, .textarea:active {
 }
 
 #edit-button-panel {
-    width: 200px;
+    width: 80px;
     margin: 0 auto;
     justify-content: space-between;
     display: flex;
@@ -245,4 +249,12 @@ textarea:focus, .textarea:active {
 
 #edit-button-panel button {
     width: 80px;
+}
+
+.states-container li, #equip-item-list li {
+    border: none;
+}
+
+.add-property-btn, .delete-property-btn {
+    margin-top: 12px;
 }

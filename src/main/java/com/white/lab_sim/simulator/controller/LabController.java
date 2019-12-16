@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class LabController {
@@ -89,6 +91,13 @@ public class LabController {
     @ResponseBody
     public String changeStateName(@PathVariable String id, @PathVariable String stateId, @RequestParam String name) {
         labService.changeStateName(id, stateId, name);
+        return "ok";
+    }
+
+    @PostMapping("/lab/{id}/changeStepState")
+    @ResponseBody
+    public String changeStepState(@PathVariable String id, @RequestParam int stepId, @RequestParam String stateId, @RequestParam(value = "property[]") String[] properties, @RequestParam(value = "value[]") String[] values) {
+        labService.changeStepState(id, stepId, stateId, properties, values);
         return "ok";
     }
 
