@@ -53,12 +53,12 @@
         <div class="d-inline side-list top-border-card" id="equip-list">
             <div class="equip-list-header">
                 <span class="font-weight-bold">Equipment List</span>
+
                 <button class="text-btn no-border-btn" data-toggle="modal" data-target="#equip-market-modal"><span aria-hidden="true">+</span></button>
             </div>
             <div id="equip-item-list">
 
             </div>
-            <div></div>
         </div>
         <div class="d-inline" id="main-canvas">
             <div class="lab-edit-canvas">
@@ -75,6 +75,9 @@
                         <div class="edit-section-header">
                             <h4>Initial Setup</h4>
                         </div>
+                        <ul id="initial-states-container" class="list-group states-container">
+                        </ul>
+
                     </div>
                 </div>
                 <div id="not-initial-edit" style="display: none">
@@ -82,21 +85,94 @@
                         <div class="edit-section-header">
                             <h4>Before</h4><h6>Add equipments(1 or 2) for this step.</h6>
                         </div>
+                        <ul class="list-group states-container">
+                            <li class="list-group-item optionOne">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label>Equipment</label>
+                                            <select class="form-control inputEquip">
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>Property</label>
+                                            <input type="text" class="form-control inputProperty" disabled>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>Value</label>
+                                            <input type="text" class="form-control inputValue" disabled>
+                                        </div>
+                                    </div>
+                            </li>
+                            <li class="list-group-item optionTwo">
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label>Equipment</label>
+                                        <select class="form-control inputEquip">
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Property</label>
+                                        <input type="text" class="form-control inputProperty" disabled>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Value</label>
+                                        <input type="text" class="form-control inputValue" disabled>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="edit-section">
-                        <div class="edit-section-header">
-                            <h4>Action</h4><h6>Add actions!</h6>
-                        </div>
-                    </div>
-                    <div class="edit-section">
+                    <div id="after-section" class="edit-section">
                         <div class="edit-section-header">
                             <h4>After</h4><h6>Set new states.</h6>
                         </div>
+                        <ul class="list-group states-container">
+                            <li class="list-group-item optionOne">
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label>Equipment</label>
+                                        <select class="form-control" disabled>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Property</label>
+                                        <input type="text" class="form-control inputProperty">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Value</label>
+                                        <input type="text" class="form-control inputValue">
+                                    </div>
+                                    <button class="text-btn no-border-btn add-property-btn"><span aria-hidden="true">+</span></button>
+                                </div>
+                            </li>
+                            <li class="list-group-item optionTwo">
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label>Equipment</label>
+                                        <select class="form-control" disabled>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Property</label>
+                                        <input type="text" class="form-control inputProperty">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Value</label>
+                                        <input type="text" class="form-control inputValue">
+                                    </div>
+                                    <button class="text-btn no-border-btn add-property-btn"><span aria-hidden="true">+</span></button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="edit-section">
+                    <div class="edit-section-header">
+                        <h4>Action</h4><h6>Add actions!</h6>
                     </div>
                 </div>
                 <div id="edit-button-panel">
-                    <button type="button" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <button id="delete-step-btn" type="button" class="btn btn-danger">Delete</button>
                 </div>
 
             </div>
