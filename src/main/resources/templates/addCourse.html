@@ -15,6 +15,8 @@
     <!--    <script type="text/javascript" src="../static/resources/js/dashboard.js" th:src="@{/resources/js/dashboard.js}"></script>-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/edit.css" th:href="@{/resources/css/edit.css}">
+
 </head>
 <body>
     <nav class="mb-1 navbar navbar-expand-sm navbar-light">
@@ -47,8 +49,8 @@
     <div class="lab-container">
         <section class="form-elegant">
             <div class="row">
-                <div class="col-md-9 col-lg-7 col-xl-5">
-                    <div class="card">
+                <div class="col-md-9 col-lg-7 col-xl-5 d-inline side-list top-border-card">
+                    <!--<div class="card">-->
                         <div class="card-body mx-4">
                             <div class="text-center">
                                 <h3 class="dark-grey-text mb-5"><strong>Add New Course</strong></h3>
@@ -69,10 +71,19 @@
                             </div>
 
                             <div class="text-center mb-3">
+                                <a href="/create_lab" th:href="@{/create_lab}" class="stretched-link">Create an new Lab</a>
+                            </div>
+
+                            <div class="text-center mb-3">
+                                <button type="button" class="btn btn-block btn-rounded z-depth-1a">Add Students</button>
+                            </div>
+
+                            <div class="text-center mb-3">
                                 <button id="add-course-btn" type="button" href="/dashboard" th:href="@{/dashboard}" class="btn btn-block btn-rounded z-depth-1a">Add Course</button>
                             </div>
+
                         </div>
-                    </div>
+                    <!--</div>-->
                 </div>
 
 
