@@ -94,6 +94,16 @@
                 <div class="card-container">
 
                     <div id="add-lab-dashboard" class="row">
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="lab: ${labs}">
+                            <div class="box-part text-center">
+                                <i class="mdi mdi-add" aria-hidden="true"></i>
+                                <div class="title" th:text="${lab.getTitle()}"></div>
+                                <div class="text" th:text="${lab.getDescription()}"></div>
+                                <a href="/addCourse" th:href="@{/}" class="stretched-link">Get More</a>
+                            </div>
+                        </div>
+
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="box-part text-center">
                                 <i class="mdi mdi-add" aria-hidden="true"></i>

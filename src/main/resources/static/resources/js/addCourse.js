@@ -9,7 +9,7 @@ function addCourseInDashboard(){
             "courseDescription":courseDescription.val()
         },
         success : function(data){
-
+            console.log("go to dashboard");
         }
     });
 }

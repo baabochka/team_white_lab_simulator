@@ -3,6 +3,7 @@ package com.white.lab_sim.simulator.controller;
 import com.white.lab_sim.market.model.User;
 import com.white.lab_sim.market.service.UserServiceImpl;
 import com.white.lab_sim.simulator.model.Course;
+import com.white.lab_sim.simulator.model.Lab;
 import com.white.lab_sim.simulator.service.CourseService;
 import com.white.lab_sim.simulator.service.LabService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,9 @@ public class SimulatorController {
         }
         model.addAttribute("user", user);
         List<Course> courses = courseService.findByCreatedBy(user);
+        List<Lab> labs = labService.findByCreatedBy(user);
         model.addAttribute("courses", courses);
+        model.addAttribute("labs", labs);
         return "dashboard";
     }
 
