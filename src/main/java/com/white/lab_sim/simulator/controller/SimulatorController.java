@@ -80,8 +80,7 @@ public class SimulatorController {
     @ResponseBody
     public String createCourse(@RequestParam String courseName, @RequestParam String courseSection, @RequestParam String courseDescription,
                                Authentication authentication){
-        if(courseName != null && courseSection != null && courseDescription != null)
-            courseService.newCourse(userService.findByAuthentication(authentication), courseName, courseSection, courseDescription);
+        courseService.newCourse(userService.findByAuthentication(authentication), courseName, courseSection, courseDescription);
         return null;
     }
 
