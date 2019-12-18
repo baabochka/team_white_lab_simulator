@@ -23,20 +23,36 @@
 
 }
 .side-list {
-    border-radius: 10px;
-    border-width: 0 1px 1px 1px;
-    border-style: solid;
-    border-color: var(--border-color);
-    width: 300px;
-    margin: 20px 25px;
-    background-color: white;
-    padding: 0 5px 30px 5px;
-}
+     border-radius: 10px;
+     border-width: 0 1px 1px 1px;
+     border-style: solid;
+     border-color: var(--border-color);
+     width: 300px;
+     margin: 20px 25px;
+     background-color: white;
+     padding: 0 5px 30px 5px;
+ }
 
-.side-list::before {
-    width: calc(100% + 10px);
-    left: -5px;
-}
+ .side-list::before {
+     width: calc(100% + 10px);
+     left: -5px;
+ }
+ .side-list1 {
+     border-radius: 10px;
+     border-width: 0 1px 1px 1px;
+     border-style: solid;
+     border-color: var(--border-color);
+     width: 400px;
+     margin: 20px 25px;
+     background-color: white;
+     padding: 0 5px 30px 5px;
+ }
+
+ .side-list1::before {
+     width: calc(100% + 10px);
+     left: -5px;
+ }
+
 .equip-list-header {
     padding: 30px 25px;
 }
@@ -46,6 +62,8 @@
     padding: 10px 25px;
     height: calc(100% - 84px);
 }
+
+
 
 #equip-item-list .card{
     margin-top: -2px;

@@ -255,3 +255,7 @@ a{
 .text{
     margin:20px 0;
 }
+.description{
+    margin:20px 0;
+    padding: 20 px;
+}

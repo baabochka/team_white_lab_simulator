@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.*;
 
 @Controller
 public class SimulatorController {
@@ -104,5 +105,24 @@ public class SimulatorController {
         List<Course> courses = courseService.findByCreatedBy(user);
         model.addAttribute("courses", courses);
         return "market";
+    }
+
+    @GetMapping({"/course/{id}/manageCourse"})
+    public String manageCoursePage(HttpServletRequest request, Authentication authentication, Model model, @PathVariable String id) {
+        Course course = courseService.findById(id);
+        User user = userService.findByAuthentication(authentication);
+//        if(!user.getId().equals(lab.getCreatedBy().getId())) {
+//            return "redirect:/dashboard";
+//        }
+        model.addAttribute("user", user);
+        model.addAttribute("course", course);
+
+//        List<String> inf = new ArrayList<String>(2);
+//        inf.add("doom"); // adds 1 at 0 index
+//        inf.add("wonderwoman  "); // adds 2 at 1 index
+        model.addAttribute("students", userService.findAll());
+        model.addAttribute("labs", labService.findAll());
+
+        return "manage_course";
     }
 }

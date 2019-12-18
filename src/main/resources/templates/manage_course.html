@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:divth="http://www.w3.org/1999/html">
+<head>
+    <title>Lab Sim</title>
+    <link rel="icon" href="../static/resources/images/icon.png" th:href="@{/resources/images/icon.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f49d6c9a46.js" crossorigin="anonymous"></script>
+    <!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">-->
+    <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
+
+    <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!--    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">-->
+
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/edit.css" th:href="@{/resources/css/edit.css}">
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        let lab = [[${lab}]];
+        /*]]>*/
+    </script>
+
+    <!--<script src="../static/resources/js/jquery-1.10.2.js"></script>-->
+    <!--<script src="../static/resources/js/bootstrap.js"></script>-->
+    <!--<script src="../static/resources/js/jquery.selectlistactions.js"></script>-->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/resources/js/jquery.selectlistactions.js"></script>
+
+    <!--<link rel="stylesheet" href="../static/resources/css/bootstrap.css">-->
+    <!--<link rel="stylesheet" href="../static/resources/css/site.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <nav class="mb-1 navbar navbar-expand-sm navbar-light">
+        <img id="logo" src="../static/resources/images/icon.png" th:src="@{/resources/images/icon.png}"/>
+        <a class="navbar-brand" href="#">Lab Sim</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+                aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item avatar dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded-circle z-depth-0"
+                             th:src="${user.avatar_url == null || user.avatar_url.isEmpty()} ? '/resources/images/default.png':${user.avatar_url}">
+                        <!--/*@thymesVar id="user" type=""*/-->
+                        <span th:text="${user.getNickname()}"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-secondary"
+                         aria-labelledby="navbarDropdownMenuLink-55">
+                        <!--                        <a class="dropdown-item" href="#">game history</a>-->
+                        <a class="dropdown-item" id="logout-link" href="/logout" th:href="@{/logout}">logout</a>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="lab-container d-flex">
+        <div class="d-inline side-list1 top-border-card" id="equip-list">
+            <div class="equip-list-header">
+                <span class="font-weight-bold">Student List</span>
+            </div>
+            <div id="equip-item-list">
+                <div class="subject-info-box-1" style="width:50% display:inline">
+                    <label>Available Students</label>
+                    <select multiple class="form-control" id="lstBox1">
+                        <span th:each="stud : ${students}">
+                            <option value="${stud.name}"><span th:text="${stud.name}"></span></option>
+                        </span>
+                    </select>
+                </div>
+                <div class="subject-info-arrows text-center" style="width:20% display:inline">
+                    <br /><br />
+                    <input type='button' id='btnAllRight' value='>>' class="btn btn-default" /><br />
+                    <input type='button' id='btnRight' value='>' class="btn btn-default" /><br />
+                    <input type='button' id='btnLeft' value='<' class="btn btn-default" /><br />
+                    <input type='button' id='btnAllLeft' value='<<' class="btn btn-default" />
+                </div>
+
+            </div>
+
+        </div>
+        <div class="d-inline" id="main-canvas">
+            <div class="lab-edit-canvas">
+                <div id="step-basic-edit" class="top-border-card">
+                    <div class="h3" id="step-edit-header">
+                        <span>Course: </span><span class="title"  th:text="${course.getName()}"></span>
+                        <!--<div class="title" th:text="${course.getName()}"></div>-->
+
+                    </div>
+                    <div class="description" th:text="${course.getDescription()}" style="padding:30px"></div>
+                    <!--<div id="step-brief-edit">-->
+                        <!--<textarea rows='1' id="step-instruction-input" placeholder="Instruction"></textarea><br>-->
+                    <!--</div>-->
+                    <div class="subject-info-box-2">
+                        <label>Students You Have Selected</label>
+                        <select multiple class="form-control" id="lstBox2">
+
+                        </select>
+                        </div>
+                    <div class="subject-info-box-2">
+                        <label>Labs You Have Selected</label>
+                        <select multiple class="form-control" id="lstBoxLab2">
+
+                        </select>
+                        </div>
+
+                    <div class="clearfix"></div>
+                    <br/><br/>
+                    <button type="button" class="save" data-dismiss="modal" aria-label="Save">Save Course</button>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="d-inline side-list top-border-card" id="step-list">
+            <div class="equip-list-header">
+                <span class="font-weight-bold">Lab List</span>
+            </div>
+            <div class="subject-info-box-1" style="width:50% display:inline">
+                <label>Available Labs</label>
+                <select multiple class="form-control" id="lstBoxLab1">
+                        <span th:each="lab : ${labs}">
+                            <option value="${lab.title}"><span th:text="${lab.title}"></span></option>
+                        </span>
+                </select>
+            </div>
+            <div class="subject-info-arrows text-center" style="width:20% display:inline">
+                <br /><br />
+                <input type='button' id='btnAllRightLab' value='<<' class="btn btn-default" /><br />
+                <input type='button' id='btnRightLab' value='<' class="btn btn-default" /><br />
+                <input type='button' id='btnLeftLab' value='>' class="btn btn-default" /><br />
+                <input type='button' id='btnAllLeftLab' value='>>' class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="delete-step-confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Step</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Do you want to delete step?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+                    <button type="button" class="btn btn-danger" id="remove-step-confirm-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/resources/js/lab_edit.js}"></script>
+    <script th:src="@{/resources/js/course_add_lab_market.js}"></script>
+    <div class="container">
+        <div class="row style-select">
+            <div class="col-md-12">
+                <!--<div class="subject-info-box-1">-->
+                    <!--<label>Available Superheroes</label>-->
+                    <!--<select multiple class="form-control" id="lstBox1">-->
+                        <!--<option value="123">Superman</option>-->
+                        <!--<option value="456">Batman</option>-->
+                        <!--<option value="789">Spiderman</option>-->
+                        <!--<option value="654">Captain America</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+
+                <!--<div class="subject-info-arrows text-center">-->
+                    <!--<br /><br />-->
+                    <!--<input type='button' id='btnAllRight' value='>>' class="btn btn-default" /><br />-->
+                    <!--<input type='button' id='btnRight' value='>' class="btn btn-default" /><br />-->
+                    <!--<input type='button' id='btnLeft' value='<' class="btn btn-default" /><br />-->
+                    <!--<input type='button' id='btnAllLeft' value='<<' class="btn btn-default" />-->
+                <!--</div>-->
+
+                <!--<div class="subject-info-box-2">-->
+                    <!--<label>Superheroes You Have Selected</label>-->
+                    <!--<select multiple class="form-control" id="lstBox2">-->
+                        <!--<option value="765">Nick Fury</option>-->
+                        <!--<option value="698">The Hulk</option>-->
+                        <!--<option value="856">Iron Man</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+
+                <!--<div class="clearfix"></div>-->
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        $('#btnRight').click(function (e) {
+            $('select').moveToListAndDelete('#lstBox1', '#lstBox2');
+            e.preventDefault();
+        });
+
+        $('#btnAllRight').click(function (e) {
+            $('select').moveAllToListAndDelete('#lstBox1', '#lstBox2');
+            e.preventDefault();
+        });
+
+        $('#btnLeft').click(function (e) {
+            $('select').moveToListAndDelete('#lstBox2', '#lstBox1');
+            e.preventDefault();
+        });
+
+        $('#btnAllLeft').click(function (e) {
+            $('select').moveAllToListAndDelete('#lstBox2', '#lstBox1');
+            e.preventDefault();
+        });
+         $('#btnRightLab').click(function (e) {
+            $('select').moveToListAndDelete('#lstBoxLab1', '#lstBoxLab2');
+            e.preventDefault();
+        });
+
+        $('#btnAllRightLab').click(function (e) {
+            $('select').moveAllToListAndDelete('#lstBoxLab1', '#lstBoxLab2');
+            e.preventDefault();
+        });
+
+        $('#btnLeftLab').click(function (e) {
+            $('select').moveToListAndDelete('#lstBoxLab2', '#lstBoxLab1');
+            e.preventDefault();
+        });
+
+        $('#btnAllLeftLab').click(function (e) {
+            $('select').moveAllToListAndDelete('#lstBoxLab2', '#lstBoxLab1');
+            e.preventDefault();
+        });
+    </script>
+
+</body>
+</html>
