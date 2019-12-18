@@ -27,7 +27,7 @@ public class LabService {
     private UserRepository userRepository;
     public void load_pre_equip() {
         equipmentRepository.deleteAll();
-        String[] names = {"beaker", "flask", "pipette", "thermometer"};
+        String[] names = {"beaker", "flask", "pipette", "litmus"};
         for (String name : names) {
             Equipment equipment = new Equipment();
             equipment.setName(name);
@@ -51,7 +51,9 @@ public class LabService {
         Optional<Lab> o = labRepository.findById(id);
         return o.orElse(null);
     }
-
+    public List<Lab> findAll() {
+        return labRepository.findAll();
+    }
     public void addStateList(String id, HashMap<String, String> counter) {
         Optional<Lab> o = labRepository.findById(id);
         if(o.isPresent()) {
