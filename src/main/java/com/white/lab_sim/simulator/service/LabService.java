@@ -203,4 +203,8 @@ public class LabService {
             labRepository.save(lab);
         }
     }
+
+    public List<Lab> findByCreatedBy(User user) {
+        return labRepository.getByCreatedBy(user);
+    }
 }

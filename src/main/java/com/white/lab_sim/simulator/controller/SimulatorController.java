@@ -3,8 +3,11 @@ package com.white.lab_sim.simulator.controller;
 import com.white.lab_sim.market.model.User;
 import com.white.lab_sim.market.service.UserServiceImpl;
 import com.white.lab_sim.simulator.model.Course;
+import com.white.lab_sim.simulator.model.Lab;
+import com.white.lab_sim.simulator.model.Equipment;
 import com.white.lab_sim.simulator.service.CourseService;
 import com.white.lab_sim.simulator.service.LabService;
+import com.white.lab_sim.simulator.repository.EquipmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -28,6 +31,31 @@ public class SimulatorController {
     @Autowired
     CourseService courseService;
 
+    @Autowired
+    EquipmentRepository equipmentRepository;
+//    @Autowired
+//    private LabRepository labRepository;
+//    @Autowired
+//    private UserRepository userRepository;
+//    public void load_pre_equip() {
+//        equipmentRepository.deleteAll();
+//        String[] names = {"beaker", "flask", "pipette", "litmus"};
+//        for (String name : names) {
+//            Equipment equipment = new Equipment();
+//            equipment.setName(name);
+//            equipmentRepository.save(equipment);
+//        }
+//    }
+//
+//    public Lab newLab(User user) {
+//        Lab l = new Lab();
+//        l.setIf_public(false);
+//        l.setCreatedBy(user);
+//        labRepository.save(l);
+//        return l;
+//    }
+
+
     @GetMapping({"/"})
     public String index(Authentication authentication) {
         if(authentication != null && authentication.isAuthenticated())
@@ -50,7 +78,9 @@ public class SimulatorController {
         }
         model.addAttribute("user", user);
         List<Course> courses = courseService.findByCreatedBy(user);
+        List<Lab> labs = labService.findByCreatedBy(user);
         model.addAttribute("courses", courses);
+        model.addAttribute("labs", labs);
         return "dashboard";
     }
 
@@ -66,6 +96,33 @@ public class SimulatorController {
         labService.load_pre_equip();
         return "redirect:dashboard";
     }
+    @GetMapping({"/equipLoad"})
+    public String addEquipPage(HttpServletRequest request, Authentication authentication, Model model) {
+        User user = userService.findByAuthentication(authentication);
+        model.addAttribute("user", user);
+        return "equipL";
+    }
+    @PostMapping({"/equipLoad"})
+    @ResponseBody
+    public String createEquip(@RequestParam String name, Authentication authentication, Model model){
+        User user = userService.findByAuthentication(authentication);
+        model.addAttribute("user", user);
+        Equipment equipment = new Equipment();
+        equipment.setName(name);
+        equipment.setCreatedBy(user);
+        equipmentRepository.save(equipment);
+        return "equipL";
+    }
+//    @RequestMapping({"/equipLoad"})
+//    public String equipLoad(@RequestParam String name, HttpServletRequest request, Authentication authentication, Model model) {
+//        User user = userService.findByAuthentication(authentication);
+//        model.addAttribute("user", user);
+//        Equipment equipment = new Equipment();
+//        equipment.setName(name);
+//        equipment.setCreatedBy(user);
+//        equipmentRepository.save(equipment);
+//        return "equipL";
+//    }
 
     @GetMapping({"/addCourse"})
     public String addCoursePage(HttpServletRequest request, Authentication authentication, Model model) {
@@ -77,8 +134,8 @@ public class SimulatorController {
     @PostMapping({"/addCourse"})
     @ResponseBody
     public String createCourse(@RequestParam String courseName, @RequestParam String courseSection, @RequestParam String courseDescription,
-                               Authentication authentication, Model model){
-        Course course = courseService.newCourse(userService.findByAuthentication(authentication), courseName, courseSection, courseDescription);
+                               Authentication authentication){
+        courseService.newCourse(userService.findByAuthentication(authentication), courseName, courseSection, courseDescription);
         return null;
     }
 

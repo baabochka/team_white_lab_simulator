@@ -26,6 +26,8 @@ public class CourseService {
     }
 
     public Course newCourse(User user, String name, String section, String des){
+        if(name == null && section == null)
+            return null;
         Course course = new Course();
         course.setCreatedBy(user);
         course.setIf_public(false);

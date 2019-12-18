@@ -46,12 +46,6 @@
 </nav>
 <div class="lab-container">
     <div class="toolbar">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search..." style="width: 300px">
-            <button type="button" aria-label="Search">
-                <i class="mdi mdi-magnify" aria-hidden="true"></i>
-            </button>
-        </div>
         <div class="lab-col mt-4">
             <div class="card ">
                 <div class="card-header">
@@ -64,10 +58,12 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="course: ${courses}">
                             <div class="box-part text-center">
+                                <th: if="${course} != null">
                                 <i class="mdi mdi-add" aria-hidden="true"></i>
                                 <div class="title" th:text="${course.getName()}"></div>
                                 <div class="text" th:text="${course.getDescription()}"></div>
                                 <a href="/addCourse" th:href="@{/}" class="stretched-link">Get More</a>
+                                </th:>
                             </div>
                         </div>
 
@@ -75,14 +71,13 @@
                             <div class="box-part text-center">
                                 <i class="mdi mdi-add" aria-hidden="true"></i>
                                 <div class="title">
-                                    <div>Add A New Course</div>
+                                    <h4>Add A New Course</h4>
                                 </div>
                                 <div class="text">
-                                    <div>add more course</div>
+                                    <span>add more course</span>
                                 </div>
                                 <a href="/addCourse" th:href="@{/addCourse}" class="stretched-link">Click me</a>
                             </div>
-                            <a href="/addCourse" th:href="@{/addCourse}" class="stretched-link">Click me</a>
                         </div>
 
                     </div>
@@ -101,6 +96,16 @@
                 <div class="card-container">
 
                     <div id="add-lab-dashboard" class="row">
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="lab: ${labs}">
+                            <div class="box-part text-center">
+                                <i class="mdi mdi-add" aria-hidden="true"></i>
+                                <div class="title" th:text="${lab.getTitle()}"></div>
+                                <div class="text" th:text="${lab.getDescription()}"></div>
+                                <a href="/addCourse" th:href="@{/}" class="stretched-link">Get More</a>
+                            </div>
+                        </div>
+
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="box-part text-center">
                                 <i class="mdi mdi-add" aria-hidden="true"></i>

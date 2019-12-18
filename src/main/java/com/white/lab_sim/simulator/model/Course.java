@@ -1,8 +1,11 @@
 package com.white.lab_sim.simulator.model;
 
 import com.white.lab_sim.market.model.MarketUnit;
+import com.white.lab_sim.market.model.User;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import java.util.List;
 
 @Document
 public class Course extends MarketUnit {
@@ -11,6 +14,8 @@ public class Course extends MarketUnit {
     String name;
     String section;
     String description;
+    List<Lab> labs;
+    List<User> students;
 
     public Course() { }
 
@@ -18,6 +23,8 @@ public class Course extends MarketUnit {
         this.name = name;
         this.section = section;
         this.description = description;
+        labs = null;
+        students = null;
     }
 
     public String getName() {
@@ -44,4 +51,19 @@ public class Course extends MarketUnit {
         this.description = description;
     }
 
+    public List<Lab> getLabs() {
+        return labs;
+    }
+
+    public void setLabs(List<Lab> labs) {
+        this.labs = labs;
+    }
+
+    public List<User> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<User> students) {
+        this.students = students;
+    }
 }
