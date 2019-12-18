@@ -3,13 +3,16 @@ package com.white.lab_sim.simulator.controller;
 import com.white.lab_sim.market.model.User;
 import com.white.lab_sim.market.service.UserServiceImpl;
 import com.white.lab_sim.simulator.model.Lab;
+import com.white.lab_sim.simulator.service.EquipmentService;
 import com.white.lab_sim.simulator.service.LabService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +24,8 @@ public class LabController {
     private LabService labService;
     @Autowired
     private UserServiceImpl userService;
-
+    @Autowired
+    private EquipmentService equipmentService;
     @RequestMapping("/create_lab")
     public String newLab(Authentication authentication) {
         System.err.println("create");
@@ -137,5 +141,15 @@ public class LabController {
 
 //        System.out.println(model.getAttribute("user"));
         return "lab_do";
+    }
+
+    @PostMapping("/equips/add")
+    @ResponseBody
+    public String addEquipment(@RequestParam("title") String name,
+                           @RequestParam("image") MultipartFile image)
+            throws IOException {
+        System.err.println("add");
+        String id = equipmentService.addEquipment(name, image);
+        return id;
     }
 }

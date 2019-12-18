@@ -31,24 +31,33 @@ function loadSteps() {
 function initialStates() {
     equip_list.empty();
     for(let v of (Object.values(states))) {
-        let src = "/resources/images/equipments/" + v['equipmentId'] + ".png";
-        equip_list.append($("<div class=\"card state-card\" id=" + v['id'] + ">\n" +
-            "    <div class=\"card-header\">\n" +
-            "        <img src=" + src + "><textarea class='equip-name-input'>" + v['name'] + "</textarea>\n" +
-            "        <button class=\"btn btn-link\" data-toggle=\"collapse\" data-target=\"#collapse-" + v['id'] + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
-            "            <span><i class=\"fas fa-eye\"></i></span>" +
-            "        </button>\n" +
-            "        <button class=\"btn btn-link remove-state-btn\">\n" +
-            "            <span><i class=\"fas fa-times\"></i></span>" +
-            "        </button>\n" +
-            "    </div>\n" +
-            "\n" +
-            "    <div id=\"collapse-" + v['id'] + "\" class=\"collapse\" aria-labelledby=\"headingOne\" data-parent=\"#accordion\">\n" +
-            "      <div class=\"card-body\">" +
-            " <dl class='row'></dl>" +
-            "      </div>\n" +
-            "    </div>\n" +
-            "  </div>"));
+        let src = "data:image/png;base64,";
+        $.ajax({
+            type: "get",
+            url: "/api/equipments/image/" + v['equipmentId'],
+            success: function (data) {
+                src += data;
+                equip_list.append($("<div class=\"card state-card\" id=" + v['id'] + ">\n" +
+                    "    <div class=\"card-header\">\n" +
+                    "        <img src=" + src + "><textarea class='equip-name-input'>" + v['name'] + "</textarea>\n" +
+                    "        <button class=\"btn btn-link\" data-toggle=\"collapse\" data-target=\"#collapse-" + v['id'] + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
+                    "            <span><i class=\"fas fa-eye\"></i></span>" +
+                    "        </button>\n" +
+                    "        <button class=\"btn btn-link remove-state-btn\">\n" +
+                    "            <span><i class=\"fas fa-times\"></i></span>" +
+                    "        </button>\n" +
+                    "    </div>\n" +
+                    "\n" +
+                    "    <div id=\"collapse-" + v['id'] + "\" class=\"collapse\" aria-labelledby=\"headingOne\" data-parent=\"#accordion\">\n" +
+                    "      <div class=\"card-body\">" +
+                    " <dl class='row'></dl>" +
+                    "      </div>\n" +
+                    "    </div>\n" +
+                    "  </div>"));
+            }
+
+        });
+
     }
 }
 
@@ -456,4 +465,32 @@ function deleteStep() {
 delete_step_btn.click(function () {
     $('#delete-step-confirm-msg').text("Do you want to delete step " + current_step + "?")
 });
+$("#upload-form").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+    var url = "/equips/add";
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            'name': $('#equip-name-input').val(),
+            'image': $('#equip-image-input').val()
+        },
+        success: function(data)
+        {
+            alert(data); // show response from the php script.
+        }
+    });
+
+
+});
 initialPage();
+$(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+
+$('#add-new-equip-btn').click(function () {
+    $('#equip-market-modal').modal('hide');
+});
