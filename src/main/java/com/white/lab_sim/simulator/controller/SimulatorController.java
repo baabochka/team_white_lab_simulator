@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -101,8 +102,37 @@ public class SimulatorController {
             }
         }
         model.addAttribute("user", user);
-        List<Course> courses = courseService.findByCreatedBy(user);
-        model.addAttribute("courses", courses);
+        //Get courses and labs from database
+        List<Course> localCourses = courseService.findByCreatedBy(user);
+        List<Lab> localLabs = labService.findByCreatedBy(user);
+        List<Course> allCourses = courseService.findAll();
+        List<Lab> allLabs = labService.findAll();
+
+        //Remove local items from all items
+       for (int i = 0; i < allCourses.size(); i++) {
+
+           for (Course lc : localCourses) {
+               if (allCourses.get(i).getId().equals(lc.getId())) {
+                   allCourses.remove(allCourses.get(i));
+               }
+           }
+       }
+
+        model.addAttribute("localCourses", localCourses);
+        model.addAttribute("localLabs", localLabs);
+        model.addAttribute("allCourses", allCourses);
+        model.addAttribute("allLabs", allLabs);
+        return "market";
+    }
+
+    @PostMapping({"/market"})
+    @ResponseBody
+    public String createCourse(@RequestParam List<Course> addedCourses,
+                               Authentication authentication){
+        User user = userService.findByAuthentication(authentication);
+        for (Course course : addedCourses) {
+            courseService.newCourse(userService.findByAuthentication(authentication), course.getName(), course.getSection(), course.getDescription());
+        }
         return "market";
     }
 }
