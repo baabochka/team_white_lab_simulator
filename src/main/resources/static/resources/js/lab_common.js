@@ -23,10 +23,14 @@ function performStep() {
             current_states[k] = map[k]
         }
     }
+    // console.log(current_states);
 }
 
 function loadStates() {
+    console.log((current_states));
+    console.log(equip_list.find(".card"));
     for(let card of equip_list.find(".card")) {
+        console.log(card);
         let stateId = $(card).attr('id');
         let fields = current_states[stateId];
         let list = $(card).find('dl');

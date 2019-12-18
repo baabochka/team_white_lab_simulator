@@ -282,7 +282,7 @@
                 </div>
                 <div class="modal-body text-center">
                     <h6>Upload new Equipment</h6>
-                    <form method="POST" th:action="@{/equips/add}" enctype="multipart/form-data">
+                    <form method="POST" th:action="@{/equips/add}" id="upload-form" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="add-equip-name">Equipment Name</label>
                             <input type="text" class="form-control text-center" id="add-equip-name" name="title">
@@ -294,7 +294,7 @@
                                 <label class="custom-file-label" for="add-equip-image">Choose file</label>
                             </div>
                         </div>
-                        <input  class="btn btn-info" type="submit" value="Upload" />
+                        <input  class="btn btn-info" id="upload-btn" type="submit" value="Upload" />
                     </form>
 
                 </div>

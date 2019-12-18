@@ -22,25 +22,32 @@ function initialStates() {
     equip_list.empty();
     for(let v of (Object.values(states))) {
         let src = "data:image/png;base64,";
+        let card = $("<div class=\"card state-card draggable\" id=" + v['id'] + ">\n" +
+            "    <div class=\"card-header\">\n" +
+            "        <img><div class='state-name'>" + v['name'] + "</div>\n" +
+            "        <button class=\"btn btn-link\" data-toggle=\"collapse\" data-target=\"#collapse-" + v['id'] + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
+            "            <i class=\"fas fa-eye\"></i>" +
+            "        </button>\n" +
+            "    </div>\n" +
+            "\n" +
+            "    <div id=\"collapse-" + v['id'] + "\" class=\"collapse\" aria-labelledby=\"headingOne\" data-parent=\"#accordion\">\n" +
+            "      <div class=\"card-body\">" +
+            " <dl class='row'></dl>" +
+            "      </div>\n" +
+            "    </div>\n" +
+            "  </div>").appendTo(equip_list);
+        $(card).draggable({
+            revert: "invalid",
+            stack: ".draggable",
+            helper: 'clone',
+            handle: '.card-header'
+        });
         $.ajax({
             type: "get",
             url: "/api/equipments/image/" + v['equipmentId'],
             success: function (data) {
                 src += data;
-                equip_list.append($("<div class=\"card state-card draggable\" id=" + v['id'] + ">\n" +
-                    "    <div class=\"card-header\">\n" +
-                    "        <img src=" + src + "><div class='state-name'>" + v['name'] + "</div>\n" +
-                    "        <button class=\"btn btn-link\" data-toggle=\"collapse\" data-target=\"#collapse-" + v['id'] + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
-                    "            <i class=\"fas fa-eye\"></i>" +
-                    "        </button>\n" +
-                    "    </div>\n" +
-                    "\n" +
-                    "    <div id=\"collapse-" + v['id'] + "\" class=\"collapse\" aria-labelledby=\"headingOne\" data-parent=\"#accordion\">\n" +
-                    "      <div class=\"card-body\">" +
-                    " <dl class='row'></dl>" +
-                    "      </div>\n" +
-                    "    </div>\n" +
-                    "  </div>"));
+                $(card).find('img').attr('src', src)
             }
 
         });
@@ -79,21 +86,28 @@ $('.droppable').droppable({
         droppable.empty();
         let id = ui.draggable.attr('id');
         let state = states[id];
-        let src = "/resources/images/equipments/" + state['equipmentId'] + ".png";
-        let card = $("<div class=\"card state-card\" id=selection-" + id + ">\n" +
-            "    <div class=\"card-header\">\n" +
-            "        <img src=" + src + "><div class='state-name'>" + state['name'] + "</div>\n" +
-            "        <button class='btn btn-link remove-selected-equip-btn'>\n" +
-            "            <i class=\"fas fa-times\"></i>" +
-            "        </button>\n" +
-            "    </div>\n" +
-            "    <div class=\"card-body\">" +
-            "       <dl class='row'></dl>" +
-            "    </div>\n" +
-            "  </div>");
-        loadFieldsToStates(card.find('dl'), current_states[id]);
-        card.appendTo(droppable);
-        droppable.addClass("after-drop");
+        let src = "data:image/png;base64,";
+        $.ajax({
+            type: "get",
+            url: "/api/equipments/image/" + state['equipmentId'],
+            success: function (data) {
+                src += data;
+                let card = $("<div class=\"card state-card\" id=selection-" + id + ">\n" +
+                    "    <div class=\"card-header\">\n" +
+                    "        <img src=" + src + "><div class='state-name'>" + state['name'] + "</div>\n" +
+                    "        <button class='btn btn-link remove-selected-equip-btn'>\n" +
+                    "            <i class=\"fas fa-times\"></i>" +
+                    "        </button>\n" +
+                    "    </div>\n" +
+                    "    <div class=\"card-body\">" +
+                    "       <dl class='row'></dl>" +
+                    "    </div>\n" +
+                    "  </div>");
+                loadFieldsToStates(card.find('dl'), current_states[id]);
+                card.appendTo(droppable);
+                droppable.addClass("after-drop");
+            }
+        });
     }
 });
 
