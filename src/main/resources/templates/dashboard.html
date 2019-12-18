@@ -14,6 +14,9 @@
     <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
     <!--    <script type="text/javascript" src="../static/resources/js/dashboard.js" th:src="@{/resources/js/dashboard.js}"></script>-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/lab_common.css" th:href="@{/resources/css/lab_common.css}">
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/lab_edit.css" th:href="@{/resources/css/lab_edit.css}">
 
 </head>
 <body>
@@ -53,17 +56,15 @@
                 </div>
 
                 <div class="card-container" >
-
                     <div id="add-course-dashboard" class="row">
-
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="course: ${courses}">
                             <div class="box-part text-center">
-                                <th: if="${course} != null">
                                 <i class="mdi mdi-add" aria-hidden="true"></i>
                                 <div class="title" th:text="${course.getName()}"></div>
                                 <div class="text" th:text="${course.getDescription()}"></div>
                                 <a href="/addCourse" th:href="@{/}" class="stretched-link">Get More</a>
-                                </th:>
+                                <br>
+                                <a href="/addCourse" th:href="@{'/course/'+${course.id}+'/manageCourse'}" class="stretched-link">Edit Course</a>
                             </div>
                         </div>
 
