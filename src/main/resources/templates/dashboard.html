@@ -104,7 +104,8 @@
                                 <i class="mdi mdi-add" aria-hidden="true"></i>
                                 <div class="title" th:text="${lab.getTitle()}"></div>
                                 <div class="text" th:text="${lab.getDescription()}"></div>
-                                <a href="/addCourse" th:href="@{/}" class="stretched-link">Get More</a>
+                                <a href="/addCourse" th:href="@{'/lab/' + ${lab.id} + '/edit'}" class="stretched-link">edit</a><br>
+                                <a href="/addCourse" th:href="@{'/lab/' + ${lab.id} + '/do'}" class="stretched-link">do</a>
                             </div>
                         </div>
 

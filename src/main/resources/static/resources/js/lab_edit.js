@@ -11,6 +11,7 @@ let before_two = $("#before-section .optionTwo");
 let after_one = $("#after-section .optionOne");
 let after_two = $("#after-section .optionTwo");
 let delete_step_modal = $("#delete-step-confirm");
+let upload_btn = $('#upload-btn');
 
 // load steps to the right panel, the last step will be selected
 function loadSteps() {
@@ -32,28 +33,30 @@ function initialStates() {
     equip_list.empty();
     for(let v of (Object.values(states))) {
         let src = "data:image/png;base64,";
+
+        let card = $("<div class=\"card state-card\" id=" + v['id'] + ">\n" +
+            "    <div class=\"card-header\">\n" +
+            "        <img><textarea class='equip-name-input'>" + v['name'] + "</textarea>\n" +
+            "        <button class=\"btn btn-link\" data-toggle=\"collapse\" data-target=\"#collapse-" + v['id'] + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
+            "            <span><i class=\"fas fa-eye\"></i></span>" +
+            "        </button>\n" +
+            "        <button class=\"btn btn-link remove-state-btn\">\n" +
+            "            <span><i class=\"fas fa-times\"></i></span>" +
+            "        </button>\n" +
+            "    </div>\n" +
+            "\n" +
+            "    <div id=\"collapse-" + v['id'] + "\" class=\"collapse\" aria-labelledby=\"headingOne\" data-parent=\"#accordion\">\n" +
+            "      <div class=\"card-body\">" +
+            " <dl class='row'></dl>" +
+            "      </div>\n" +
+            "    </div>\n" +
+            "  </div>").appendTo(equip_list);
         $.ajax({
             type: "get",
             url: "/api/equipments/image/" + v['equipmentId'],
             success: function (data) {
                 src += data;
-                equip_list.append($("<div class=\"card state-card\" id=" + v['id'] + ">\n" +
-                    "    <div class=\"card-header\">\n" +
-                    "        <img src=" + src + "><textarea class='equip-name-input'>" + v['name'] + "</textarea>\n" +
-                    "        <button class=\"btn btn-link\" data-toggle=\"collapse\" data-target=\"#collapse-" + v['id'] + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
-                    "            <span><i class=\"fas fa-eye\"></i></span>" +
-                    "        </button>\n" +
-                    "        <button class=\"btn btn-link remove-state-btn\">\n" +
-                    "            <span><i class=\"fas fa-times\"></i></span>" +
-                    "        </button>\n" +
-                    "    </div>\n" +
-                    "\n" +
-                    "    <div id=\"collapse-" + v['id'] + "\" class=\"collapse\" aria-labelledby=\"headingOne\" data-parent=\"#accordion\">\n" +
-                    "      <div class=\"card-body\">" +
-                    " <dl class='row'></dl>" +
-                    "      </div>\n" +
-                    "    </div>\n" +
-                    "  </div>"));
+                $(card).find('img').attr('src', src);
             }
 
         });
@@ -494,3 +497,43 @@ $(".custom-file-input").on("change", function() {
 $('#add-new-equip-btn').click(function () {
     $('#equip-market-modal').modal('hide');
 });
+
+
+upload_btn.click(function (event) {
+
+    //stop submit the form, we will post it manually.
+    event.preventDefault();
+
+    fire_ajax_submit();
+
+});
+
+function fire_ajax_submit() {
+
+    // Get form
+    let form = $('#upload-form')[0];
+
+    let data = new FormData(form);
+
+    $("#upload-btn").prop("disabled", true);
+
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: "/equips/add",
+        data: data,
+        //http://api.jquery.com/jQuery.ajax/
+        //https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+        processData: false, //prevent jQuery from automatically transforming the data into a query string
+        contentType: false,
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            console.log(data);
+            $("#upload-btn").prop("disabled", false);
+            $("#upload-equip-modal").modal('hide');
+            loadEquipmentFromMarket();
+            $('#equip-market-modal').modal('show');
+        }
+    });
+}
