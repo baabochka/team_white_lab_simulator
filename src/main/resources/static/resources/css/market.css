@@ -26,35 +26,13 @@ body {
     width:auto;
 }
 
-/*Dual list*/
-.dual-list .list-group {
-    margin-top: 8px;
-}
-
-.list-left li, .list-right li {
-    cursor: pointer;
-}
-
-.list-arrows {
-    padding-top: 100px;
-}
-
-.list-arrows button {
-    margin-bottom: 20px;
-}
+/*.tab-content {*/
+/*    position:fixed;*/
+/*}*/
 
 #labFilterBar #courseFilterBar {
     width:auto;
 }
-
-.unselectable {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
 /*-------------flip cards CSS-------------*/
 .flip-card {
     background-color: transparent;

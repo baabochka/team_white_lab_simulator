@@ -48,6 +48,4 @@ public class CourseService {
     public List<Course> findByCreatedBy(User user) {
         return courseRepository.getByCreatedBy(user);
     }
-
-    public List<Course> findAll() { return courseRepository.findAll();}
 }

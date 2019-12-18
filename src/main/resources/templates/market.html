@@ -12,9 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
 
     <!--    fontawesome Icon CSS-->
-<!--    <link rel="stylesheet" href="../static/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="../static/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
 
     <!--    jquery-ui CSS-->
     <link rel="stylesheet" href="../static/resources/css/jquery-ui/jquery-ui.min.css" th:href="@{/resources/css/jquery-ui/jquery-ui.min.css}">
@@ -36,7 +34,6 @@
 
 </head>
 <body>
-<<<<<<< Updated upstream
     <h2>Add your favorite courses</h2>
     <select id="sbOne" multiple="multiple">
         <option value="1">CSE307</option>
@@ -97,152 +94,25 @@
     </div>
     <button id="create-course">Create new course</button>
 
-=======
-    <div id="top-half">
-            <nav class="mb-1 navbar navbar-expand-sm navbar-light">
-                <img id="logo" src="../static/resources/images/icon.png" th:src="@{/resources/images/icon.png}"/>
-                <a class="navbar-brand" href="#">Lab Sim</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
-                        aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
-                    <ul class="navbar-nav ml-auto nav-flex-icons">
-                        <li class="nav-item avatar dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle z-depth-0"
-                                     th:src="${user.avatar_url == null || user.avatar_url.isEmpty()} ? '/resources/images/default.png':${user.avatar_url}">
-                                <span th:text="${user.getNickname()}"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-secondary"
-                                 aria-labelledby="navbarDropdownMenuLink-55">
-                                <a class="dropdown-item" id="logout-link" href="/logout" th:href="@{/logout}">logout</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-            <div class="vertical-center">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#course">Course</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#lab">Lab</a>
-                    </li>
-                </ul>
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <!--Course tab-->
-                    <div id="course" class="container tab-pane active">
-                        <br>
-                        <h3>Course</h3>
-                        <br>
-                        <div class="container">
-                            <br />
-                            <div class="row">
-                                <div class="dual-list list-left col-md-3">
-                                    <div class="well">
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="input-group">
-                                                    <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <ul class="list-group">
-                                        <li class="list-group-item" th:each="course: ${allCourses}" th:name="${course.getName()}" th:text="${course.getName()}"> </li>
-                                    </ul>
-                                </div>
-
-                                <div class="list-arrows col-3 text-center btn-group-vertical">
-                                    <button class="btn btn-light btn-sm move-right">
-                                        Add <i class="fas fa-plus"></i>
-                                    </button>
-                                    <button class="btn btn-light btn-sm move-left">
-                                        Remove <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button class="btn btn-light btn-sm  saveAddedCourses">
-                                        Save
-                                    </button>
-                                </div>
-
-                                <div class="dual-list list-right col-md-6 well">
-                                    <div class="container">
-                                        <!--Course nav tab-->
-                                        <ul class="nav nav-tabs">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" data-toggle="tab" href="#addedCourses">Added Courses</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#localCourses">Local Courses</a>
-                                            </li>
-                                        </ul>
-                                        <div class="well">
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <div class="input-group">
-                                                        <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-content">
-                                            <!--Added Courses tab-->
-                                            <div id="addedCourses" class="container tab-pane active">
-                                                <ul class="list-group">
-                                                </ul>
-                                            </div>
-
-                                            <!--Local Courses tab-->
-                                            <div id="localCourses" class="container tab-pane">
-                                                <ul class="list-group">
-                                                    <li class="list-group-item local-items unselectable" th:each="course: ${localCourses}" th:name="${course.getName()}" th:text="${course.getName()}"> </li>
-                                                </ul>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Lab tab-->
-                    <div id="lab" class="container tab-pane fade">
-                        <br>
-                        <h3>Lab</h3>
-                        <br>
-                        <div class="container">
-                            <div class="row">
-                                <div class="lab-list col-md-4">
-                                    <div class="well text-right">
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="input-group">
-                                                    <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ul class="allLabs list-group">
-                                            <li class="list-group-item" th:each="lab: ${allLabs}" th:name="${lab.getTitle()}" th:text="${lab.getTitle()}"> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-            </div>
-        </div>
-    </div>
-
->>>>>>> Stashed changes
 </body>
 
 </html>
+
+<!--        <div id="market" class="row">-->
+<!--            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="course: ${courses}">-->
+<!--                <div class="box-part text-center">-->
+<!--                    <i class="mdi mdi-add" aria-hidden="true"></i>-->
+<!--                    <div class="title" th:text="${course.getName()}"></div>-->
+<!--                    <a href="/addCourse" th:href="@{/}" class="stretched-link">Get More</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--                <div class="input-group-prepend">-->
+<!--                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>-->
+<!--                    <div class="dropdown-menu">-->
+<!--                        <a class="dropdown-item" href="#">Action</a>-->
+<!--                        <a class="dropdown-item" href="#">Another action</a>-->
+<!--                        <a class="dropdown-item" href="#">Something else here</a>-->
+<!--                    </div>-->
+<!--                </div>-->
