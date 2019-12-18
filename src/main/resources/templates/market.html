@@ -53,21 +53,13 @@
             </nav>
 
             <div class="vertical-center">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#course">Course</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#lab">Lab</a>
-                    </li>
-                </ul>
+
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <!--Course tab-->
                     <div id="course" class="container tab-pane active">
                         <br>
-                        <h3>Course</h3>
+                        <h3>Market</h3>
                         <br>
                         <div class="container">
                             <br />
@@ -79,6 +71,7 @@
                                                 <div class="input-group">
                                                     <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -136,31 +129,6 @@
                                         </div>
                                     </div>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Lab tab-->
-                    <div id="lab" class="container tab-pane fade">
-                        <br>
-                        <h3>Lab</h3>
-                        <br>
-                        <div class="container">
-                            <div class="row">
-                                <div class="lab-list col-md-4">
-                                    <div class="well text-right">
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="input-group">
-                                                    <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ul class="allLabs list-group">
-                                            <li class="list-group-item" th:each="lab: ${allLabs}" th:name="${lab.getTitle()}" th:text="${lab.getTitle()}"> </li>
-                                        </ul>
-                                    </div>
                                 </div>
                             </div>
                         </div>

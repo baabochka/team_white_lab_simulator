@@ -25,7 +25,7 @@ $(function () {
                 type:"POST",
                 url:"/market",
                 data:{
-                    "addedCourses":idList
+                    "courseList":idList
                 },
                 success : function(data){
                 }
