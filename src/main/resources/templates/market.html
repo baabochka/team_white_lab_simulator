@@ -12,7 +12,9 @@
     <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
 
     <!--    fontawesome Icon CSS-->
-    <link rel="stylesheet" href="../static/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+<!--    <link rel="stylesheet" href="../static/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
 
     <!--    Bootstrap Javascript-->
     <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
@@ -39,22 +41,18 @@
                                aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle z-depth-0"
                                      th:src="${user.avatar_url == null || user.avatar_url.isEmpty()} ? '/resources/images/default.png':${user.avatar_url}">
-                                <!--/*@thymesVar id="user" type=""*/-->
                                 <span th:text="${user.getNickname()}"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-secondary"
                                  aria-labelledby="navbarDropdownMenuLink-55">
-                                <!--                        <a class="dropdown-item" href="#">game history</a>-->
                                 <a class="dropdown-item" id="logout-link" href="/logout" th:href="@{/logout}">logout</a>
-
                             </div>
                         </li>
                     </ul>
                 </div>
             </nav>
 
-        <div class="vertical-center">
-            <div class="container">
+            <div class="vertical-center">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -66,91 +64,112 @@
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
+                    <!--Course tab-->
                     <div id="course" class="container tab-pane active">
                         <br>
                         <h3>Course</h3>
                         <br>
-                        <form class="form-inline well">
-
-
-                            <!--                    <div class="input-group-prepend">-->
-                            <!--                        <select class="form-control select2" >-->
-                            <!--                            <option>Course</option>-->
-                            <!--                            <option>Lab</option>-->
-                            <!--                        </select>-->
-                            <!--                    </div>-->
-                            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-                                   aria-label="Search" id="courseFilterInput" onkeyup="courseFilterFunction()">
-                            <!--                <div class="input-group-prepend">-->
-                            <!--                    <button class="btn btn-secondary" type="submit">-->
-                            <!--                        <i class="fa fa-search"></i>-->
-                            <!--                    </button>-->
-                            <!--                </div>-->
-                        </form>
-                        <br>
-                        <!--                        Course cards-->
                         <div class="container">
-                            <div class="row" id="courseGroup">
-                                <div class="courseCard col-lg-4 col-md-6 mb-4"  th:each="course: ${courses}" th:name="${course.getName()}">
-                                    <div class="flip-card">
-                                        <div class="flip-card-inner">
-                                            <div class="flip-card-front">
-                                                <br>
-                                                <br>
-                                                <h3 class="card-title"th:text="${course.getName()}"></h3>
-                                            </div>
-                                            <div class="flip-card-back">
-                                                <h4 th:text="${course.getSection()}"></h4>
-                                                <p th:text="${course.getDescription()}"></p>
+                            <br />
+                            <div class="row">
+                                <div class="dual-list list-left col-md-3">
+                                    <div class="well">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <ul class="list-group">
+                                        <li class="list-group-item" th:each="course: ${allCourses}" th:name="${course.getName()}" th:text="${course.getName()}"> </li>
+                                    </ul>
+                                </div>
+
+                                <div class="list-arrows col-3 text-center btn-group-vertical">
+                                    <button class="btn btn-light btn-sm move-right">
+                                        Add <i class="fas fa-plus"></i>
+                                    </button>
+                                    <button class="btn btn-light btn-sm move-left">
+                                        Remove <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button class="btn btn-light btn-sm  saveAddedCourses">
+                                        Save
+                                    </button>
+                                </div>
+
+                                <div class="dual-list list-right col-md-6 well">
+                                    <div class="container">
+                                        <!--Course nav tab-->
+                                        <ul class="nav nav-tabs">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#addedCourses">Added Courses</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#localCourses">Local Courses</a>
+                                            </li>
+                                        </ul>
+                                        <div class="well">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-content">
+                                            <!--Added Courses tab-->
+                                            <div id="addedCourses" class="container tab-pane active">
+                                                <ul class="list-group">
+                                                </ul>
+                                            </div>
+
+                                            <!--Local Courses tab-->
+                                            <div id="localCourses" class="container tab-pane">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item local-items unselectable" th:each="course: ${localCourses}" th:name="${course.getName()}" th:text="${course.getName()}"> </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lab tab-->
+                    <div id="lab" class="container tab-pane fade">
+                        <br>
+                        <h3>Lab</h3>
+                        <br>
+                        <div class="container">
+                            <div class="row">
+                                <div class="lab-list col-md-4">
+                                    <div class="well text-right">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="allLabs list-group">
+                                            <li class="list-group-item" th:each="lab: ${allLabs}" th:name="${lab.getTitle()}" th:text="${lab.getTitle()}"> </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="lab" class="container tab-pane fade">
-                        <br>
-                        <h3>Lab</h3>
-                        <br>
-                        <form class="form-inline well">
-                            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-                                   aria-label="Search" id="labFilterBar">
-                        </form>
-                        <br>
-                        <div class="container">
-                            <div class="row">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
 
             </div>
         </div>
     </div>
 
-
 </body>
 
 </html>
-
-<!--        <div id="market" class="row">-->
-<!--            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="course: ${courses}">-->
-<!--                <div class="box-part text-center">-->
-<!--                    <i class="mdi mdi-add" aria-hidden="true"></i>-->
-<!--                    <div class="title" th:text="${course.getName()}"></div>-->
-<!--                    <a href="/addCourse" th:href="@{/}" class="stretched-link">Get More</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--                <div class="input-group-prepend">-->
-<!--                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>-->
-<!--                    <div class="dropdown-menu">-->
-<!--                        <a class="dropdown-item" href="#">Action</a>-->
-<!--                        <a class="dropdown-item" href="#">Another action</a>-->
-<!--                        <a class="dropdown-item" href="#">Something else here</a>-->
-<!--                    </div>-->
-<!--                </div>-->

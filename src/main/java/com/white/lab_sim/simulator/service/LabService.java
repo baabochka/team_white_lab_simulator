@@ -169,4 +169,5 @@ public class LabService {
     public List<Lab> findByCreatedBy(User user) {
         return labRepository.getByCreatedBy(user);
     }
+    public List<Lab> findAll() { return labRepository.findAll();}
 }
