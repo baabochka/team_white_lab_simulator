@@ -6,14 +6,16 @@
     <link rel="icon" href="../static/resources/images/icon.png" th:href="@{/resources/images/icon.png}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f49d6c9a46.js" crossorigin="anonymous"></script>
     <!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">-->
     <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<!--    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">-->
 
     <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
-    <link rel="stylesheet" type="text/css" href="../static/resources/css/edit.css" th:href="@{/resources/css/edit.css}">
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/lab_common.css" th:href="@{/resources/css/lab_common.css}">
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/lab_edit.css" th:href="@{/resources/css/lab_edit.css}">
     <script type="text/javascript" th:inline="javascript">
         /*<![CDATA[*/
         let lab = [[${lab}]];
@@ -61,18 +63,18 @@
             </div>
         </div>
         <div class="d-inline" id="main-canvas">
-            <div class="lab-edit-canvas">
-                <div id="step-basic-edit" class="top-border-card">
-                    <div class="h3" id="step-edit-header">
+            <div class="lab-canvas">
+                <div class="step-basic top-border-card">
+                    <div class="h3 step-basic-header">
                         <span>Step </span><span id="step-edit-counter">0</span>
                     </div>
-                    <div id="step-brief-edit">
+                    <div class="step-brief">
                         <textarea rows='1' id="step-instruction-input" placeholder="Instruction"></textarea><br>
                     </div>
                 </div>
                 <div id="initial-edit" style="display: none">
-                    <div class="edit-section">
-                        <div class="edit-section-header">
+                    <div class="section-card">
+                        <div class="section-card-header">
                             <h4>Initial Setup</h4>
                         </div>
                         <ul id="initial-states-container" class="list-group states-container">
@@ -81,12 +83,12 @@
                     </div>
                 </div>
                 <div id="not-initial-edit" style="display: none">
-                    <div class="edit-section">
-                        <div class="edit-section-header">
+                    <div id="before-section" class="section-card">
+                        <div class="section-card-header">
                             <h4>Before</h4><h6>Add equipments(1 or 2) for this step.</h6>
                         </div>
                         <ul class="list-group states-container">
-                            <li class="list-group-item optionOne">
+                            <li class="list-group-item optionOne option">
                                     <div class="form-row">
                                         <div class="form-group col-md-3">
                                             <label>Equipment</label>
@@ -103,7 +105,7 @@
                                         </div>
                                     </div>
                             </li>
-                            <li class="list-group-item optionTwo">
+                            <li class="list-group-item optionTwo option">
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <label>Equipment</label>
@@ -122,16 +124,16 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="after-section" class="edit-section">
-                        <div class="edit-section-header">
+                    <div id="after-section" class="section-card">
+                        <div class="section-card-header">
                             <h4>After</h4><h6>Set new states.</h6>
                         </div>
                         <ul class="list-group states-container">
-                            <li class="list-group-item optionOne">
+                            <li class="list-group-item optionOne option">
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <label>Equipment</label>
-                                        <select class="form-control" disabled>
+                                        <select class="form-control inputEquip" disabled>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
@@ -145,11 +147,11 @@
                                     <button class="text-btn no-border-btn add-property-btn"><span aria-hidden="true">+</span></button>
                                 </div>
                             </li>
-                            <li class="list-group-item optionTwo">
+                            <li class="list-group-item optionTwo option">
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <label>Equipment</label>
-                                        <select class="form-control" disabled>
+                                        <select class="form-control inputEquip" disabled>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
@@ -165,14 +167,15 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div class="edit-section">
-                    <div class="edit-section-header">
-                        <h4>Action</h4><h6>Add actions!</h6>
+                    <div class="section-card">
+                        <div class="section-card-header">
+                            <h4>Action</h4><h6>Add actions!</h6>
+                        </div>
                     </div>
                 </div>
+
                 <div id="edit-button-panel">
-                    <button id="delete-step-btn" type="button" class="btn btn-danger">Delete</button>
+                    <button id="delete-step-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-step-confirm">Delete</button>
                 </div>
 
             </div>
@@ -228,6 +231,45 @@
             </div>
         </div>
     </div>
+    <div class="modal fade message-modal" id="delete-step-confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4>Confirm</h4>
+                    <h6 id="delete-step-confirm-msg"></h6>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+                    <button type="button" class="btn btn-danger" id="remove-step-confirm-btn">Delete</button>
+                </div>
+<!--                <div class="modal-footer">-->
+<!--                    -->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="modal fade message-modal" id="delete-state-error">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4>Ooops!</h4>
+                    <h6 id="delete-state-err-msg"></h6>
+                    <button class="btn btn-info" data-dismiss="modal">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/resources/js/lab_common.js}"></script>
     <script th:src="@{/resources/js/lab_edit.js}"></script>
     <script th:src="@{/resources/js/lab_edit_equip_market.js}"></script>
 

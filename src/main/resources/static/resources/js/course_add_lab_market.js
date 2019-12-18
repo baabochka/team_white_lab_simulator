@@ -23,7 +23,7 @@ function loadEquipmentFromMarket() {
 }
 
 function constructRadio(id, name) {
-    let link = "/resources/images/equipments/" + id + ".png";
+//    let link = "/resources/images/equipments/" + id + ".png";
     return "<div class='col col-sm-2'>" +
         "<div class='equip-unit'>" +
         "<label class=\"layersMenu\">\n" +

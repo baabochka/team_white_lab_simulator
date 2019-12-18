@@ -47,7 +47,6 @@ public class LabController {
         if(!user.getId().equals(lab.getCreatedBy().getId())) {
             return "redirect:/dashboard";
         }
-        lab.performSteps(lab.getSteps().size());
         model.addAttribute("user", user);
         model.addAttribute("lab", lab);
         return "lab_edit";
@@ -101,13 +100,27 @@ public class LabController {
         return "ok";
     }
 
-    @PostMapping("/lab/{id}/perform")
+    @PostMapping("/lab/{id}/fullUpdateStep")
     @ResponseBody
-    public Object perform(@PathVariable String id, @RequestParam int count) {
-        return labService.perform(id, count);
+    public String fullUpdateStep(@PathVariable String id, @RequestParam int stepId, @RequestParam String stateId1, @RequestParam(value = "property1[]") String[] properties1, @RequestParam(value = "value1[]") String[] values1,
+                                 @RequestParam String stateId2, @RequestParam(value = "property2[]") String[] properties2, @RequestParam(value = "value2[]") String[] values2) {
+        labService.fullUpdateStep(id, stepId, stateId1, properties1, values1, stateId2, properties2, values2);
+        return "ok";
     }
 
+    @PostMapping("/lab/{id}/removeState")
+    @ResponseBody
+    public String removeState(@PathVariable String id, @RequestParam String stateId) {
+        labService.removeState(id, stateId);
+        return "ok";
+    }
 
+    @PostMapping("/lab/{id}/deleteStep")
+    @ResponseBody
+    public String deleteStep(@PathVariable String id, @RequestParam int stepId) {
+        labService.deleteStep(id, stepId);
+        return "ok";
+    }
 
 
     @RequestMapping("/lab/{id}/do")

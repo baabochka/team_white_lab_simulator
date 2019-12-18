@@ -59,15 +59,4 @@ public class Lab extends MarketUnit {
         step.setBrief("Setup Equipments.(Student won't see this step.)");
         steps.add(step);
     }
-
-    public void performSteps(int count) {
-        for(int i = 0; i < count; i++) {
-            Step step = steps.get(i);
-            step.getMap().forEach((k, v) -> {
-                stateMap.get(k).setInfo(v);
-            });
-        }
-    }
-
-
 }

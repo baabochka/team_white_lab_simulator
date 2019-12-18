@@ -1,0 +1,51 @@
+.text-btn i {
+    font-size: 16px;
+    line-height: initial;
+}
+
+.state-name {
+    display: inline-block;
+    width: 90px;
+    margin: 0 0 0 15px;
+}
+
+.state-card {
+    max-width: 238px;
+}
+
+.state-card button {
+    margin-left: 30px;
+}
+
+.select-equip-holder {
+    width: 240px;
+    height: 240px;
+    border: 2px var(--border-color) dashed;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.select-equip-holder .card {
+    width: 240px;
+    height: 240px;
+    margin-bottom: 30px;
+    min-width: 0;
+}
+
+.select-equip-holder .card dl{
+    max-height: 160px;
+    overflow-y: auto;
+}
+
+.after-drop {
+    border: none;
+}
+
+.selection-row {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#finish-modal .modal-header {
+    background-color: rgb(40,167,69);
+}

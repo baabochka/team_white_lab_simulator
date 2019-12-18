@@ -1,0 +1,263 @@
+:root {
+    --border-color: #e6e6e6;
+    --bg-color: white;
+    --highlight-color: rgb(81, 158, 46);
+    --highlight-color-op: rgba(81, 158, 46, 0.2);
+    --complement: #fafafa;
+    --complement-darker: #f5f5f5;
+    --header-height: 64px;
+    --footer-height: 0px;
+    --sidebar-width: 200px;
+    --major-color: rgb(100, 146, 239);
+    --major-color-op: rgba(100, 146, 239, 0.2);
+}
+
+.col {
+    background-color: white;
+}
+
+.lab-canvas {
+    width: 90%;
+    margin: 0 auto;
+}
+.lab-container {
+    background-color: #e7ecee;
+}
+#main-canvas {
+    width: calc(100% - 700px);
+    background-color: transparent;
+    height: 100%;
+    padding: 0 0 50px 0;
+    overflow: auto;
+}
+
+.side-list {
+     border-radius: 10px;
+     border-width: 0 1px 1px 1px;
+     border-style: solid;
+     border-color: var(--border-color);
+     width: 300px;
+     margin: 20px 25px;
+     background-color: white;
+     padding: 0 5px 30px 5px;
+ }
+
+ .side-list::before {
+     width: calc(100% + 10px);
+     left: -5px;
+ }
+ .side-list1 {
+     border-radius: 10px;
+     border-width: 0 1px 1px 1px;
+     border-style: solid;
+     border-color: var(--border-color);
+     width: 400px;
+     margin: 20px 25px;
+     background-color: white;
+     padding: 0 5px 30px 5px;
+ }
+
+ .side-list1::before {
+     width: calc(100% + 10px);
+     left: -5px;
+ }
+
+.equip-list-header {
+    padding: 30px 25px;
+}
+
+#equip-item-list {
+    overflow: auto;
+    padding: 10px 25px;
+    height: calc(100% - 84px);
+}
+
+
+
+#equip-item-list .card{
+    margin-top: -2px;
+    margin-bottom: 0;
+    width: 100%;
+    min-width: auto!important;
+    border-radius: 0;
+}
+
+#equip-item-list .card-header {
+    display: flex;
+    align-items: center;
+}
+
+#equip-cart-modal .modal-dialog , #equip-market-modal .modal-dialog{
+    width: 1000px;
+    min-width: 1000px;
+}
+
+
+.text-btn {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    border: 0;
+    background-color: transparent;
+}
+.text-btn:hover {
+    opacity: .8;
+}
+
+
+.no-border-btn:focus{
+    outline: none;
+}
+
+.state-card img {
+    width: 35px;
+    height: 35px;
+}
+
+#step-item-list {
+    padding-left: 25px;
+}
+
+#step-item-list .brief {
+    font-size: 14px;
+}
+
+.message-modal .modal-header {
+    border-bottom: none;
+    position: relative;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+    display: block;
+}
+
+.modal-content {
+    border: none;
+    border-radius: 5px;
+}
+
+.icon-box {
+    color: #fff;
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    border-radius: 50%;
+    z-index: 9;
+    border: 5px solid #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+.icon-box i {
+    font-size: 40px;
+}
+
+.message-modal .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+    text-shadow: none;
+    opacity: 0.5;
+}
+
+.message-modal .close:hover{
+    opacity: 0.8;
+}
+
+.message-modal h4 {
+    text-align: center;
+    font-size: 36px;
+    margin: 10px 0;
+}
+
+.message-modal h6 {
+    text-align: center;
+    font-size: 16px;
+    margin: 10px 0 20px 0;
+}
+
+.message-modal .modal-body {
+    padding: 20px;
+}
+
+.state-card .card-body {
+    padding: 10px 30px;
+}
+
+.section-card {
+    margin-bottom: 20px;
+    padding: 25px 30px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.top-border-card::before {
+    content: "";
+    display: block;
+    border-style: solid;
+    border-color: #607d8b;
+    background-color: #607d8b;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 10px;
+    position: relative;
+}
+
+.step-basic {
+    background-color: white;
+    margin: 20px auto;
+    border-radius: 10px;
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    border-color: var(--border-color);
+}
+
+
+.step-brief {
+    padding: 0 30px 25px 30px;
+}
+
+.step-basic-header {
+    padding:25px 30px 0 30px;
+    margin-bottom: 20px;
+}
+
+.state-card .btn-link {
+    color: #000000;
+    opacity: 0.5;
+    padding: 0 5px;
+    font-size: 14px;
+}
+
+.state-card .btn-link:hover {
+    opacity: 0.8;
+}
+
+.state-card dl {
+    margin-block-end: 0;
+}
+
+textarea{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    overflow-y: hidden;
+    resize: none;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: var(--border-color);
+    transition: border-bottom-color 0.3s ease-in;
+    line-height: 135%;
+    vertical-align: bottom;
+}
+
+textarea:focus, .textarea:active {
+    outline: none;
+    border-color: var(--highlight-color);
+    border-bottom-width: 2px;
+}

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -72,7 +73,9 @@ public class UserServiceImpl implements UserService{
             userRepository.save(user);
         }
     }
-
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
     private User userByAttributes(Map attributes) {
         User user;
         String email = (String)attributes.get("email");

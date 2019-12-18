@@ -27,7 +27,7 @@ public class LabService {
     private UserRepository userRepository;
     public void load_pre_equip() {
         equipmentRepository.deleteAll();
-        String[] names = {"beaker", "flask", "pipette", "thermometer"};
+        String[] names = {"beaker", "flask", "pipette", "litmus"};
         for (String name : names) {
             Equipment equipment = new Equipment();
             equipment.setName(name);
@@ -51,7 +51,9 @@ public class LabService {
         Optional<Lab> o = labRepository.findById(id);
         return o.orElse(null);
     }
-
+    public List<Lab> findAll() {
+        return labRepository.findAll();
+    }
     public void addStateList(String id, HashMap<String, String> counter) {
         Optional<Lab> o = labRepository.findById(id);
         if(o.isPresent()) {
@@ -129,16 +131,6 @@ public class LabService {
     }
 
 
-    public Object perform(String id, int count) {
-        Optional<Lab> o = labRepository.findById(id);
-        if(o.isPresent()) {
-            Lab lab = o.get();
-            lab.performSteps(count);
-            return lab;
-        }
-        return null;
-    }
-
     public void changeStateName(String id, String stateId, String name) {
         Optional<Lab> l = labRepository.findById(id);
         if(l.isPresent()) {
@@ -150,18 +142,61 @@ public class LabService {
 
 
     public void changeStepState(String id, int stepId, String stateId, String[] props, String[] values) {
+        if(stateId.equals("-1")) {
+            return;
+        }
         Optional<Lab> l = labRepository.findById(id);
         if(l.isPresent()) {
             Lab lab = l.get();
             HashMap<String, HashMap<String, String>> map = lab.getSteps().get(stepId).getMap();
-            HashMap<String, String> fields = new HashMap<>();
-            for(int i = 0; i < props.length; i++) {
-                if(props[i].length() == 0 && values[i].length() == 0) {
-                    continue;
-                }
-                fields.put(props[i], values[i]);
+            updateMap(map, stateId, props, values);
+            labRepository.save(lab);
+        }
+    }
+
+    public void fullUpdateStep(String id, int stepId, String stateId1, String[] properties1, String[] values1, String stateId2, String[] properties2, String[] values2) {
+        Optional<Lab> l = labRepository.findById(id);
+        if(l.isPresent()) {
+            Lab lab = l.get();
+            HashMap<String, HashMap<String, String>> map = new HashMap<>();
+            updateMap(map, stateId1, properties1, values1);
+            updateMap(map, stateId2, properties2, values2);
+            lab.getSteps().get(stepId).setMap(map);
+            labRepository.save(lab);
+        }
+    }
+
+    private void updateMap(HashMap<String, HashMap<String, String>> map, String stateId, String[] props, String[] values) {
+        if(stateId.equals("-1")) {
+            return;
+        }
+        HashMap<String, String> fields = new HashMap<>();
+        for(int i = 0; i < props.length; i++) {
+            String prop = props[i].substring(1);
+            String value = values[i].substring(1);
+            if(prop.length() == 0 && value.length() == 0) {
+                continue;
             }
-            map.put(stateId, fields);
+            fields.put(prop, value);
+        }
+        map.put(stateId, fields);
+    }
+
+    public void removeState(String id, String stateId) {
+        Optional<Lab> l = labRepository.findById(id);
+        if(l.isPresent()) {
+            Lab lab = l.get();
+            lab.getStateMap().remove(stateId);
+            lab.getSteps().get(0).getMap().remove(stateId);
+            labRepository.save(lab);
+        }
+    }
+
+    public void deleteStep(String id, int stepId) {
+        Optional<Lab> l = labRepository.findById(id);
+        if(l.isPresent()) {
+            Lab lab = l.get();
+            lab.getSteps().remove(stepId);
             labRepository.save(lab);
         }
     }

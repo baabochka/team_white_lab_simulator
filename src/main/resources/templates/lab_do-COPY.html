@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:divth="http://www.w3.org/1999/html">
+<head>
+    <title>Lab Sim</title>
+    <link rel="icon" href="../static/resources/images/icon.png" th:href="@{/resources/images/icon.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">-->
+    <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        var selectorForEquipment = 1;
+        var mIndex = 0, eIndex = 0;
+        $(document).ready(function () {
+            var PropTable;
+            var container = document.createElement("div");
+            container.setAttribute("class", "container");
+            PropTable = document.createElement("table");
+            PropTable.setAttribute("id","propTable")
+            PropTable.setAttribute("class", "table");
+            PropTable.setAttribute("class", "table-borderless");
+            container.appendChild(PropTable);
+            $("ul[id*=equip-item-list] li").click(function () {
+                if (selectorForEquipment === 1 || selectorForEquipment === 2) {
+                    eIndex++;
+                    alert("You added "+ $(this).text() + " to your lab table"); // gets text contents of clicked li
+                    var node = document.createElement("SPAN");                 // Create a <span> node
+                    var textnode = document.createTextNode($(this).text());         // Create a text node
+                    node.appendChild(textnode);                           // Append the text to <span>
+                    node.setAttribute("class", "col");
+
+                    var rowId = "erow_" + eIndex;
+                    var tr = PropTable.insertRow(-1);
+                    tr.setAttribute("class", "col");
+                    tr.setAttribute("id", rowId);
+
+                    //Row[0]
+                    var tdName = tr.insertCell(0);
+                    tdName.appendChild(node);
+
+
+                    //Row[1]
+                    var tdColor = tr.insertCell(1);
+
+                    var colorLabel = document.createElement("label");
+                    var colorSelect = document.createElement("select");
+                    var redOption = document.createElement("option");
+                    var blueOption = document.createElement("option");
+                    var greenOption = document.createElement("option");
+                    var pinkOption = document.createElement("option");
+                    colorLabel.innerHTML = "Color: ";
+                    colorLabel.htmlFor = "selectFor";
+                    colorSelect.add(redOption);
+                    colorSelect.add(blueOption);
+                    colorSelect.add(greenOption);
+                    colorSelect.add(pinkOption);
+                    colorSelect.setAttribute("id", "colorSelect");
+                    redOption.text = "red";
+                    blueOption.text = "blue";
+                    greenOption.text = "green";
+                    pinkOption.text = "pink";
+                    tdColor.appendChild(colorLabel);
+                    tdColor.appendChild(colorSelect);
+
+                    //Row[2]
+                    var tdCloseBt = tr.insertCell(2);
+                    var closeBt = document.createElement('button');
+                    closeBt.onclick = function() { close(rowId); }
+                    closeBt.innerHTML = "close";
+                    tdCloseBt.appendChild(closeBt);
+                }
+                if (selectorForEquipment === 1) {
+                    var firstEquip = document.getElementById("first-equip");
+                    firstEquip.appendChild(PropTable);     // Append <span> to <div> with id="first-equip"
+                    selectorForEquipment += 1;
+
+                } else if (selectorForEquipment === 2) {
+                    document.getElementById("second-equip").appendChild(PropTable);     // Append <span> to <div> with id="first-equip"
+                    selectorForEquipment += 1;
+                }
+            });
+            $("ul[id*=material-item-list] li").click(function () {
+                if (selectorForEquipment === 1 || selectorForEquipment === 2) {
+                    mIndex++;
+                    alert("You added "+ $(this).text() + " to your lab table"); // gets text contents of clicked li
+                    var node = document.createElement("SPAN");                 // Create a <span> node
+                    var textnode = document.createTextNode($(this).text());         // Create a text node
+                    node.appendChild(textnode);                           // Append the text to <span>
+                    node.setAttribute("class", "col");
+
+                    var tr = PropTable.insertRow(-1);
+                    tr.setAttribute("class", "col");
+                    var rowId = "mrow_" + mIndex;
+                    tr.setAttribute("id", rowId);
+                    //Row[0]
+                    var tdName = tr.insertCell(0);
+                    tdName.appendChild(node);
+
+                    //Row[1]
+                    var tdAmount = tr.insertCell(1);
+                    var valueId = 'sliderValue_' + mIndex;
+                    var amountLabel = document.createElement('label');
+                    var slider = document.createElement('input');
+                    var value = document.createElement('label');
+                    amountLabel.innerHTML = 'Amount: ';
+                    slider.setAttribute('type', 'range');
+                    slider.setAttribute('min', '1');
+                    slider.setAttribute('max', '10000');
+                    slider.setAttribute('onchange', "updateSliderValue(\"" + valueId + "\", this.value)");
+                    slider.defaultValue = 3000;
+                    value.setAttribute('type', 'input');
+                    value.setAttribute('id', valueId);
+                    value.innerHTML = '3000';
+                    tdAmount.appendChild(amountLabel);
+                    tdAmount.appendChild(slider);
+                    tdAmount.appendChild(value);
+
+                    //Row[2]
+                    var tdCloseBt = tr.insertCell(2);
+                    var closeBt = document.createElement('button');
+                    closeBt.onclick = function() { close(rowId); }
+                    closeBt.innerHTML = "close";
+                    tdCloseBt.appendChild(closeBt);
+
+                }
+                if (selectorForEquipment === 1) {
+                    var firstEquip = document.getElementById("first-equip");
+                    firstEquip.appendChild(PropTable);     // Append <span> to <div> with id="first-equip"
+                    selectorForEquipment += 1;
+                } else if (selectorForEquipment === 2) {
+                    document.getElementById("second-equip").appendChild(PropTable);     // Append <span> to <div> with id="first-equip"
+                    selectorForEquipment += 1;
+                }
+            });
+            // $("div[class*=lab-table] div").click(function () {
+            //     $("div[class*=lab-area] div span").remove();
+            //     selectorForEquipment = 1
+            // });
+
+            function close(id) {
+                document.getElementById(id).remove();
+                selectorForEquipment = 1
+            }
+        });
+
+    </script>
+    <script>
+        var stepN = 1;
+        function myFunction() {
+            var div1 = document.getElementById("first-equip");
+            var span1 = div1.getElementsByTagName("span");
+            var div2 = document.getElementById("second-equip");
+            var span2 = div2.getElementsByTagName("span");
+            var labAction = span1[0].innerHTML+span2[0].innerHTML;
+            var li = document.getElementById("step"+stepN);
+            var span3 = li.getElementsByClassName("step-action");
+            var stepCheck = "";
+            for(i = 0; i < span3.length; i++) {
+                stepCheck += span3[i].innerHTML;
+            }
+            if (labAction == stepCheck) {
+                alert("Congratulations! You did the step #" + stepN + " correctly!");
+                stepN +=1;
+                li.remove();
+                cleanLabArea();
+
+            } else {
+                alert("Sorry, you did something wrong, try again!");
+                cleanLabArea();
+            }
+        }
+        function cleanLabArea() {
+            var labArea = document.getElementsByClassName("lab-area")[0];
+            var spans = labArea.getElementsByTagName("span");
+            <!--alert(spans[0].innerHTML);-->
+            <!--alert(spans[1].innerHTML);-->
+            spans[1].remove();
+            spans[0].remove();
+            selectorForEquipment = 1;
+            document.getElementById("propTable").remove();
+        }
+        function updateSliderValue(id, val) {
+            document.getElementById(id).innerHTML=val;
+        }
+
+    </script>
+
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/styles.css" th:href="@{/resources/css/styles.css}">
+    <link rel="stylesheet" type="text/css" href="../static/resources/css/edit.css" th:href="@{/resources/css/edit.css}">
+</head>
+<body>
+<nav class="mb-1 navbar navbar-expand-sm navbar-light">
+    <img id="logo" src="../static/resources/images/icon.png" th:src="@{/resources/images/icon.png}"/>
+    <a class="navbar-brand" href="#">Lab Sim</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+            aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item avatar dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <img class="rounded-circle z-depth-0"
+                         th:src="${user.avatar_url == null || user.avatar_url.isEmpty()} ? '/resources/images/default.png':${user.avatar_url}">
+                    <!--/*@thymesVar id="user" type=""*/-->
+                    <span th:text="${user.getNickname()}"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-secondary"
+                     aria-labelledby="navbarDropdownMenuLink-55">
+                    <!--                        <a class="dropdown-item" href="#">game history</a>-->
+                    <a class="dropdown-item" id="logout-link" href="/logout" th:href="@{/logout}">logout</a>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="lab-container d-flex">
+    <div class="d-inline" id="equip-list">
+        <div id="equip-list-header">
+            <span class="font-weight-bold">Equipment List</span>
+        </div>
+        <ul class="list-group" id="equip-item-list">
+            <li class='item list-group-item'><span>Flask1</span></li>
+            <li class='item list-group-item'><span>Flask2</span></li>
+            <li class='item list-group-item'><span>Beaker</span></li>
+        </ul>
+
+    </div>
+    <div class="d-inline" id="material-list">
+        <div id="material-list-header">
+            <span class="font-weight-bold">Material List</span>
+        </div>
+        <ul class="list-group" id="material-item-list">
+            <li class='item list-group-item'><span>Water</span></li>
+            <li class='item list-group-item'><span>ethanol</span></li>
+        </ul>
+    </div>
+    <div class="d-inline">
+        <div class="set-form">
+            <div id="lab-title" class="text-center mb-3"><span> My magic lab</span></div>
+            <div class="text-center mb-3"><span>Here is some description of this extremely interesting lab</span></div>
+        </div>
+        <div class="lab-area">
+            <div class="lab-table">Lab Area
+                <div id="first-equip"></div>
+                <div id="second-equip"></div>
+            </div>
+            <div><button id="do-lab" type="button" class="btn btn-block btn-rounded z-depth-1a" onclick="myFunction()">Do some magic</button>
+            </div>
+        </div>
+
+        <div></div>
+    </div>
+
+
+    <!--<div id="add-step-dashboard" class="row">-->
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="box-part text-center">
+            <i class="mdi mdi-add" aria-hidden="true"></i>
+            <div class="title">
+                <div>Do the following steps:</div>
+            </div>
+            <!--<div class="text">-->
+            <!--<div>add more steps</div>-->
+            <!--</div>-->
+            <!-- List of steps-->
+            <ul class="list-group list-group-horizonta" id="step-group">
+                <li id="step1" class='list-group-item'>Step 1: Combine <span class="step-action">Flask1</span> and <span class="step-action">Flask2</span> together</li>
+                <li id="step2" class='list-group-item'><span>Step 2: Combine <span class="step-action">Flask2</span> and <span class="step-action">Beaker</span> together</span></li>
+                <li  id="step3" class='list-group-item'><span>Step 3: Mix liquids in <span class="step-action">Beaker</span> and <span class="step-action">Flask1</span> together</span></li>
+            </ul>
+            <!--                                <a href="/addCourse" th:href="@{/addCourse}" class="stretched-link">Click me</a>-->
+
+        </div>
+        <div>
+            <button id="save-lab" type="button" data-dismiss="modal" class="btn btn-block btn-rounded z-depth-1a">Save lab</button>
+        </div>
+    </div>
+    <!--</div>-->
+</div>
+<style>
+    .item:hover {
+        background: #68a9e3;
+    }
+</style>
+<script th:src="@{/resources/js/edit.js}"></script>
+<script th:src="@{/resources/js/addStep.js}"></script>
+</body>
+</html>
