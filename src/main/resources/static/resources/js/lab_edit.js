@@ -1,13 +1,5 @@
-// Basic variable
-let states;
-let steps;
-let labId;
-let current_step = 0;
-let current_states;
-let instruction_input = $('#step-instruction-input');
 // jQuery Selectors
-let equip_list = $('#equip-item-list');
-let step_list = $('#step-item-list');
+let instruction_input = $('#step-instruction-input');
 let initial_edit = $('#initial-edit');
 let not_initial_edit = $('#not-initial-edit');
 let initial_states_list = $('#initial-states-container');
@@ -19,12 +11,6 @@ let before_two = $("#before-section .optionTwo");
 let after_one = $("#after-section .optionOne");
 let after_two = $("#after-section .optionTwo");
 let delete_step_modal = $("#delete-step-confirm");
-// get field from lab object
-function extractLabInfo() {
-    states = lab['stateMap'];
-    steps = lab['steps'];
-    labId = lab['id'];
-}
 
 // load steps to the right panel, the last step will be selected
 function loadSteps() {
@@ -32,10 +18,9 @@ function loadSteps() {
     for(let i = 0; i < steps.length; i++) {
         step_list.append(
             "<div class=\"form-check\">\n" +
-            "  <input class=\"form-check-input\" type=\"radio\" name=\"exampleRadios\" id=\"exampleRadios" + i + "\" value=" + i + " checked>\n" +
-            "  <label class=\"form-check-label\" for=\"exampleRadios" + i + "\">\n" +
-            " Step " +i +": <span>" + steps[i]['brief']+ "</span>\n" +
-            "  </label>\n" +
+            "  <input class=\"form-check-input col-sm-1\" type=\"radio\" name=\"exampleRadios\" id=\"exampleRadios" + i + "\" value=" + i + " checked>\n" +
+            " <dt class='col-sm-4'>Step " + i + "</dt>" +
+            " <dd class='col-sm-12 brief'>" + steps[i]['brief'] +"</dd>" +
             "</div>"
         )
     }
@@ -60,7 +45,7 @@ function initialStates() {
             "\n" +
             "    <div id=\"collapse-" + v['id'] + "\" class=\"collapse\" aria-labelledby=\"headingOne\" data-parent=\"#accordion\">\n" +
             "      <div class=\"card-body\">" +
-            " <ul class='list-group'></ul>" +
+            " <dl class='row'></dl>" +
             "      </div>\n" +
             "    </div>\n" +
             "  </div>"));
@@ -75,7 +60,7 @@ function loadFields(rows, fields) {
         row.find('.inputValue').val(fields[keys[i]]);
     }
 }
-function loadStepEdit() {
+function loadStepCanvas() {
     $('#step-edit-counter').text(current_step);
     instruction_input.val(steps[current_step]['brief']);
     if(current_step == 0){
@@ -137,15 +122,7 @@ function reFetchLabAndLoadSteps() {
     });
 }
 
-function performStep() {
-    current_states = {};
-    for(let i = 0; i < current_step; i++) {
-        let map = steps[i]['map'];
-        for(let k of Object.keys(map)){
-            current_states[k] = map[k]
-        }
-    }
-}
+
 function reFetchLabAndLoadStates() {
     $.ajax({
         type: "POST",
@@ -167,30 +144,7 @@ function loadOption() {
         select_input.append($("<option value=" + v['id'] + ">" + v['name'] + "</option>"))
     }
 }
-function loadStates() {
-    for(let card of equip_list.find(".card")) {
-        let stateId = $(card).attr('id');
-        let fields = current_states[stateId];
-        let list = $(card).find('ul');
-        list.empty();
-        if(fields != null) {
-            for(let k of Object.keys(fields)) {
-                $("<li class='list-group-item'>" + k + ": " + fields[k] + "</li>").appendTo(list)
-            }
-        }
-    }
-}
-// initial left and right side bar
-function initialPanels() {
-    loadSteps();
-    initialStates();
-}
 
-function loadPanelsByStep() {
-    performStep();
-    loadStates();
-    loadStepEdit();
-}
 
 $('#add-step-btn').click(function () {
     addStep();
@@ -206,12 +160,7 @@ function addStep() {
         }
     });
 }
-// initial page
-function initialPage() {
-    extractLabInfo();
-    initialPanels();
-    loadPanelsByStep();
-}
+
 
 function changeStateName(id, name) {
     states[id]['name'] = name;
@@ -337,7 +286,7 @@ function change_instruction() {
             'i': current_step
         },
         success: function (data) {
-            $('#step-item-list input:radio:checked').next().find('span').text(instruction_input.val());
+            $('#step-item-list input:radio:checked').siblings('.brief').text(instruction_input.val());
             steps[current_step]['brief'] = brief;
         }
     });
@@ -465,7 +414,9 @@ function removeState(card) {
     for(let i = 1; i < steps.length; i++) {
         let map = steps[i]['map'];
         if(map != null && stateId in map) {
-            alert("Can't not be removed. This equipment is used in Step " + i + ".");
+            // alert("Can't not be removed. This equipment is used in Step " + i + ".");
+            $('#delete-state-err-msg').text("This equipment can't be removed. It's used in step " + i + ".");
+            $('#delete-state-error').modal('show');
             return;
         }
     }
@@ -485,11 +436,11 @@ $(document).on('click', '.remove-state-btn', function () {
     removeState($(this).closest('.card'));
 });
 
+
 $("#remove-step-confirm-btn").click(function () {
     deleteStep();
 });
 function deleteStep() {
-    delete_step_modal.modal('hide');
     $.ajax({
         type: "POST",
         url: "/lab/" + labId + "/deleteStep",
@@ -498,8 +449,11 @@ function deleteStep() {
         },
         success: function (data) {
             reFetchLabAndLoadSteps();
-
+            delete_step_modal.modal('hide');
         }
     });
 }
+delete_step_btn.click(function () {
+    $('#delete-step-confirm-msg').text("Do you want to delete step " + current_step + "?")
+});
 initialPage();
