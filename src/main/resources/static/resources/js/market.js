@@ -1,48 +1,38 @@
-
-
 $(function () {
-
-    $('body').on('click', '.list-group .list-group-item', function () {
+    $('body').on('click', ".list-group .list-group-item:not('.local-items')", function () {
         $(this).toggleClass('active');
-    }).not('.local-items unselectable');
+    });
     $('.list-arrows button').click(function () {
         var $button = $(this), actives = '';
         var addedCourses = null;
         if ($button.hasClass('move-left')) {
             actives = $('.list-right .container .tab-content #addedCourses ul li.active');
+            actives.toggleClass('active');
             actives.clone().appendTo('.list-left ul');
             actives.remove();
         } else if ($button.hasClass('move-right')) {
             actives = $('.list-left ul li.active');
+            actives.toggleClass('active');
             actives.clone().appendTo('.list-right .container .tab-content #addedCourses ul');
             actives.remove();
         } else if ($button.hasClass('saveAddedCourses')) {
             addedCourses = $('.list-right .container .tab-content #addedCourses ul li');
-            // var list=[];
-            //
-            // console.log("addedCourses",addedCourses);
-            // $.ajax({
-            //     type:"POST",
-            //     url:"/market",
-            //     data:{
-            //         "addedCourses":addedCourses.val()
-            //     },
-            //     success : function(data){
-            //         console.log("addedCourses",addedCourses.val());
-            //     }
-            // });
+            var idList=[];
+            addedCourses.each(function(){
+                idList.push($(this).attr('id'));
+            });
+            $.ajax({
+                type:"POST",
+                url:"/market",
+                data:{
+                    "addedCourses":idList
+                },
+                success : function(data){
+                }
+            });
         }
     });
-    $('.dual-list .selector').click(function () {
-        var $checkBox = $(this);
-        if (!$checkBox.hasClass('selected')) {
-            $checkBox.addClass('selected').closest('.well').find('ul li:not(.active)').addClass('active');
-            $checkBox.children('i').removeClass('glyphicon-unchecked').addClass('glyphicon-check');
-        } else {
-            $checkBox.removeClass('selected').closest('.well').find('ul li.active').removeClass('active');
-            $checkBox.children('i').removeClass('glyphicon-check').addClass('glyphicon-unchecked');
-        }
-    });
+
     $('[name="SearchDualList"]').keyup(function (e) {
         var code = e.keyCode || e.which;
         if (code == '9') return;

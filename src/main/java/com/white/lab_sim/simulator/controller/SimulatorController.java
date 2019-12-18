@@ -129,11 +129,17 @@ public class SimulatorController {
 
     @PostMapping({"/market"})
     @ResponseBody
-    public String saveAddedCourses(@RequestParam List<Course> addedCourses,
+    public String saveAddedCourses(@RequestParam List<String> courseList,
                                Authentication authentication){
         User user = userService.findByAuthentication(authentication);
-        for (Course course : addedCourses) {
-            courseService.newCourse(userService.findByAuthentication(authentication), course.getName(), course.getSection(), course.getDescription());
+        List<Course> allCourses = courseService.findAll();
+        //Save added courses by course ID
+        for (Course ac : allCourses) {
+            for (String id : courseList) {
+                if (ac.getId().equals(id)) {
+                    courseService.newCourse(userService.findByAuthentication(authentication), ac.getName(), ac.getSection(), ac.getDescription());
+                }
+            }
         }
         return "market";
     }

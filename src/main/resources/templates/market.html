@@ -83,7 +83,7 @@
                                         </div>
                                     </div>
                                     <ul class="list-group">
-                                        <li class="list-group-item" th:each="course: ${allCourses}" th:name="${course.getName()}" th:text="${course.getName()}"> </li>
+                                        <li class="list-group-item" th:each="course: ${allCourses}" th:name="${course.getName()}" th:text="${course.getName()}" th:id="${course.getId()}"> </li>
                                     </ul>
                                 </div>
 
@@ -129,7 +129,7 @@
                                             <!--Local Courses tab-->
                                             <div id="localCourses" class="container tab-pane">
                                                 <ul class="list-group">
-                                                    <li class="list-group-item local-items unselectable" th:each="course: ${localCourses}" th:name="${course.getName()}" th:text="${course.getName()}"> </li>
+                                                    <li class="list-group-item local-items unselectable" th:each="course: ${localCourses}" th:name="${course.getName()}" th:text="${course.getName()}" th:id="${course.getId()}"> </li>
                                                 </ul>
 
                                             </div>
