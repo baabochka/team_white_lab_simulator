@@ -91,5 +91,7 @@ label > input:checked + img { /* (RADIO CHECKED) IMAGE STYLES */
     background-color: #607d8b;
 }
 
-
+#upload-equip-modal .modal-header {
+    background-color: #607d8b;
+}
 

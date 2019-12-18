@@ -21,21 +21,30 @@ function loadSteps() {
 function initialStates() {
     equip_list.empty();
     for(let v of (Object.values(states))) {
-        let src = "/resources/images/equipments/" + v['equipmentId'] + ".png";
-        equip_list.append($("<div class=\"card state-card draggable\" id=" + v['id'] + ">\n" +
-            "    <div class=\"card-header\">\n" +
-            "        <img src=" + src + "><div class='state-name'>" + v['name'] + "</div>\n" +
-            "        <button class=\"btn btn-link\" data-toggle=\"collapse\" data-target=\"#collapse-" + v['id'] + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
-            "            <i class=\"fas fa-eye\"></i>" +
-            "        </button>\n" +
-            "    </div>\n" +
-            "\n" +
-            "    <div id=\"collapse-" + v['id'] + "\" class=\"collapse\" aria-labelledby=\"headingOne\" data-parent=\"#accordion\">\n" +
-            "      <div class=\"card-body\">" +
-            " <dl class='row'></dl>" +
-            "      </div>\n" +
-            "    </div>\n" +
-            "  </div>"));
+        let src = "data:image/png;base64,";
+        $.ajax({
+            type: "get",
+            url: "/api/equipments/image/" + v['equipmentId'],
+            success: function (data) {
+                src += data;
+                equip_list.append($("<div class=\"card state-card draggable\" id=" + v['id'] + ">\n" +
+                    "    <div class=\"card-header\">\n" +
+                    "        <img src=" + src + "><div class='state-name'>" + v['name'] + "</div>\n" +
+                    "        <button class=\"btn btn-link\" data-toggle=\"collapse\" data-target=\"#collapse-" + v['id'] + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
+                    "            <i class=\"fas fa-eye\"></i>" +
+                    "        </button>\n" +
+                    "    </div>\n" +
+                    "\n" +
+                    "    <div id=\"collapse-" + v['id'] + "\" class=\"collapse\" aria-labelledby=\"headingOne\" data-parent=\"#accordion\">\n" +
+                    "      <div class=\"card-body\">" +
+                    " <dl class='row'></dl>" +
+                    "      </div>\n" +
+                    "    </div>\n" +
+                    "  </div>"));
+            }
+
+        });
+
     }
 }
 

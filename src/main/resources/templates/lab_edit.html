@@ -79,7 +79,7 @@
                         </div>
                         <ul id="initial-states-container" class="list-group states-container">
                         </ul>
-
+                        <div></div>
                     </div>
                 </div>
                 <div id="not-initial-edit" style="display: none">
@@ -205,6 +205,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload-equip-modal" id="add-new-equip-btn">Add Equipment</button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#equip-cart-modal" id="view-cart-button">View Shopping Cart</button>
                 </div>
             </div>
@@ -269,6 +270,38 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade message-modal" id="upload-equip-modal">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body text-center">
+                    <h6>Upload new Equipment</h6>
+                    <form method="POST" th:action="@{/equips/add}" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="add-equip-name">Equipment Name</label>
+                            <input type="text" class="form-control text-center" id="add-equip-name" name="title">
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <label for="add-equip-image">Select Image</label>
+                                <input type="file" class="custom-file-input" name="image" id="add-equip-image">
+                                <label class="custom-file-label" for="add-equip-image">Choose file</label>
+                            </div>
+                        </div>
+                        <input  class="btn btn-info" type="submit" value="Upload" />
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1>Upload new Photo</h1>
     <script th:src="@{/resources/js/lab_common.js}"></script>
     <script th:src="@{/resources/js/lab_edit.js}"></script>
     <script th:src="@{/resources/js/lab_edit_equip_market.js}"></script>

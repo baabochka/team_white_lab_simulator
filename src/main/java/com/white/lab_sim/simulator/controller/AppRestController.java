@@ -1,16 +1,17 @@
 package com.white.lab_sim.simulator.controller;
 
 import com.white.lab_sim.simulator.model.Course;
+import com.white.lab_sim.simulator.model.Equipment;
 import com.white.lab_sim.simulator.repository.CourseRepository;
 import com.white.lab_sim.simulator.repository.EquipmentRepository;
 import com.white.lab_sim.simulator.repository.LabRepository;
+import com.white.lab_sim.simulator.service.EquipmentService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
 import java.util.Optional;
 
 @RestController
@@ -19,6 +20,8 @@ public class AppRestController {
     private EquipmentRepository equipmentRepository;
     @Autowired
     private LabRepository labRepository;
+    @Autowired
+    private EquipmentService equipmentService;
 
     @Autowired
     private CourseRepository courseRepository;
@@ -36,5 +39,11 @@ public class AppRestController {
     @RequestMapping("/api/labs/{id}")
     public Object getLab(@PathVariable String id) {
         return labRepository.findById(id);
+    }
+
+    @GetMapping("api/equipments/image/{id}")
+    public String getEquipmentImage(@PathVariable String id) {
+        Equipment equipment = equipmentService.getEquipment(id);
+        return Base64.getEncoder().encodeToString(equipment.getImage().getData());
     }
 }

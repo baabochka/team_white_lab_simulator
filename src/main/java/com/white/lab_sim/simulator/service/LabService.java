@@ -25,6 +25,8 @@ public class LabService {
     private LabRepository labRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private EquipmentService equipmentService;
     public void load_pre_equip() {
         equipmentRepository.deleteAll();
         String[] names = {"beaker", "flask", "pipette", "litmus"};
@@ -60,11 +62,12 @@ public class LabService {
             StateMap stateMap = o.get().getStateMap();
             for (Map.Entry mapElement : counter.entrySet()) {
                 String key = (String)mapElement.getKey();
+                String equipmentName = equipmentService.getEquipment(key).getName();
                 int value = Integer.parseInt((String)mapElement.getValue());
                 for(int i = 0; i < value; i++) {
                     State state = new State(key);
                     stateRepository.save(state);
-                    state.setName(state.getId().substring(state.getId().length() - 5));
+                    state.setName(equipmentName);
                     stateRepository.save(state);
                     stateMap.put(state.getId(), state);
                 }
